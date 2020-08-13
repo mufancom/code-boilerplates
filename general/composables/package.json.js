@@ -5,13 +5,41 @@ const {json} = require('@magicspace/core');
 const {resolveProjectOptions} = require('../@utils');
 
 const JSON_OPTIONS = {
+  /** @link https://docs.npmjs.com/files/package.json */
   sortKeys: {
-    top: ['name', 'version', 'displayName', 'description', 'private'],
-    bottom: [
-      'scripts',
+    top: [
+      'name',
+      'version',
+      'private',
+      'publishConfig',
+      'description',
+      'keywords',
+      'homepage',
+      'man',
+      'bugs',
+      'repository',
+      'license',
+      'author',
+      'contributors',
+      'type',
+      'main',
+      'browser',
+      'types',
+      'bin',
       'files',
+      'directories',
+      'engines',
+      'engineStrict',
+      'os',
+      'cpu',
+    ],
+    bottom: [
+      'config',
+      'scripts',
       'workspaces',
       'dependencies',
+      'bundledDependencies',
+      'bundleDependencies',
       'optionalDependencies',
       'peerDependencies',
       'devDependencies',
