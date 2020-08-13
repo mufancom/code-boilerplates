@@ -6,6 +6,8 @@
 npm install --global magicspace makeflow/mufan-code-templates
 ```
 
+### Initialize magicspace
+
 After making the initial commit, create magicspace template config `.magicspace/template.json`:
 
 ```json
@@ -23,4 +25,20 @@ After making the initial commit, create magicspace template config `.magicspace/
 magicspace init --force # force to skip clean working directory assertion
 ```
 
-Review changes and commit the merge.
+Review changes, resolve conflicts (if any) and commit the merge.
+
+### Update magicspace
+
+Update installed templates.
+
+```bash
+npm install --global makeflow/mufan-code-templates
+```
+
+Update magicspace. If you want to modify some template config before update, you can also add `--force` option if you do not want to commit that change first.
+
+```bash
+magicspace update
+```
+
+Review changes, resolve conflicts (if any) and commit the merge.
