@@ -1,0 +1,8 @@
+{
+  "name": "@mufan/code-templates",
+  "version": "0.0.0",
+  "description": "Code templates for Mufan",
+  "repository": "https://github.com/makeflow/mufan-code-templates.git",
+  "author": "Chengdu Mufan Technology Co., Ltd.",
+  "license": "MIT"
+}

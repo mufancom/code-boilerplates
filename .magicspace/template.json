@@ -1,0 +1,8 @@
+{
+  "extends": ["../general"],
+  "options": {
+    "project": {
+      "name": "@mufan/code-templates"
+    }
+  }
+}

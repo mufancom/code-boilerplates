@@ -1,0 +1,19 @@
+{
+  "editor.formatOnSave": true,
+  "editor.insertSpaces": true,
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": true
+  },
+  "editor.tabSize": 2,
+  "files.eol": "\n",
+  "files.insertFinalNewline": true,
+  "files.trimTrailingWhitespace": true,
+  "typescript.tsdk": "node_modules/typescript/lib",
+  "eslint.enable": true,
+  "eslint.validate": ["javascript", "typescript"],
+  "eslint.workingDirectories": [{"mode": "auto"}],
+  "cSpell.words": [
+    "Mufan",
+    "Parens",
+  ]
+}
