@@ -1,6 +1,7 @@
 const Path = require('path');
 
 const {json} = require('@magicspace/core');
+const latestVersion = require('latest-version');
 
 const {resolveProjectOptions} = require('../@utils');
 
@@ -47,14 +48,39 @@ const JSON_OPTIONS = {
   },
 };
 
-module.exports = ({project}) => {
-  let {name, packages} = resolveProjectOptions(project);
+const PROJECT_DEV_DEPENDENCY_DICT = {
+  eslint: '7',
+  prettier: '2',
+};
+
+module.exports = async ({project}) => {
+  let {name, repository, author, license, packages} = resolveProjectOptions(
+    project,
+  );
+
+  let common = {
+    repository,
+    author,
+    license,
+  };
+
+  let devDependencies = Object.fromEntries(
+    await Promise.all(
+      Object.entries(
+        PROJECT_DEV_DEPENDENCY_DICT,
+      ).map(async ([name, versionRange]) => [
+        name,
+        `^${await latestVersion(name, versionRange)}`,
+      ]),
+    ),
+  );
 
   return [
     json(
       'package.json',
       {
         name,
+        devDependencies,
         ...(packages.length
           ? {
               private: true,
@@ -63,6 +89,7 @@ module.exports = ({project}) => {
           : {
               version: '0.0.0',
             }),
+        ...common,
       },
       JSON_OPTIONS,
     ),
@@ -72,6 +99,7 @@ module.exports = ({project}) => {
         {
           name: package.name,
           version: '0.0.0',
+          ...common,
         },
         JSON_OPTIONS,
       ),
