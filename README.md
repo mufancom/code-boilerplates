@@ -1,1 +1,3 @@
-# Magicspace Project
+# @mufan/code-templates
+
+Hello
