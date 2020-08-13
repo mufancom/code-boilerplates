@@ -4,5 +4,8 @@
   "description": "Code templates for Mufan",
   "repository": "https://github.com/makeflow/mufan-code-templates.git",
   "author": "Chengdu Mufan Technology Co., Ltd.",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "@magicspace/core": "^0.2.2"
+  }
 }
