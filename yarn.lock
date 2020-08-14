@@ -23,10 +23,10 @@
     chalk "^2.0.0"
     js-tokens "^4.0.0"
 
-"@magicspace/core@^0.2.5":
-  version "0.2.5"
-  resolved "https://registry.yarnpkg.com/@magicspace/core/-/core-0.2.5.tgz#24e8c0f676ce78bab82d6b9e9248db7edfa9bd48"
-  integrity sha512-nlITJfaQXISaSZDYypoxlrCZiSBYnlg8UqIvGKszzQV/Od70yKTAGHlByf33tbfprPej+jPVEItlb0ueZcMvnA==
+"@magicspace/core@^0.2.6":
+  version "0.2.6"
+  resolved "https://registry.yarnpkg.com/@magicspace/core/-/core-0.2.6.tgz#dad4079aaf9c8e0d57c0da2aa9fe966a03d904b6"
+  integrity sha512-l20Ise7tlRdB0z4FFBpChqy76ZhDdN7cXQPjCfBPjQ4iOKIqamAbAEHZgvJEdrFpCLJ0Ka8M19xhTPeqJRm+GA==
   dependencies:
     fast-glob "^3.2.4"
     fs-extra "^9.0.1"
