@@ -15,11 +15,20 @@ After making the initial commit, create magicspace template config `.magicspace/
   "extends": ["@mufan/code-templates/general"],
   "options": {
     "project": {
-      "name": "awesome-project"
+      "name": "awesome-project",
+      "author": "Chengdu Mufan Technology Co., Ltd.",
+      "license": "MIT",
+      "packages": [
+        {
+          "name": "@mufan/awesome-empty-project"
+        }
+      ]
     }
   }
 }
 ```
+
+> Options are defined by templates.
 
 ```bash
 magicspace init --force # force to skip clean working directory assertion
