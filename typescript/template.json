@@ -1,0 +1,5 @@
+{
+  "extends": "../general",
+  "root": "composables",
+  "composables": ["*.js"]
+}

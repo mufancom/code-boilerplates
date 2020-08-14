@@ -64,7 +64,11 @@ module.exports = async ({project}) => {
     license,
   };
 
-  console.info('Fetching dependency versions...');
+  console.info(
+    `Fetching dependency versions of ${Object.keys(PROJECT_DEV_DEPENDENCY_DICT)
+      .map(name => `"${name}"`)
+      .join(', ')}...`,
+  );
 
   let devDependencies = Object.fromEntries(
     await Promise.all(
