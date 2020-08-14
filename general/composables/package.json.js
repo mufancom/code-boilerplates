@@ -78,6 +78,12 @@ module.exports = async options => {
       'package.json',
       {
         name,
+        scripts: {
+          lint: 'eslint .',
+          'lint-prettier':
+            'prettier --list-different "**/*.{ts,tsx,js,jsx,json,md}"',
+          test: 'yarn lint-prettier && yarn lint',
+        },
         devDependencies,
         ...(packages.length
           ? {
