@@ -42,3 +42,7 @@ magicspace update
 ```
 
 Review changes, resolve conflicts (if any) and commit the merge.
+
+## License
+
+MIT License.
