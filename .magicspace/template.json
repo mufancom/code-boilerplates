@@ -2,7 +2,9 @@
   "extends": ["../general"],
   "options": {
     "project": {
-      "name": "@mufan/code-templates"
+      "name": "@mufan/code-templates",
+      "author": "Chengdu Mufan Technology Co., Ltd.",
+      "license": "MIT"
     }
   }
 }

@@ -6,7 +6,7 @@
   "author": "Chengdu Mufan Technology Co., Ltd.",
   "license": "MIT",
   "dependencies": {
-    "@magicspace/core": "^0.2.3",
+    "@magicspace/core": "^0.2.5",
     "latest-version": "^5.1.0"
   },
   "devDependencies": {
