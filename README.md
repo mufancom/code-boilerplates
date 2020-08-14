@@ -1,10 +1,14 @@
 # Mufan Code Templates
 
+Code templates for our projects, powered by [Magicspace](https://github.com/makeflow/magicspace).
+
 ## Usage
 
 ```bash
 npm install --global magicspace makeflow/mufan-code-templates
 ```
+
+> As this repository is updated on a daily basis, the package `@mufan/code-templates` is not published to NPM registry. Instead we are installing from github `makeflow/mufan-code-templates`.
 
 ### Initialize magicspace
 
