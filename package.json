@@ -2,6 +2,7 @@
   "name": "@mufan/code-templates",
   "version": "0.0.0",
   "license": "MIT",
+  "author": "Chengdu Mufan Technology Co., Ltd.",
   "devDependencies": {
     "eslint": "^7.6.0",
     "prettier": "^2.0.5"
