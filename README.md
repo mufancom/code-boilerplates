@@ -1,3 +1,5 @@
 # @mufan/code-templates
 
-Hello
+Just another awesome magic.
+
+## License
