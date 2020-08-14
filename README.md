@@ -14,16 +14,14 @@ After making the initial commit, create magicspace template config `.magicspace/
 {
   "extends": ["@mufan/code-templates/general"],
   "options": {
-    "project": {
-      "name": "awesome-project",
-      "author": "Chengdu Mufan Technology Co., Ltd.",
-      "license": "MIT",
-      "packages": [
-        {
-          "name": "@mufan/awesome-empty-project"
-        }
-      ]
-    }
+    "name": "awesome-project",
+    "author": "Chengdu Mufan Technology Co., Ltd.",
+    "license": "MIT",
+    "packages": [
+      {
+        "name": "@mufan/awesome-empty-project"
+      }
+    ]
   }
 }
 ```

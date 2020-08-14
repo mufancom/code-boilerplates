@@ -3,7 +3,7 @@ const Path = require('path');
 const {json} = require('@magicspace/core');
 const latestVersion = require('latest-version');
 
-const {resolveProjectOptions} = require('../@utils');
+const {resolveOptions} = require('../@utils');
 
 const JSON_OPTIONS = {
   /** @link https://docs.npmjs.com/files/package.json */
@@ -48,15 +48,13 @@ const JSON_OPTIONS = {
   },
 };
 
-const PROJECT_DEV_DEPENDENCY_DICT = {
+const DEV_DEPENDENCY_DICT = {
   eslint: '7',
   prettier: '2',
 };
 
-module.exports = async ({project}) => {
-  let {name, repository, author, license, packages} = resolveProjectOptions(
-    project,
-  );
+module.exports = async options => {
+  let {name, repository, author, license, packages} = resolveOptions(options);
 
   let common = {
     repository,
@@ -68,9 +66,7 @@ module.exports = async ({project}) => {
 
   let devDependencies = Object.fromEntries(
     await Promise.all(
-      Object.entries(
-        PROJECT_DEV_DEPENDENCY_DICT,
-      ).map(async ([name, versionRange]) => [
+      Object.entries(DEV_DEPENDENCY_DICT).map(async ([name, versionRange]) => [
         name,
         `^${await latestVersion(name, versionRange)}`,
       ]),
