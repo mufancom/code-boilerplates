@@ -18,5 +18,11 @@
     "typescriptreact"
   ],
   "eslint.workingDirectories": [{"mode": "auto"}],
-  "cSpell.words": ["Mufan", "Parens", "composables", "magicspace"]
+  "cSpell.words": [
+    "Mufan",
+    "Parens",
+    "composables",
+    "magicspace",
+    "makeflow"
+  ]
 }

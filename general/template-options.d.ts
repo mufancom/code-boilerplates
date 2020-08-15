@@ -1,17 +1,13 @@
 declare namespace Magicspace {
   interface TemplateOptions {
-    project?: TemplateOptions.ProjectOptions;
+    name: string;
+    author?: string;
+    license?: string;
+    packagesDir?: string;
+    packages?: TemplateOptions.PackageOptions[];
   }
 
   namespace TemplateOptions {
-    interface ProjectOptions {
-      name: string;
-      author?: string;
-      license?: string;
-      packagesDir?: string;
-      packages?: PackageOptions[];
-    }
-
     interface PackageOptions {
       name: string;
       dir?: string;

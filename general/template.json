@@ -1,4 +1,5 @@
 {
+  "extends": "./prettier",
   "root": "composables",
   "composables": ["*.js"]
 }

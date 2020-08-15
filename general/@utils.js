@@ -1,10 +1,6 @@
 const Path = require('path');
 
-function resolveProjectOptions({
-  packagesDir = 'packages',
-  packages = [],
-  ...rest
-}) {
+function resolveOptions({packagesDir = 'packages', packages = [], ...rest}) {
   return {
     ...rest,
     packagesDir,
@@ -20,4 +16,4 @@ function resolveProjectOptions({
   };
 }
 
-module.exports = {resolveProjectOptions};
+module.exports = {resolveOptions};

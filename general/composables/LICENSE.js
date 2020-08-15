@@ -5,7 +5,7 @@ const {handlebars} = require('@magicspace/core');
 
 const LICENSES_DIR = Path.join(__dirname, 'licenses');
 
-module.exports = ({project: {license, author}}) => {
+module.exports = ({license, author}) => {
   if (!license) {
     return undefined;
   }
