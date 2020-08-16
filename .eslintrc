@@ -4,5 +4,21 @@
   "env": {
     "node": true,
     "es2020": true
-  }
+  },
+  "overrides": [
+    {
+      "files": ["**/*.{ts,tsx}"],
+      "extends": ["plugin:@mufan/default"],
+      "parserOptions": {
+        "project": "./**/tsconfig.json"
+      }
+    },
+    {
+      "files": ["**/template-options.d.ts"],
+      "extends": ["plugin:@mufan/default"],
+      "rules": {
+        "@typescript-eslint/triple-slash-reference": "off"
+      }
+    }
+  ]
 }

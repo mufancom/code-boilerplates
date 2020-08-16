@@ -23,6 +23,7 @@
     "Parens",
     "composables",
     "magicspace",
-    "makeflow"
+    "makeflow",
+    "prettierignore"
   ]
 }

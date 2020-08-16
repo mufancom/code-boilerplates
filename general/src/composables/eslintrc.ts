@@ -1,4 +1,4 @@
-const {json} = require('@magicspace/core');
+import {json} from '@magicspace/core';
 
 const JSON_OPTIONS = {
   /** @link https://eslint.org/docs/user-guide/configuring */
@@ -20,17 +20,15 @@ const JSON_OPTIONS = {
   ],
 };
 
-module.exports = () => {
-  return json(
-    '.eslintrc',
-    {
-      root: true,
-      extends: ['eslint:recommended'],
-      env: {
-        node: true,
-        es2020: true,
-      },
+export default json(
+  '.eslintrc',
+  {
+    root: true,
+    extends: ['eslint:recommended'],
+    env: {
+      node: true,
+      es2020: true,
     },
-    JSON_OPTIONS,
-  );
-};
+  },
+  JSON_OPTIONS,
+);

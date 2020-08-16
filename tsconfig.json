@@ -1,0 +1,9 @@
+{
+  "files": [],
+  "references": [
+    {"path": "general/src/library"},
+    {"path": "general/src/composables"},
+    {"path": "typescript/src/library"},
+    {"path": "typescript/src/composables"}
+  ]
+}

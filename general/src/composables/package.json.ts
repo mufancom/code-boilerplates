@@ -1,9 +1,9 @@
-const Path = require('path');
+import * as Path from 'path';
 
-const {json} = require('@magicspace/core');
-const latestVersion = require('latest-version');
+import {Project, json} from '@magicspace/core';
+import {fetchPackageVersions} from '@magicspace/utils';
 
-const {resolveOptions} = require('../@utils');
+import {resolveOptions} from '../library';
 
 const JSON_OPTIONS = {
   /** @link https://docs.npmjs.com/files/package.json */
@@ -53,7 +53,7 @@ const DEV_DEPENDENCY_DICT = {
   prettier: '2',
 };
 
-module.exports = async options => {
+const composable: Project.ComposableModuleFunction = async options => {
   let {name, repository, author, license, packages} = resolveOptions(options);
 
   let common = {
@@ -62,20 +62,7 @@ module.exports = async options => {
     license,
   };
 
-  console.info(
-    `Fetching dependency versions of ${Object.keys(PROJECT_DEV_DEPENDENCY_DICT)
-      .map(name => `"${name}"`)
-      .join(', ')}...`,
-  );
-
-  let devDependencies = Object.fromEntries(
-    await Promise.all(
-      Object.entries(DEV_DEPENDENCY_DICT).map(async ([name, versionRange]) => [
-        name,
-        `^${await latestVersion(name, versionRange)}`,
-      ]),
-    ),
-  );
+  let devDependencies = await fetchPackageVersions(DEV_DEPENDENCY_DICT);
 
   return [
     json(
@@ -84,15 +71,14 @@ module.exports = async options => {
         name,
         scripts: {
           lint: 'eslint .',
-          'lint-prettier':
-            'prettier --list-different "**/*.{ts,tsx,js,jsx,json,md}"',
+          'lint-prettier': 'prettier --check .',
           test: 'yarn lint-prettier && yarn lint',
         },
         devDependencies,
         ...(packages.length
           ? {
               private: true,
-              workspaces: packages.map(package => package.dir),
+              workspaces: packages.map(packageOptions => packageOptions.dir),
             }
           : {
               version: '0.0.0',
@@ -101,11 +87,11 @@ module.exports = async options => {
       },
       JSON_OPTIONS,
     ),
-    ...packages.map(package =>
+    ...packages.map(packageOptions =>
       json(
-        Path.join(package.dir, 'package.json'),
+        Path.posix.join(packageOptions.dir, 'package.json'),
         {
-          name: package.name,
+          name: packageOptions.name,
           version: '0.0.0',
           ...common,
         },
@@ -114,3 +100,5 @@ module.exports = async options => {
     ),
   ];
 };
+
+export default composable;

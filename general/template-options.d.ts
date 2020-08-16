@@ -1,8 +1,9 @@
 declare namespace Magicspace {
   interface TemplateOptions {
     name: string;
-    author?: string;
+    repository?: string;
     license?: string;
+    author?: string;
     packagesDir?: string;
     packages?: TemplateOptions.PackageOptions[];
   }

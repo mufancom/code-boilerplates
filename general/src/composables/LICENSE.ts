@@ -1,16 +1,16 @@
-const FS = require('fs');
-const Path = require('path');
+import * as FS from 'fs';
+import * as Path from 'path';
 
-const {handlebars} = require('@magicspace/core');
+import {Project, handlebars} from '@magicspace/core';
 
-const LICENSES_DIR = Path.join(__dirname, 'licenses');
+import {LICENSE_TEMPLATES_DIR} from './@constants';
 
-module.exports = ({license, author}) => {
+const composable: Project.ComposableModuleFunction = ({license, author}) => {
   if (!license) {
     return undefined;
   }
 
-  let licenses = FS.readdirSync(LICENSES_DIR).map(fileName =>
+  let licenses = FS.readdirSync(LICENSE_TEMPLATES_DIR).map(fileName =>
     Path.basename(fileName, '.txt'),
   );
 
@@ -28,8 +28,10 @@ module.exports = ({license, author}) => {
       organization: author || '{{ organization }}',
     },
     {
-      template: Path.join(LICENSES_DIR, `${license}.txt`),
+      template: Path.join(LICENSE_TEMPLATES_DIR, `${license}.txt`),
       noEscape: true,
     },
   );
 };
+
+export default composable;
