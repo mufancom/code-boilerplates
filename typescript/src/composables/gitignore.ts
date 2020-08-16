@@ -1,7 +1,7 @@
 import {text} from '@magicspace/core';
 
 export default text(
-  '.prettierignore',
+  '.gitignore',
   content => `${content}\
 # TypeScript Build Artifacts
 bld/
