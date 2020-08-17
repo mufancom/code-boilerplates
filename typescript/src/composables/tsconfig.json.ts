@@ -1,6 +1,6 @@
 import * as Path from 'path';
 
-import {Project, json} from '@magicspace/core';
+import {ComposableModuleFunction, json} from '@magicspace/core';
 
 import {resolveTypeScriptProjects} from '../library';
 
@@ -15,7 +15,7 @@ const JSON_OPTIONS = {
   ],
 };
 
-const composable: Project.ComposableModuleFunction = options => {
+const composable: ComposableModuleFunction = options => {
   let {projects} = resolveTypeScriptProjects(options);
 
   return [

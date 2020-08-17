@@ -1,11 +1,11 @@
 import * as FS from 'fs';
 import * as Path from 'path';
 
-import {Project, handlebars} from '@magicspace/core';
+import {ComposableModuleFunction, handlebars} from '@magicspace/core';
 
 import {LICENSE_TEMPLATES_DIR} from './@constants';
 
-const composable: Project.ComposableModuleFunction = ({license, author}) => {
+const composable: ComposableModuleFunction = ({license, author}) => {
   if (!license) {
     return undefined;
   }

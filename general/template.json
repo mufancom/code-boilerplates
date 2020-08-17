@@ -1,5 +1,33 @@
 {
   "extends": "./prettier",
   "root": "bld/composables",
-  "composables": ["(?!@)*.js"]
+  "composables": ["(?!@)*.js"],
+  "examples": [
+    {
+      "name": "basic",
+      "description": "basic usage",
+      "options": {
+        "name": "awesome-project",
+        "license": "MIT",
+        "author": "Magicspace"
+      }
+    },
+    {
+      "name": "multiple packages",
+      "description": "multiple packages with workspaces",
+      "options": {
+        "name": "awesome-project",
+        "license": "MIT",
+        "author": "Magicspace",
+        "packages": [
+          {
+            "name": "@awesome/server"
+          },
+          {
+            "name": "@awesome/client"
+          }
+        ]
+      }
+    }
+  ]
 }

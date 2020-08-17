@@ -1,8 +1,8 @@
-import {Project, json} from '@magicspace/core';
+import {ComposableModuleFunction, json} from '@magicspace/core';
 
 import {resolveTypeScriptProjects} from '../library';
 
-const composable: Project.ComposableModuleFunction = options => {
+const composable: ComposableModuleFunction = options => {
   let {projects} = resolveTypeScriptProjects(options);
 
   let devProjects = projects.filter(project => project.dev);

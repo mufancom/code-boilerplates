@@ -1,6 +1,6 @@
 import * as Path from 'path';
 
-import {Project, json} from '@magicspace/core';
+import {ComposableModuleFunction, json} from '@magicspace/core';
 import {fetchPackageVersions} from '@magicspace/utils';
 
 import {resolveOptions} from '../library';
@@ -53,7 +53,7 @@ const DEV_DEPENDENCY_DICT = {
   prettier: '2',
 };
 
-const composable: Project.ComposableModuleFunction = async options => {
+const composable: ComposableModuleFunction = async options => {
   let {name, repository, author, license, packages} = resolveOptions(options);
 
   let common = {

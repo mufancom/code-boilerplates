@@ -1,4 +1,4 @@
-import {Project, json} from '@magicspace/core';
+import {ComposableModuleFunction, json} from '@magicspace/core';
 import {
   extendObjectProperties,
   extendPackageScript,
@@ -15,7 +15,7 @@ const DEV_DEPENDENCY_DICT = {
   typescript: '3',
 };
 
-const composable: Project.ComposableModuleFunction = async options => {
+const composable: ComposableModuleFunction = async options => {
   let {
     projects,
     package: {packagesDir},
