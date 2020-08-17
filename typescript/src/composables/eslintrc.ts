@@ -1,4 +1,5 @@
 import {ComposableModuleFunction, json} from '@magicspace/core';
+import _ from 'lodash';
 
 import {resolveTypeScriptProjects} from '../library';
 
@@ -10,6 +11,10 @@ const composable: ComposableModuleFunction = options => {
   return json('.eslintrc', (data: any) => {
     return {
       ...data,
+      ignorePatterns: _.union(_.castArray(data.ignorePatterns ?? []), [
+        'bld',
+        '.bld-cache',
+      ]),
       overrides: [
         ...(data.overrides ?? []),
         {
