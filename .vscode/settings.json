@@ -17,7 +17,6 @@
     "typescript",
     "typescriptreact"
   ],
-  "eslint.workingDirectories": [{"mode": "auto"}],
   "cSpell.words": [
     "Mufan",
     "Parens",
