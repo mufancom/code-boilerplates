@@ -15,7 +15,7 @@ npm install --global magicspace makeflow/mufan-code-templates
 After making the initial commit:
 
 ```bash
-magicspace create @mufan/code-templates-general
+magicspace create @mufan/code-templates/general
 ```
 
 Select an example and review/edit the configuration options.
