@@ -9,7 +9,7 @@
       "options": {
         "name": "awesome-project",
         "license": "MIT",
-        "author": "Magicspace"
+        "author": "Awesome Author"
       }
     },
     {
@@ -18,7 +18,7 @@
       "options": {
         "name": "awesome-project",
         "license": "MIT",
-        "author": "Magicspace",
+        "author": "Awesome Author",
         "packages": [
           {
             "name": "@awesome/server"

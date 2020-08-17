@@ -9,7 +9,7 @@
       "options": {
         "name": "awesome-library",
         "license": "MIT",
-        "author": "Magicspace",
+        "author": "Awesome Author",
         "tsProjects": [
           {
             "name": "library"
@@ -26,7 +26,7 @@
       "options": {
         "name": "awesome-program",
         "license": "MIT",
-        "author": "Magicspace",
+        "author": "Awesome Author",
         "tsProjects": [
           {
             "name": "program"
@@ -43,7 +43,7 @@
       "options": {
         "name": "awesome-project",
         "license": "MIT",
-        "author": "Magicspace",
+        "author": "Awesome Author",
         "packages": [
           {
             "name": "@awesome/core",
