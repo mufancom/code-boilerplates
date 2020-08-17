@@ -23,10 +23,10 @@
     chalk "^2.0.0"
     js-tokens "^4.0.0"
 
-"@magicspace/core@^0.2.9":
-  version "0.2.9"
-  resolved "https://registry.yarnpkg.com/@magicspace/core/-/core-0.2.9.tgz#d181ee8ddce8a77dbd8b97d78026aab677b95f16"
-  integrity sha512-5D6k/YP6AVkhDv9qsMgcgaI66agTrbLtdkhJbrZiVa2EEuj12A6QPAvb/4KBm2ps/PVbkpMCDMdOOJfXAOat7g==
+"@magicspace/core@^0.2.12":
+  version "0.2.12"
+  resolved "https://registry.yarnpkg.com/@magicspace/core/-/core-0.2.12.tgz#be944e8506bed020fd851cbf2530500d9f5d8743"
+  integrity sha512-Ral7wOqjF98rQwnJhMot045SAPezvHWiwo22HD5YbCbTru26uZ2kYyrzcpbBfiF/QLNu1Iqd+NeJy+HSnySiJA==
   dependencies:
     fast-glob "^3.2.4"
     fs-extra "^9.0.1"
@@ -35,7 +35,7 @@
     module-lens "^0.1.6"
     prettier "^2.0.5"
     sort-keys "^4.0.0"
-    tiva "^0.2.0"
+    tiva "^0.2.1"
     tslang "^0.1.22"
     tslib "^2.0.1"
     typescript "^3.9.7"
@@ -1594,10 +1594,10 @@ text-table@^0.2.0:
   resolved "https://registry.yarnpkg.com/text-table/-/text-table-0.2.0.tgz#7f5ee823ae805207c00af2df4a84ec3fcfa570b4"
   integrity sha1-f17oI66AUgfACvLfSoTsP8+lcLQ=
 
-tiva@^0.2.0:
-  version "0.2.0"
-  resolved "https://registry.yarnpkg.com/tiva/-/tiva-0.2.0.tgz#518c2a68845c3c798a28a45b6bf29acc6635de79"
-  integrity sha512-77DE+G+JZqAdbEzuzF8OZG+AvX/VBYulHxRBYX4ULUfztHa0/pExcvjJkC89PZoSkIf0CpKA9VFd8fNOzx9R7w==
+tiva@^0.2.1:
+  version "0.2.1"
+  resolved "https://registry.yarnpkg.com/tiva/-/tiva-0.2.1.tgz#8281ca89def58d8742c55997c89d653773cd96c3"
+  integrity sha512-1DdE4rDxs1E4sBeXvdQdD1HDWJ0xn82GQNCn17UdcXTVFQ7mAE2nfiI0XMuS5oHAPLpZf05Z4uUV3IZCdNXazg==
   dependencies:
     extendable-error "^0.1.7"
     tslang "^0.1.22"

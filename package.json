@@ -7,7 +7,10 @@
   "author": "Chengdu Mufan Technology Co., Ltd.",
   "license": "MIT",
   "scripts": {
-    "install": "tsc --build"
+    "install": "tsc --build",
+    "lint": "eslint .",
+    "lint-prettier": "prettier --check .",
+    "test": "yarn lint-prettier && yarn lint"
   },
   "dependencies": {
     "@magicspace/core": "^0.2.12",
