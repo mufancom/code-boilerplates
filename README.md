@@ -12,7 +12,7 @@ npm install --global magicspace makeflow/mufan-code-templates
 
 ### Create magicspace configuration
 
-After making the initial commit:
+Create magicspace configuration file with `magicspace create` command.
 
 ```bash
 magicspace create @mufan/code-templates/general
@@ -24,9 +24,22 @@ Select an example and review/edit the configuration options.
 
 ### Initialize magicspace
 
+Initialize the repository and **make initial commit** if you have not:
+
+```bash
+git init
+
+touch README.md
+git add README.md
+
+git commit --message "Initial commit"
+```
+
 ```bash
 magicspace init
 ```
+
+> You can use magicspace to initialize an existing project, just expect more conflicts to resolve.
 
 Review changes, resolve conflicts (if any) and commit the merge.
 
