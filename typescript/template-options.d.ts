@@ -13,11 +13,6 @@ declare namespace Magicspace {
     interface TypeScriptProjectOptions {
       name: string;
       /**
-       * Default directory inside its parent package, defaults to the project
-       * name.
-       */
-      dir?: string;
-      /**
        * Is this TypeScript project a library or program? Defaults to 'library'
        * if project name is 'library', otherwise 'program'.
        *

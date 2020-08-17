@@ -10,7 +10,6 @@ import {
 } from '../../../general/bld/library';
 
 export interface ResolvedTypeScriptProjectOptions {
-  name: string;
   srcDir: string;
   outDir: string;
   tsconfigPath: string;
@@ -47,21 +46,19 @@ export function resolveTypeScriptProjects(
 }
 
 function buildResolvedTypeScriptProjectOptions(
-  {name, dir, type, dev}: Magicspace.TemplateOptions.TypeScriptProjectOptions,
+  {name, type, dev}: Magicspace.TemplateOptions.TypeScriptProjectOptions,
   packageOptions?: ResolvedPackageOptions,
 ): ResolvedTypeScriptProjectOptions {
-  let dirBaseName = dir ?? name;
   let packageDir = packageOptions?.dir ?? '';
 
-  let srcDir = Path.posix.join(packageDir, 'src', dirBaseName);
+  let srcDir = Path.posix.join(packageDir, 'src', name);
   let outDir = Path.posix.join(
     packageDir,
     type === 'script' ? '.bld-cache' : 'bld',
-    dirBaseName,
+    name,
   );
 
   return {
-    name,
     srcDir,
     outDir,
     tsconfigPath: Path.posix.join(srcDir, 'tsconfig.json'),
