@@ -1,6 +1,6 @@
-import {json} from '@magicspace/core';
+import {JSONFileOptions, json} from '@magicspace/core';
 
-const JSON_OPTIONS = {
+const JSON_OPTIONS: JSONFileOptions = {
   /** @link https://eslint.org/docs/user-guide/configuring */
   sortKeys: [
     'root',
@@ -18,6 +18,9 @@ const JSON_OPTIONS = {
     'settings',
     'overrides',
   ],
+  // Add space to hint prettier so that it won't make short object literal like
+  // `env` below a single line.
+  space: 2,
 };
 
 export default json(

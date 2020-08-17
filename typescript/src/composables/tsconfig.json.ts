@@ -1,10 +1,14 @@
 import * as Path from 'path';
 
-import {ComposableModuleFunction, json} from '@magicspace/core';
+import {
+  ComposableModuleFunction,
+  JSONFileOptions,
+  json,
+} from '@magicspace/core';
 
 import {resolveTypeScriptProjects} from '../library';
 
-const JSON_OPTIONS = {
+const JSON_OPTIONS: JSONFileOptions = {
   sortKeys: [
     'extends',
     'compilerOptions',

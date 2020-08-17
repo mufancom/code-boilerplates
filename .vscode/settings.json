@@ -24,6 +24,8 @@
     "composables",
     "magicspace",
     "makeflow",
-    "prettierignore"
+    "postgenerate",
+    "prettierignore",
+    "prettierrc"
   ]
 }

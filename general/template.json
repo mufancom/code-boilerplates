@@ -1,7 +1,9 @@
 {
-  "extends": "./prettier",
   "root": "bld/composables",
   "composables": ["(?!@)*.js"],
+  "scripts": {
+    "postgenerate": "prettier --write ."
+  },
   "examples": [
     {
       "name": "basic",

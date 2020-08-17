@@ -15,7 +15,6 @@
     },
     {
       "files": ["**/template-options.d.ts"],
-      "extends": ["plugin:@mufan/default"],
       "rules": {
         "@typescript-eslint/triple-slash-reference": "off"
       }

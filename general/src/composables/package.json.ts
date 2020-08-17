@@ -1,11 +1,15 @@
 import * as Path from 'path';
 
-import {ComposableModuleFunction, json} from '@magicspace/core';
+import {
+  ComposableModuleFunction,
+  JSONFileOptions,
+  json,
+} from '@magicspace/core';
 import {fetchPackageVersions} from '@magicspace/utils';
 
 import {resolveOptions} from '../library';
 
-const JSON_OPTIONS = {
+const JSON_OPTIONS: JSONFileOptions = {
   /** @link https://docs.npmjs.com/files/package.json */
   sortKeys: {
     top: [
