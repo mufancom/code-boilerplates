@@ -1,5 +1,5 @@
 // eslint-disable-next-line @typescript-eslint/triple-slash-reference
-/// <reference path="../../template-options.d.ts" />
+/// <reference path="../../boilerplate.d.ts" />
 
 import * as Path from 'path';
 
@@ -24,7 +24,7 @@ export interface ResolveTypeScriptProjectsResult {
 }
 
 export function resolveTypeScriptProjects(
-  options: Magicspace.TemplateOptions,
+  options: Magicspace.BoilerplateOptions,
 ): ResolveTypeScriptProjectsResult {
   let packageOptions = resolveOptions(options);
   let {tsProjects, packages} = packageOptions;
@@ -46,7 +46,7 @@ export function resolveTypeScriptProjects(
 }
 
 function buildResolvedTypeScriptProjectOptions(
-  {name, type, dev}: Magicspace.TemplateOptions.TypeScriptProjectOptions,
+  {name, type, dev}: Magicspace.BoilerplateOptions.TypeScriptProjectOptions,
   packageOptions?: ResolvedPackageOptions,
 ): ResolvedTypeScriptProjectOptions {
   let packageDir = packageOptions?.dir ?? '';

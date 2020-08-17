@@ -1,9 +1,9 @@
 {
-  "name": "@mufan/code-templates",
+  "name": "@mufan/code-boilerplates",
   "version": "0.0.0",
   "private": true,
-  "description": "Code templates for Mufan",
-  "repository": "https://github.com/makeflow/mufan-code-templates.git",
+  "description": "Code boilerplates for Mufan",
+  "repository": "https://github.com/makeflow/mufan-code-boilerplates.git",
   "author": "Chengdu Mufan Technology Co., Ltd.",
   "license": "MIT",
   "scripts": {
@@ -13,8 +13,8 @@
     "test": "yarn lint-prettier && yarn lint"
   },
   "dependencies": {
-    "@magicspace/core": "^0.2.15",
-    "@magicspace/utils": "^0.2.15",
+    "@magicspace/core": "^0.2.16",
+    "@magicspace/utils": "^0.2.16",
     "@mufan/code": "^0.2.5",
     "@types/lodash": "^4.14.159",
     "@types/node": "^14.0.27",

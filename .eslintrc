@@ -15,7 +15,7 @@
       }
     },
     {
-      "files": ["**/template-options.d.ts"],
+      "files": ["**/*.d.ts"],
       "rules": {
         "@typescript-eslint/triple-slash-reference": "off"
       }

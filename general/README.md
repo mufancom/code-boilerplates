@@ -1,1 +1,1 @@
-# General JavaScript Project Template
+# General JavaScript Project Boilerplate

@@ -1,6 +1,6 @@
 import {ComposableModuleFunction, json} from '@magicspace/core';
 
-const DEFAULT_PRETTIER_OPTIONS: Magicspace.TemplateOptions.PrettierOptions = {
+const DEFAULT_PRETTIER_OPTIONS: Magicspace.BoilerplateOptions.PrettierOptions = {
   printWidth: 80,
   tabWidth: 2,
   useTabs: false,

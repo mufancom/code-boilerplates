@@ -1,14 +1,14 @@
 // eslint-disable-next-line @typescript-eslint/triple-slash-reference
-/// <reference path="../../template-options.d.ts" />
+/// <reference path="../../boilerplate.d.ts" />
 
 import * as Path from 'path';
 
 export interface ResolvedPackageOptions
-  extends Magicspace.TemplateOptions.PackageOptions {
+  extends Magicspace.BoilerplateOptions.PackageOptions {
   dir: string;
 }
 
-export interface ResolvedOptions extends Magicspace.TemplateOptions {
+export interface ResolvedOptions extends Magicspace.BoilerplateOptions {
   packagesDir: string;
   packages: ResolvedPackageOptions[];
 }
@@ -17,7 +17,7 @@ export function resolveOptions({
   packagesDir = 'packages',
   packages = [],
   ...rest
-}: Magicspace.TemplateOptions): ResolvedOptions {
+}: Magicspace.BoilerplateOptions): ResolvedOptions {
   return {
     ...rest,
     packagesDir,

@@ -1,11 +1,11 @@
-/// <reference path="../general/template-options.d.ts" />
+/// <reference path="../general/boilerplate.d.ts" />
 
 declare namespace Magicspace {
-  interface TemplateOptions {
-    tsProjects?: TemplateOptions.TypeScriptProjectOptions[];
+  interface BoilerplateOptions {
+    tsProjects?: BoilerplateOptions.TypeScriptProjectOptions[];
   }
 
-  namespace TemplateOptions {
+  namespace BoilerplateOptions {
     interface PackageOptions {
       tsProjects?: TypeScriptProjectOptions[];
     }

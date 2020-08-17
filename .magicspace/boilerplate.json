@@ -1,7 +1,7 @@
 {
   "extends": ["../general"],
   "options": {
-    "name": "@mufan/code-templates",
+    "name": "@mufan/code-boilerplates",
     "author": "Chengdu Mufan Technology Co., Ltd.",
     "license": "MIT"
   }

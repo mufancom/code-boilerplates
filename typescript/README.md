@@ -1,1 +1,1 @@
-# TypeScript Project Template
+# TypeScript Project Boilerplate

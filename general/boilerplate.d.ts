@@ -1,15 +1,15 @@
 declare namespace Magicspace {
-  interface TemplateOptions {
+  interface BoilerplateOptions {
     name: string;
     repository?: string;
     license?: string;
     author?: string;
     packagesDir?: string;
-    packages?: TemplateOptions.PackageOptions[];
-    prettier?: TemplateOptions.PrettierOptions;
+    packages?: BoilerplateOptions.PackageOptions[];
+    prettier?: BoilerplateOptions.PrettierOptions;
   }
 
-  namespace TemplateOptions {
+  namespace BoilerplateOptions {
     interface PackageOptions {
       name: string;
       dir?: string;

@@ -16,7 +16,9 @@ const composable: ComposableModuleFunction = ({license, author}) => {
 
   if (!licenses.includes(license)) {
     console.warn(
-      `No license template found for ${JSON.stringify(license)}, use one of:`,
+      `No license boilerplate found for ${JSON.stringify(
+        license,
+      )}, use one of:`,
     );
     console.warn(licenses.map(license => `  - ${license}`).join('\n'));
     return undefined;

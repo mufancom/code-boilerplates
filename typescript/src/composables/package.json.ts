@@ -51,10 +51,12 @@ const composable: ComposableModuleFunction = async options => {
       scripts = extendObjectProperties(
         scripts,
         {
-          test: extendPackageScript(scripts.test, 'yarn build'),
+          test: extendPackageScript(scripts.test, 'yarn build', {
+            after: '*lint-prettier*',
+          }),
         },
         {
-          after: '*lint-prettier*',
+          after: '*lint*',
         },
       );
 
