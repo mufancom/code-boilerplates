@@ -23,10 +23,10 @@
     chalk "^2.0.0"
     js-tokens "^4.0.0"
 
-"@magicspace/core@^0.2.15":
-  version "0.2.15"
-  resolved "https://registry.yarnpkg.com/@magicspace/core/-/core-0.2.15.tgz#de15d3e3b109625b625e586d37a6a1c2244f32fe"
-  integrity sha512-FqvjjtI2xG5nQGVpIHd6SnzpXOtWuxsxdvNe6N6cug3YBQ2J95AGdEzLh5rAGOzwm2Mr6AMDC5yjIsuNqFw6sg==
+"@magicspace/core@^0.2.17":
+  version "0.2.17"
+  resolved "https://registry.yarnpkg.com/@magicspace/core/-/core-0.2.17.tgz#ea315b3f63eb7660f5c56cd6239bd2fef04ba6b8"
+  integrity sha512-PY4apvITn+IJeVmnrbmlOagh2fDT4b8S29iCj7SpMMs/tnHsbUpCVIf1T2JZ2VTPrH3054XZTLyCtIYQS1Qa4w==
   dependencies:
     fast-glob "^3.2.4"
     fs-extra "^9.0.1"
@@ -42,10 +42,10 @@
     typescript "^3.9.7"
     yarn-global-modules "^1.0.1"
 
-"@magicspace/utils@^0.2.15":
-  version "0.2.15"
-  resolved "https://registry.yarnpkg.com/@magicspace/utils/-/utils-0.2.15.tgz#78d97d8ee36ff2112eda7de46318d5f133422121"
-  integrity sha512-m+z/V4CxL84jbEevtVsGW3vU9wAtosFrN26FKba9ZQO6F18mI7faq2mru9NYr6q/52BrYszoEX97RASjnAT/Bw==
+"@magicspace/utils@^0.2.16":
+  version "0.2.16"
+  resolved "https://registry.yarnpkg.com/@magicspace/utils/-/utils-0.2.16.tgz#882d6c83f6f67fcfefb58437f6b2cba9330b7907"
+  integrity sha512-th8e9xwUwiJAnTKt9E6uEeU7hNBg+EEw9pzXfFA+hnKX260J851kg1na15SNHljQ91rsPJ9IwBHDgmGLk1biqg==
   dependencies:
     chalk "^4.1.0"
     latest-version "^5.1.0"
