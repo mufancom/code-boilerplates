@@ -1,4 +1,4 @@
-# @mufan/code-templates
+# @mufan/code-boilerplates
 
 Just another awesome magic.
 
