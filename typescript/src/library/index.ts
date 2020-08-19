@@ -48,9 +48,9 @@ export function resolveTypeScriptProjects(
 function buildResolvedTypeScriptProjectOptions(
   {
     name,
-    type,
+    type = name === 'library' ? 'library' : 'program',
     src = 'src',
-    dev,
+    dev = type === 'script' ? true : false,
   }: Magicspace.BoilerplateOptions.TypeScriptProjectOptions,
   packageOptions?: ResolvedPackageOptions,
 ): ResolvedTypeScriptProjectOptions {
@@ -67,8 +67,8 @@ function buildResolvedTypeScriptProjectOptions(
     srcDir,
     outDir,
     tsconfigPath: Path.posix.join(srcDir, 'tsconfig.json'),
-    type: type ?? (name === 'library' ? 'library' : 'program'),
-    dev: dev ?? name === 'test' ? true : false,
+    type,
+    dev,
     package: packageOptions,
   };
 }

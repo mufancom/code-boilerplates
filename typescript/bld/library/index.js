@@ -19,7 +19,7 @@ function resolveTypeScriptProjects(options) {
     };
 }
 exports.resolveTypeScriptProjects = resolveTypeScriptProjects;
-function buildResolvedTypeScriptProjectOptions({ name, type, src = 'src', dev, }, packageOptions) {
+function buildResolvedTypeScriptProjectOptions({ name, type = name === 'library' ? 'library' : 'program', src = 'src', dev = type === 'script' ? true : false, }, packageOptions) {
     var _a;
     let packageDir = (_a = packageOptions === null || packageOptions === void 0 ? void 0 : packageOptions.dir) !== null && _a !== void 0 ? _a : '';
     let srcDir = Path.posix.join(packageDir, src || '', name);
@@ -28,8 +28,8 @@ function buildResolvedTypeScriptProjectOptions({ name, type, src = 'src', dev, }
         srcDir,
         outDir,
         tsconfigPath: Path.posix.join(srcDir, 'tsconfig.json'),
-        type: type !== null && type !== void 0 ? type : (name === 'library' ? 'library' : 'program'),
-        dev: (dev !== null && dev !== void 0 ? dev : name === 'test') ? true : false,
+        type,
+        dev,
         package: packageOptions,
     };
 }
