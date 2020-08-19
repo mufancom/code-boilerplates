@@ -46,12 +46,17 @@ export function resolveTypeScriptProjects(
 }
 
 function buildResolvedTypeScriptProjectOptions(
-  {name, type, dev}: Magicspace.BoilerplateOptions.TypeScriptProjectOptions,
+  {
+    name,
+    type,
+    src = 'src',
+    dev,
+  }: Magicspace.BoilerplateOptions.TypeScriptProjectOptions,
   packageOptions?: ResolvedPackageOptions,
 ): ResolvedTypeScriptProjectOptions {
   let packageDir = packageOptions?.dir ?? '';
 
-  let srcDir = Path.posix.join(packageDir, 'src', name);
+  let srcDir = Path.posix.join(packageDir, src || '', name);
   let outDir = Path.posix.join(
     packageDir,
     type === 'script' ? '.bld-cache' : 'bld',

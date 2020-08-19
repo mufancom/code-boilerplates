@@ -17,7 +17,7 @@ declare namespace Magicspace {
        * if project name is 'library', otherwise 'program'.
        *
        * If the type is specified as 'script', the project will output to
-       * `.bld-cache` instead of 'bld'.
+       * '.bld-cache' instead of 'bld'.
        */
       type?: 'library' | 'program' | 'script';
       /**
@@ -25,6 +25,10 @@ declare namespace Magicspace {
        * true if the project name is 'test', otherwise false.
        */
       dev?: boolean;
+      /**
+       * Source directory, defaults to 'src'.
+       */
+      src?: string | false;
     }
   }
 }
