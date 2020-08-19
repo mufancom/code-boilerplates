@@ -2,7 +2,9 @@
   "extends": ["../general"],
   "options": {
     "name": "@mufan/code-boilerplates",
-    "author": "Chengdu Mufan Technology Co., Ltd.",
-    "license": "MIT"
+    "description": "Code boilerplates for Mufan",
+    "repository": "https://github.com/makeflow/mufan-code-boilerplates.git",
+    "license": "MIT",
+    "author": "Chengdu Mufan Technology Co., Ltd."
   }
 }

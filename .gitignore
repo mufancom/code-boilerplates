@@ -1,6 +1,10 @@
+# General
+.DS_Store
+*.tgz
 node_modules/
+yarn-error.log
+npm-debug.log
 
+# Build artifacts
 */bld/**/*.d.ts
-
 *.tsbuildinfo
-

@@ -52,7 +52,7 @@ const DEV_DEPENDENCY_DICT = {
     prettier: '2',
 };
 const composable = async (options) => {
-    let { name, repository, author, license, packages } = library_1.resolveOptions(options);
+    let { name, description, repository, author, license, packages, } = library_1.resolveOptions(options);
     let common = {
         repository,
         author,
@@ -62,6 +62,7 @@ const composable = async (options) => {
     return [
         core_1.json('package.json', {
             name,
+            description,
             scripts: {
                 lint: 'eslint .',
                 'lint-prettier': 'prettier --check .',
