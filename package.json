@@ -10,11 +10,11 @@
     "build": "rimraf '*/bld' && tsc --build",
     "lint": "eslint .",
     "lint-prettier": "prettier --check .",
-    "test": "yarn lint-prettier && yarn lint"
+    "test": "yarn lint-prettier && yarn build && yarn lint"
   },
   "husky": {
     "hooks": {
-      "pre-commit": "yarn build && git add */bld"
+      "pre-commit": "yarn test && git add */bld"
     }
   },
   "dependencies": {
