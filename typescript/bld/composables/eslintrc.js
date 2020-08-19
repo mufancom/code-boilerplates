@@ -21,7 +21,7 @@ const composable = options => {
                     files: ['**/*.{ts,tsx}'],
                     extends: ['plugin:@mufan/default'],
                     parserOptions: {
-                        project: './**/tsconfig.json',
+                        project: '!(node_modules)/**/tsconfig.json',
                     },
                 },
                 ...devProjects.map(project => {
