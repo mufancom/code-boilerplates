@@ -1,6 +1,7 @@
 declare namespace Magicspace {
   interface BoilerplateOptions {
     name: string;
+    description?: string;
     repository?: string;
     license?: string;
     author?: string;
