@@ -4,6 +4,7 @@
     "composite": true,
 
     "types": ["node"],
+    "sourceMap": false,
 
     "outDir": "../../bld/composables"
   },
