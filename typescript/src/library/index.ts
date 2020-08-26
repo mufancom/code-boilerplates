@@ -49,7 +49,7 @@ function buildResolvedTypeScriptProjectOptions(
   {
     name,
     type = name === 'library' ? 'library' : 'program',
-    dev = type === 'script' ? true : false,
+    dev = name === 'test' || type === 'script' ? true : false,
     dir = '',
     src = 'src',
   }: Magicspace.BoilerplateOptions.TypeScriptProjectOptions,
