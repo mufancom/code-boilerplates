@@ -18,9 +18,6 @@ const JSON_OPTIONS: JSONFileOptions = {
     'settings',
     'overrides',
   ],
-  // Add space to hint prettier so that it won't make short object literal like
-  // `env` below a single line.
-  space: 2,
 };
 
 export default json(

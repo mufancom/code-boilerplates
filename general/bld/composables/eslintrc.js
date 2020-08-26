@@ -19,9 +19,6 @@ const JSON_OPTIONS = {
         'settings',
         'overrides',
     ],
-    // Add space to hint prettier so that it won't make short object literal like
-    // `env` below a single line.
-    space: 2,
 };
 exports.default = core_1.json('.eslintrc', {
     root: true,
