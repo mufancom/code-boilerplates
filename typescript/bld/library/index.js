@@ -19,11 +19,11 @@ function resolveTypeScriptProjects(options) {
     };
 }
 exports.resolveTypeScriptProjects = resolveTypeScriptProjects;
-function buildResolvedTypeScriptProjectOptions({ name, type = name === 'library' ? 'library' : 'program', src = 'src', dev = type === 'script' ? true : false, }, packageOptions) {
+function buildResolvedTypeScriptProjectOptions({ name, type = name === 'library' ? 'library' : 'program', dev = type === 'script' ? true : false, dir = '', src = 'src', }, packageOptions) {
     var _a;
     let packageDir = (_a = packageOptions === null || packageOptions === void 0 ? void 0 : packageOptions.dir) !== null && _a !== void 0 ? _a : '';
-    let srcDir = Path.posix.join(packageDir, src || '', name);
-    let outDir = Path.posix.join(packageDir, type === 'script' ? '.bld-cache' : 'bld', name);
+    let srcDir = Path.posix.join(packageDir, dir, src || '', name);
+    let outDir = Path.posix.join(packageDir, dir, type === 'script' ? '.bld-cache' : 'bld', name);
     return {
         srcDir,
         outDir,

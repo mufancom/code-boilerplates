@@ -49,16 +49,18 @@ function buildResolvedTypeScriptProjectOptions(
   {
     name,
     type = name === 'library' ? 'library' : 'program',
-    src = 'src',
     dev = type === 'script' ? true : false,
+    dir = '',
+    src = 'src',
   }: Magicspace.BoilerplateOptions.TypeScriptProjectOptions,
   packageOptions?: ResolvedPackageOptions,
 ): ResolvedTypeScriptProjectOptions {
   let packageDir = packageOptions?.dir ?? '';
 
-  let srcDir = Path.posix.join(packageDir, src || '', name);
+  let srcDir = Path.posix.join(packageDir, dir, src || '', name);
   let outDir = Path.posix.join(
     packageDir,
+    dir,
     type === 'script' ? '.bld-cache' : 'bld',
     name,
   );

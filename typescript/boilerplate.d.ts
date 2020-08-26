@@ -26,6 +26,10 @@ declare namespace Magicspace {
        */
       dev?: boolean;
       /**
+       * Parent directory, defaults to ''.
+       */
+      dir?: string;
+      /**
        * Source directory, defaults to 'src'.
        */
       src?: string | false;
