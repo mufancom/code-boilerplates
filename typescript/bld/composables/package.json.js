@@ -7,7 +7,7 @@ const DEV_DEPENDENCY_DICT = {
     '@mufan/code': '0.2',
     '@mufan/eslint-plugin': '0.1',
     rimraf: '3',
-    typescript: '3',
+    typescript: '4',
 };
 const composable = async (options) => {
     let { projects, package: { packagesDir }, } = library_1.resolveTypeScriptProjects(options);
