@@ -1,6 +1,7 @@
 {
   "name": "@mufan/code-boilerplates",
   "version": "0.0.0",
+  "description": "Code boilerplates for Mufan",
   "repository": "https://github.com/makeflow/mufan-code-boilerplates.git",
   "license": "MIT",
   "author": "Chengdu Mufan Technology Co., Ltd.",
@@ -10,7 +11,7 @@
     "test": "yarn lint-prettier && yarn lint"
   },
   "devDependencies": {
-    "eslint": "^7.7.0",
-    "prettier": "^2.0.5"
+    "eslint": "^7.8.1",
+    "prettier": "^2.1.1"
   }
 }
