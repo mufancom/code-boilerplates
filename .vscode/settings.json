@@ -27,6 +27,8 @@
     "makeflow",
     "postgenerate",
     "prettierignore",
-    "prettierrc"
+    "prettierrc",
+    "tslang",
+    "tslib"
   ]
 }

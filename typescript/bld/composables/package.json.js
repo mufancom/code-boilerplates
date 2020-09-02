@@ -3,6 +3,9 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const core_1 = require("@magicspace/core");
 const utils_1 = require("@magicspace/utils");
 const library_1 = require("../library");
+const DEPENDENCY_DICT = {
+    tslib: '2',
+};
 const DEV_DEPENDENCY_DICT = {
     '@mufan/code': '0.2',
     '@mufan/eslint-plugin': '0.1',
@@ -17,7 +20,10 @@ const composable = async (options) => {
         ...(anyProjectsInRoot ? ['bld', '.bld-cache'] : []),
         ...(anyProjectsInPackage ? [`'${packagesDir}/*/{bld,.bld-cache}'`] : []),
     ];
-    let devDependencies = await utils_1.fetchPackageVersions(DEV_DEPENDENCY_DICT);
+    let [dependencies, devDependencies] = await Promise.all([
+        utils_1.fetchPackageVersions(DEPENDENCY_DICT),
+        utils_1.fetchPackageVersions(DEV_DEPENDENCY_DICT),
+    ]);
     return [
         core_1.json('package.json', (data) => {
             let { scripts = {} } = data;
@@ -39,6 +45,10 @@ const composable = async (options) => {
             return {
                 ...data,
                 scripts,
+                dependencies: utils_1.sortObjectKeys({
+                    ...data.dependencies,
+                    ...dependencies,
+                }),
                 devDependencies: utils_1.sortObjectKeys({
                     ...data.devDependencies,
                     ...devDependencies,
