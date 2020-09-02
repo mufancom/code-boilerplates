@@ -8,6 +8,10 @@ import {
 
 import {resolveTypeScriptProjects} from '../library';
 
+const DEPENDENCY_DICT = {
+  tslib: '2',
+};
+
 const DEV_DEPENDENCY_DICT = {
   '@mufan/code': '0.2',
   '@mufan/eslint-plugin': '0.1',
@@ -29,7 +33,10 @@ const composable: ComposableModuleFunction = async options => {
     ...(anyProjectsInPackage ? [`'${packagesDir}/*/{bld,.bld-cache}'`] : []),
   ];
 
-  let devDependencies = await fetchPackageVersions(DEV_DEPENDENCY_DICT);
+  let [dependencies, devDependencies] = await Promise.all([
+    fetchPackageVersions(DEPENDENCY_DICT),
+    fetchPackageVersions(DEV_DEPENDENCY_DICT),
+  ]);
 
   return [
     json('package.json', (data: any) => {
@@ -63,6 +70,10 @@ const composable: ComposableModuleFunction = async options => {
       return {
         ...data,
         scripts,
+        dependencies: sortObjectKeys({
+          ...data.dependencies,
+          ...dependencies,
+        }),
         devDependencies: sortObjectKeys({
           ...data.devDependencies,
           ...devDependencies,
