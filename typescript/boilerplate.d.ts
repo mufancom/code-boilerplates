@@ -33,6 +33,11 @@ declare namespace Magicspace {
        * Source directory, defaults to 'src'.
        */
       src?: string | false;
+      /**
+       * Whether this project does not emit build artifact. If true, it will
+       * set `outDir` as '.bld-cache' instead of 'bld'.
+       */
+      noEmit?: boolean;
     }
   }
 }

@@ -15,6 +15,7 @@ export interface ResolvedTypeScriptProjectOptions {
   tsconfigPath: string;
   type: 'library' | 'program' | 'script';
   dev: boolean;
+  noEmit: boolean;
   package?: ResolvedPackageOptions;
 }
 
@@ -52,6 +53,7 @@ function buildResolvedTypeScriptProjectOptions(
     dev = name === 'test' || type === 'script' ? true : false,
     dir = '',
     src = 'src',
+    noEmit = type === 'script',
   }: Magicspace.BoilerplateOptions.TypeScriptProjectOptions,
   packageOptions?: ResolvedPackageOptions,
 ): ResolvedTypeScriptProjectOptions {
@@ -61,7 +63,7 @@ function buildResolvedTypeScriptProjectOptions(
   let outDir = Path.posix.join(
     packageDir,
     dir,
-    type === 'script' ? '.bld-cache' : 'bld',
+    noEmit ? '.bld-cache' : 'bld',
     name,
   );
 
@@ -71,6 +73,7 @@ function buildResolvedTypeScriptProjectOptions(
     tsconfigPath: Path.posix.join(srcDir, 'tsconfig.json'),
     type,
     dev,
+    noEmit,
     package: packageOptions,
   };
 }
