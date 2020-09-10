@@ -28,11 +28,16 @@ declare namespace Magicspace {
       /**
        * Parent directory, defaults to ''.
        */
-      dir?: string;
+      parentDir?: string;
       /**
        * Source directory, defaults to 'src'.
        */
       src?: string | false;
+      /**
+       * TypeScript project directory under source directory, defaults to
+       * `name` option.
+       */
+      dir?: string;
       /**
        * Whether this project does not emit build artifact. If true, it will
        * set `outDir` as '.bld-cache' instead of 'bld'.

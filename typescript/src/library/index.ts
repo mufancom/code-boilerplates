@@ -49,22 +49,23 @@ export function resolveTypeScriptProjects(
 function buildResolvedTypeScriptProjectOptions(
   {
     name,
-    type = name === 'library' ? 'library' : 'program',
-    dev = name === 'test' || type === 'script' ? true : false,
-    dir = '',
+    type = name.includes('library') ? 'library' : 'program',
+    dev = name.includes('test') || type === 'script' ? true : false,
+    parentDir = '',
     src = 'src',
+    dir = name,
     noEmit = type === 'script',
   }: Magicspace.BoilerplateOptions.TypeScriptProjectOptions,
   packageOptions?: ResolvedPackageOptions,
 ): ResolvedTypeScriptProjectOptions {
   let packageDir = packageOptions?.dir ?? '';
 
-  let srcDir = Path.posix.join(packageDir, dir, src || '', name);
+  let srcDir = Path.posix.join(packageDir, parentDir, src || '', dir);
   let outDir = Path.posix.join(
     packageDir,
-    dir,
+    parentDir,
     noEmit ? '.bld-cache' : 'bld',
-    name,
+    dir,
   );
 
   return {

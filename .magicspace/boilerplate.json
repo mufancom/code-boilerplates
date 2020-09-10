@@ -8,22 +8,26 @@
     "author": "Chengdu Mufan Technology Co., Ltd.",
     "tsProjects": [
       {
-        "name": "composables",
-        "dir": "general"
+        "name": "general-composables",
+        "parentDir": "general",
+        "dir": "composables"
       },
       {
-        "name": "library",
+        "name": "general-library",
         "type": "library",
-        "dir": "general"
+        "parentDir": "general",
+        "dir": "library"
       },
       {
-        "name": "composables",
-        "dir": "typescript"
+        "name": "typescript-composables",
+        "parentDir": "typescript",
+        "dir": "composables"
       },
       {
-        "name": "library",
+        "name": "typescript-library",
         "type": "library",
-        "dir": "typescript"
+        "parentDir": "typescript",
+        "dir": "library"
       }
     ]
   }
