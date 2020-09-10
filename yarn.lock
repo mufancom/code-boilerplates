@@ -74,7 +74,7 @@
   resolved "https://registry.yarnpkg.com/@mufan/code/-/code-0.2.5.tgz#af50d52b07e571541e19113b76f01404fda71a25"
   integrity sha512-2e4LTVglk3WfVJ7it8NJmRzhAE9RmknQcCH8OWFe2TtQ3u1txhjGZ/xS4iuSIWGbkkUy2kq9TVtLsurZgBZCDQ==
 
-"@mufan/eslint-plugin@^0.1.32":
+"@mufan/eslint-plugin@^0.1.35":
   version "0.1.35"
   resolved "https://registry.yarnpkg.com/@mufan/eslint-plugin/-/eslint-plugin-0.1.35.tgz#fa563bf799f1de6b84f92c6edd2750e20b1edd7d"
   integrity sha512-f2pn55Ed8/EpZgqixd9ox+wWZ06VupVj55pReelLwV93pSKTxAmdQEAvsvlb6vvdklLw6x+dVuHZHpNKlUVkfA==
@@ -1991,6 +1991,11 @@ typescript@^3.9.7:
   version "3.9.7"
   resolved "https://registry.yarnpkg.com/typescript/-/typescript-3.9.7.tgz#98d600a5ebdc38f40cb277522f12dc800e9e25fa"
   integrity sha512-BLbiRkiBzAwsjut4x/dsibSTB6yWpwT5qWmC2OfuCg3GgVQCSgMs4vEctYPhsaGtd0AeuuHMkjZ2h2WG8MSzRw==
+
+typescript@^4.0.2:
+  version "4.0.2"
+  resolved "https://registry.yarnpkg.com/typescript/-/typescript-4.0.2.tgz#7ea7c88777c723c681e33bf7988be5d008d05ac2"
+  integrity sha512-e4ERvRV2wb+rRZ/IQeb3jm2VxBsirQLpQhdxplZ2MEzGvDkkMmPglecnNDfSUBivMjP93vRbngYYDQqQ/78bcQ==
 
 uglify-js@^3.1.4:
   version "3.10.1"

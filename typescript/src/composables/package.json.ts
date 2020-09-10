@@ -6,8 +6,6 @@ import {
   sortObjectKeys,
 } from '@magicspace/utils';
 
-import {resolveTypeScriptProjects} from '../library';
-
 const DEPENDENCY_DICT = {
   tslib: '2',
 };
@@ -19,20 +17,7 @@ const DEV_DEPENDENCY_DICT = {
   typescript: '4',
 };
 
-const composable: ComposableModuleFunction = async options => {
-  let {
-    projects,
-    package: {packagesDir},
-  } = resolveTypeScriptProjects(options);
-
-  let anyProjectsInRoot = projects.some(project => !project.package);
-  let anyProjectsInPackage = projects.some(project => !!project.package);
-
-  let rimrafArgs = [
-    ...(anyProjectsInRoot ? ['bld', '.bld-cache'] : []),
-    ...(anyProjectsInPackage ? [`'${packagesDir}/*/{bld,.bld-cache}'`] : []),
-  ];
-
+const composable: ComposableModuleFunction = async () => {
   let [dependencies, devDependencies] = await Promise.all([
     fetchPackageVersions(DEPENDENCY_DICT),
     fetchPackageVersions(DEV_DEPENDENCY_DICT),
@@ -46,7 +31,7 @@ const composable: ComposableModuleFunction = async options => {
         scripts,
         {
           build: extendPackageScript(scripts.build, [
-            `rimraf ${rimrafArgs.join(' ')}`,
+            `rimraf '{,!(node_modules)/**/}{bld,.bld-cache}'`,
             'tsc --build',
           ]),
         },

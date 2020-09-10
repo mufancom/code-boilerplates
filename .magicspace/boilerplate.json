@@ -1,10 +1,30 @@
 {
-  "extends": ["../general"],
+  "extends": ["../typescript"],
   "options": {
     "name": "@mufan/code-boilerplates",
     "description": "Code boilerplates for Mufan",
     "repository": "https://github.com/makeflow/mufan-code-boilerplates.git",
     "license": "MIT",
-    "author": "Chengdu Mufan Technology Co., Ltd."
+    "author": "Chengdu Mufan Technology Co., Ltd.",
+    "tsProjects": [
+      {
+        "name": "composables",
+        "dir": "general"
+      },
+      {
+        "name": "library",
+        "type": "library",
+        "dir": "general"
+      },
+      {
+        "name": "composables",
+        "dir": "typescript"
+      },
+      {
+        "name": "library",
+        "type": "library",
+        "dir": "typescript"
+      }
+    ]
   }
 }
