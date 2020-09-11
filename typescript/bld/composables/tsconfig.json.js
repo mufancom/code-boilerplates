@@ -7,7 +7,13 @@ const library_1 = require("../library");
 const JSON_OPTIONS = {
     sortKeys: [
         'extends',
-        'compilerOptions',
+        {
+            key: 'compilerOptions',
+            subKeys: {
+                top: ['composite'],
+                bottom: ['outDir'],
+            },
+        },
         'references',
         'files',
         'include',

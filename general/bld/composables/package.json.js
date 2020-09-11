@@ -38,12 +38,30 @@ const JSON_OPTIONS = {
             'config',
             'scripts',
             'workspaces',
-            'dependencies',
-            'bundledDependencies',
-            'bundleDependencies',
-            'optionalDependencies',
-            'peerDependencies',
-            'devDependencies',
+            {
+                key: 'dependencies',
+                subKeys: 'asc',
+            },
+            {
+                key: 'bundledDependencies',
+                subKeys: 'asc',
+            },
+            {
+                key: 'bundleDependencies',
+                subKeys: 'asc',
+            },
+            {
+                key: 'optionalDependencies',
+                subKeys: 'asc',
+            },
+            {
+                key: 'peerDependencies',
+                subKeys: 'asc',
+            },
+            {
+                key: 'devDependencies',
+                subKeys: 'asc',
+            },
         ],
     },
 };
@@ -52,7 +70,7 @@ const DEV_DEPENDENCY_DICT = {
     prettier: '2',
 };
 const composable = async (options) => {
-    let { name, description, repository, author, license, packages, } = library_1.resolveOptions(options);
+    let { name, description, repository, author, license, packagesDir, packages, } = library_1.resolveOptions(options);
     let common = {
         repository,
         author,
@@ -69,20 +87,20 @@ const composable = async (options) => {
                 test: 'yarn lint-prettier && yarn lint',
             },
             devDependencies,
-            ...(packages.length
+            ...(packagesDir !== undefined
                 ? {
                     private: true,
                     workspaces: packages.map(packageOptions => packageOptions.dir),
                 }
-                : {
-                    version: '0.0.0',
-                }),
-            ...common,
+                : {}),
         }, JSON_OPTIONS),
-        ...packages.map(packageOptions => core_1.json(Path.posix.join(packageOptions.dir, 'package.json'), {
-            name: packageOptions.name,
-            version: '0.0.0',
-            ...common,
+        ...packages.map(packageOptions => core_1.json(Path.posix.join(packageOptions.dir, 'package.json'), (data) => {
+            return {
+                ...data,
+                ...common,
+                name: packageOptions.name,
+                version: '0.0.0',
+            };
         }, JSON_OPTIONS)),
     ];
 };

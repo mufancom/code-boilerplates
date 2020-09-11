@@ -1,7 +1,8 @@
-// eslint-disable-next-line @typescript-eslint/triple-slash-reference
 /// <reference path="../../boilerplate.d.ts" />
 
 import * as Path from 'path';
+
+import {OmitValueOfKey} from 'tslang';
 
 import {
   ResolvedOptions,
@@ -9,14 +10,18 @@ import {
   resolveOptions,
 } from '../../../general/bld/library';
 
-export interface ResolvedTypeScriptProjectOptions {
+export interface ResolvedTypeScriptProjectOptions
+  extends OmitValueOfKey<
+    Magicspace.BoilerplateOptions.TypeScriptProjectOptions,
+    keyof Magicspace.BoilerplateOptions.TypeScriptProjectBaseOptions
+  > {
   srcDir: string;
   outDir: string;
   tsconfigPath: string;
   type: 'library' | 'program' | 'script';
   dev: boolean;
   noEmit: boolean;
-  package?: ResolvedPackageOptions;
+  package: ResolvedPackageOptions;
 }
 
 export interface ResolveTypeScriptProjectsResult {
@@ -28,14 +33,10 @@ export function resolveTypeScriptProjects(
   options: Magicspace.BoilerplateOptions,
 ): ResolveTypeScriptProjectsResult {
   let packageOptions = resolveOptions(options);
-  let {tsProjects, packages} = packageOptions;
 
   return {
     projects: [
-      ...(tsProjects?.map(project =>
-        buildResolvedTypeScriptProjectOptions(project),
-      ) ?? []),
-      ...packages.flatMap(
+      ...packageOptions.packages.flatMap(
         packageOptions =>
           packageOptions.tsProjects?.map(project =>
             buildResolvedTypeScriptProjectOptions(project, packageOptions),
@@ -49,14 +50,15 @@ export function resolveTypeScriptProjects(
 function buildResolvedTypeScriptProjectOptions(
   {
     name,
-    type = name.includes('library') ? 'library' : 'program',
-    dev = name.includes('test') || type === 'script' ? true : false,
+    type = name && name.includes('library') ? 'library' : 'program',
+    dev = (name && name.includes('test')) || type === 'script' ? true : false,
     parentDir = '',
     src = 'src',
-    dir = name,
+    dir = name ?? 'program',
     noEmit = type === 'script',
+    ...rest
   }: Magicspace.BoilerplateOptions.TypeScriptProjectOptions,
-  packageOptions?: ResolvedPackageOptions,
+  packageOptions: ResolvedPackageOptions,
 ): ResolvedTypeScriptProjectOptions {
   let packageDir = packageOptions?.dir ?? '';
 
@@ -76,5 +78,6 @@ function buildResolvedTypeScriptProjectOptions(
     dev,
     noEmit,
     package: packageOptions,
+    ...rest,
   };
 }

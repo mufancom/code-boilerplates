@@ -1,34 +1,63 @@
-// eslint-disable-next-line @typescript-eslint/triple-slash-reference
 /// <reference path="../../boilerplate.d.ts" />
 
 import * as Path from 'path';
 
+import _ from 'lodash';
+
 export interface ResolvedPackageOptions
   extends Magicspace.BoilerplateOptions.PackageOptions {
   dir: string;
+  packageJSONPath: string;
 }
 
 export interface ResolvedOptions extends Magicspace.BoilerplateOptions {
-  packagesDir: string;
+  packagesDir: string | undefined;
   packages: ResolvedPackageOptions[];
 }
 
 export function resolveOptions({
-  packagesDir = 'packages',
-  packages = [],
+  packagesDir,
+  packages,
   ...rest
 }: Magicspace.BoilerplateOptions): ResolvedOptions {
-  return {
-    ...rest,
-    packagesDir,
-    packages: packages.map(packageOptions => {
+  let resolvedPackages: ResolvedPackageOptions[];
+
+  if (packages || packagesDir !== undefined) {
+    if (packagesDir === undefined) {
+      packagesDir = 'packages';
+    }
+
+    resolvedPackages = (packages ?? []).map(packageOptions => {
+      let dir = Path.posix.join(
+        packagesDir!,
+        packageOptions.dir || packageOptions.name.replace(/^@[^/]+/, ''),
+      );
+
       return {
         ...packageOptions,
-        dir: Path.posix.join(
-          packagesDir,
-          packageOptions.dir || packageOptions.name.replace(/^@[^/]+/, ''),
-        ),
+        dir,
+        packageJSONPath: Path.posix.join(dir, 'package.json'),
       };
-    }),
+    });
+  } else {
+    resolvedPackages = [
+      {
+        ..._.omit(rest, [
+          'description',
+          'repository',
+          'license',
+          'author',
+          'prettier',
+        ]),
+        dir: '',
+        packageJSONPath: 'package.json',
+      },
+    ];
+  }
+
+  return {
+    packagesDir,
+    packages: resolvedPackages,
+    ...rest,
   };
 }

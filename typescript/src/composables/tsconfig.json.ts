@@ -11,7 +11,13 @@ import {resolveTypeScriptProjects} from '../library';
 const JSON_OPTIONS: JSONFileOptions = {
   sortKeys: [
     'extends',
-    'compilerOptions',
+    {
+      key: 'compilerOptions',
+      subKeys: {
+        top: ['composite'],
+        bottom: ['outDir'],
+      },
+    },
     'references',
     'files',
     'include',

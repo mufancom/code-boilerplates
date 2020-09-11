@@ -10,8 +10,13 @@ declare namespace Magicspace {
       tsProjects?: TypeScriptProjectOptions[];
     }
 
-    interface TypeScriptProjectOptions {
-      name: string;
+    interface TypeScriptProjectOptions extends TypeScriptProjectBaseOptions {}
+
+    interface TypeScriptProjectBaseOptions {
+      /**
+       * TypeScript project name, defaults to 'program'.
+       */
+      name?: string;
       /**
        * Is this TypeScript project a library or program? Defaults to 'library'
        * if project name is 'library', otherwise 'program'.

@@ -42,12 +42,30 @@ const JSON_OPTIONS: JSONFileOptions = {
       'config',
       'scripts',
       'workspaces',
-      'dependencies',
-      'bundledDependencies',
-      'bundleDependencies',
-      'optionalDependencies',
-      'peerDependencies',
-      'devDependencies',
+      {
+        key: 'dependencies',
+        subKeys: 'asc',
+      },
+      {
+        key: 'bundledDependencies',
+        subKeys: 'asc',
+      },
+      {
+        key: 'bundleDependencies',
+        subKeys: 'asc',
+      },
+      {
+        key: 'optionalDependencies',
+        subKeys: 'asc',
+      },
+      {
+        key: 'peerDependencies',
+        subKeys: 'asc',
+      },
+      {
+        key: 'devDependencies',
+        subKeys: 'asc',
+      },
     ],
   },
 };
@@ -64,6 +82,7 @@ const composable: ComposableModuleFunction = async options => {
     repository,
     author,
     license,
+    packagesDir,
     packages,
   } = resolveOptions(options);
 
@@ -87,25 +106,25 @@ const composable: ComposableModuleFunction = async options => {
           test: 'yarn lint-prettier && yarn lint',
         },
         devDependencies,
-        ...(packages.length
+        ...(packagesDir !== undefined
           ? {
               private: true,
               workspaces: packages.map(packageOptions => packageOptions.dir),
             }
-          : {
-              version: '0.0.0',
-            }),
-        ...common,
+          : {}),
       },
       JSON_OPTIONS,
     ),
     ...packages.map(packageOptions =>
       json(
         Path.posix.join(packageOptions.dir, 'package.json'),
-        {
-          name: packageOptions.name,
-          version: '0.0.0',
-          ...common,
+        (data: any) => {
+          return {
+            ...data,
+            ...common,
+            name: packageOptions.name,
+            version: '0.0.0',
+          };
         },
         JSON_OPTIONS,
       ),

@@ -1,7 +1,10 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+const tslib_1 = require("tslib");
 const core_1 = require("@magicspace/core");
 const utils_1 = require("@magicspace/utils");
+const lodash_1 = tslib_1.__importDefault(require("lodash"));
+const library_1 = require("../library");
 const DEPENDENCY_DICT = {
     tslib: '2',
 };
@@ -11,7 +14,9 @@ const DEV_DEPENDENCY_DICT = {
     rimraf: '3',
     typescript: '4',
 };
-const composable = async () => {
+const composable = async (options) => {
+    let { package: { packagesDir }, projects, } = library_1.resolveTypeScriptProjects(options);
+    let packagesWithTypeScriptProject = lodash_1.default.uniqBy(projects.map(project => project.package), packageOptions => packageOptions.packageJSONPath);
     let [dependencies, devDependencies] = await Promise.all([
         utils_1.fetchPackageVersions(DEPENDENCY_DICT),
         utils_1.fetchPackageVersions(DEV_DEPENDENCY_DICT),
@@ -21,7 +26,7 @@ const composable = async () => {
             let { scripts = {} } = data;
             scripts = utils_1.extendObjectProperties(scripts, {
                 build: utils_1.extendPackageScript(scripts.build, [
-                    `rimraf '{,!(node_modules)/**/}{bld,.bld-cache}'`,
+                    `rimraf '${packagesDir === undefined ? '' : `${packagesDir}/*/`}{bld,.bld-cache}'`,
                     'tsc --build',
                 ]),
             }, {
@@ -37,16 +42,21 @@ const composable = async () => {
             return {
                 ...data,
                 scripts,
-                dependencies: utils_1.sortObjectKeys({
-                    ...data.dependencies,
-                    ...dependencies,
-                }),
-                devDependencies: utils_1.sortObjectKeys({
+                devDependencies: {
                     ...data.devDependencies,
                     ...devDependencies,
-                }),
+                },
             };
         }),
+        ...packagesWithTypeScriptProject.map(packageOptions => core_1.json(packageOptions.packageJSONPath, (data) => {
+            return {
+                ...data,
+                dependencies: {
+                    ...data.dependencies,
+                    ...dependencies,
+                },
+            };
+        })),
     ];
 };
 exports.default = composable;
