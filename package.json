@@ -7,7 +7,7 @@
   "author": "Chengdu Mufan Technology Co., Ltd.",
   "license": "MIT",
   "scripts": {
-    "build": "rimraf '*/{bld,.bld-cache}' && tsc --build",
+    "build": "rimraf */bld && tsc --build",
     "lint": "eslint .",
     "lint-prettier": "prettier --check .",
     "test": "yarn lint-prettier && yarn build && yarn lint"
