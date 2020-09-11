@@ -112,6 +112,7 @@ const composable: ComposableModuleFunction = async options => {
               workspaces: packages.map(packageOptions => packageOptions.dir),
             }
           : {}),
+        ...common,
       },
       JSON_OPTIONS,
     ),

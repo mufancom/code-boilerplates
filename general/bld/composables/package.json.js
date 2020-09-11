@@ -93,6 +93,7 @@ const composable = async (options) => {
                     workspaces: packages.map(packageOptions => packageOptions.dir),
                 }
                 : {}),
+            ...common,
         }, JSON_OPTIONS),
         ...packages.map(packageOptions => core_1.json(Path.posix.join(packageOptions.dir, 'package.json'), (data) => {
             return {
