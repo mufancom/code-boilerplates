@@ -19,9 +19,11 @@ function buildResolvedTypeScriptProjectOptions({ name, type = name && name.inclu
     var _a;
     let packageDir = (_a = packageOptions === null || packageOptions === void 0 ? void 0 : packageOptions.dir) !== null && _a !== void 0 ? _a : '';
     let srcDir = Path.posix.join(packageDir, parentDir, src || '', dir);
-    let outDir = Path.posix.join(packageDir, parentDir, noEmit ? '.bld-cache' : 'bld', dir);
+    let bldDir = Path.posix.join(packageDir, parentDir, noEmit ? '.bld-cache' : 'bld');
+    let outDir = Path.posix.join(bldDir, dir);
     return {
         srcDir,
+        bldDir,
         outDir,
         tsconfigPath: Path.posix.join(srcDir, 'tsconfig.json'),
         type,

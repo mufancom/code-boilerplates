@@ -1,3 +1,5 @@
+import * as Path from 'path';
+
 import {ComposableModuleFunction, json} from '@magicspace/core';
 import {
   extendObjectProperties,
@@ -20,10 +22,7 @@ const DEV_DEPENDENCY_DICT = {
 };
 
 const composable: ComposableModuleFunction = async options => {
-  let {
-    package: {packagesDir},
-    projects,
-  } = resolveTypeScriptProjects(options);
+  let {projects} = resolveTypeScriptProjects(options);
 
   let packagesWithTypeScriptProject = _.uniqBy(
     projects.map(project => project.package),
@@ -39,15 +38,27 @@ const composable: ComposableModuleFunction = async options => {
     json('package.json', (data: any) => {
       let {scripts = {}} = data;
 
+      let rimrafScript: string | undefined;
+
+      {
+        let rimrafPattern = guessReadableGlobPattern(
+          projects.map(project => project.bldDir),
+        );
+
+        if (rimrafPattern) {
+          rimrafScript = `rimraf ${
+            /\s/.test(rimrafPattern) ? `'${rimrafPattern}'` : rimrafPattern
+          }`;
+        }
+      }
+
       scripts = extendObjectProperties(
         scripts,
         {
-          build: extendPackageScript(scripts.build, [
-            `rimraf '${
-              packagesDir === undefined ? '' : `${packagesDir}/*/`
-            }{bld,.bld-cache}'`,
-            'tsc --build',
-          ]),
+          build: extendPackageScript(
+            scripts.build,
+            _.compact([rimrafScript, 'tsc --build']),
+          ),
         },
         {
           before: '*lint*',
@@ -90,3 +101,36 @@ const composable: ComposableModuleFunction = async options => {
 };
 
 export default composable;
+
+function guessReadableGlobPattern(paths: string[]): string | undefined {
+  if (paths.length === 0) {
+    return undefined;
+  }
+
+  let parentDirAndBaseNameArray = paths.map(path => {
+    return {parentDir: Path.dirname(path), baseName: Path.basename(path)};
+  });
+
+  let parentDirs = _.uniq(
+    parentDirAndBaseNameArray.map(info => info.parentDir),
+  );
+
+  let upperParentDirs = _.uniq(
+    parentDirs.map(parentDir => Path.dirname(parentDir)),
+  );
+
+  if (upperParentDirs.length > 1) {
+    // Guess only patterns with at most single '*' at the end.
+    return undefined;
+  }
+
+  let parentPattern =
+    parentDirs.length > 1 ? `${upperParentDirs[0]}/*` : parentDirs[0];
+
+  let baseNames = _.uniq(parentDirAndBaseNameArray.map(info => info.baseName));
+
+  let baseNamePattern =
+    baseNames.length > 1 ? `{${baseNames.sort().join(',')}}` : baseNames[0];
+
+  return `${parentPattern.replace(/^\.\//, '')}/${baseNamePattern}`;
+}

@@ -16,6 +16,7 @@ export interface ResolvedTypeScriptProjectOptions
     keyof Magicspace.BoilerplateOptions.TypeScriptProjectBaseOptions
   > {
   srcDir: string;
+  bldDir: string;
   outDir: string;
   tsconfigPath: string;
   type: 'library' | 'program' | 'script';
@@ -63,15 +64,16 @@ function buildResolvedTypeScriptProjectOptions(
   let packageDir = packageOptions?.dir ?? '';
 
   let srcDir = Path.posix.join(packageDir, parentDir, src || '', dir);
-  let outDir = Path.posix.join(
+  let bldDir = Path.posix.join(
     packageDir,
     parentDir,
     noEmit ? '.bld-cache' : 'bld',
-    dir,
   );
+  let outDir = Path.posix.join(bldDir, dir);
 
   return {
     srcDir,
+    bldDir,
     outDir,
     tsconfigPath: Path.posix.join(srcDir, 'tsconfig.json'),
     type,
