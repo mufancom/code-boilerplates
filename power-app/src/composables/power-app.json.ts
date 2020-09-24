@@ -11,7 +11,7 @@ const composable: ComposableModuleFunction = async ({
         name,
         version: '0.1.0',
         displayName: 'PowerApp',
-        hookBaseURL: `http://power-apps.makeflow.com/${name}/app`,
+        hookBaseURL: `https://power-apps.makeflow.com/${name}/api`,
       };
     }),
     json('power-app.dev.json', (data: any) => {
@@ -20,7 +20,7 @@ const composable: ComposableModuleFunction = async ({
         name,
         version: '0.1.0',
         displayName: 'PowerApp',
-        hookBaseURL: `http://localhost:${port}`,
+        hookBaseURL: `http://localhost:${port}/api`,
       };
     }),
   ];
