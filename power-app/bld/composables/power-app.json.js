@@ -8,7 +8,6 @@ const composable = async ({ name, powerApp: { port }, }) => {
                 ...data,
                 name,
                 version: '0.1.0',
-                displayName: 'PowerApp',
                 hookBaseURL: `https://power-apps.makeflow.com/${name}/api`,
             };
         }),
@@ -17,7 +16,6 @@ const composable = async ({ name, powerApp: { port }, }) => {
                 ...data,
                 name,
                 version: '0.1.0',
-                displayName: 'PowerApp',
                 hookBaseURL: `http://localhost:${port}/api`,
             };
         }),

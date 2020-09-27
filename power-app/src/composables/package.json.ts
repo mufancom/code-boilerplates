@@ -42,7 +42,7 @@ const DEV_DEPENDENCIES_DICT = {
   '@types/uuid': '^8.3.0',
   '@types/styled-components': '^5.1.0',
   'cross-env': '^7.0.0',
-  'env-cmd': '^10.1.0',
+  'dotenv-cli': '^4.0.0',
   'parcel-bundler': '^1.12.0',
   'ts-node-dev': '^1.0.0-pre',
 };
@@ -58,14 +58,16 @@ const composable: ComposableModuleFunction = async () => {
         scripts: sortObjectKeys(
           {
             ...data.scripts,
-            build: 'rimraf ./bld && yarn build:server && yarn build:client',
+            build:
+              'yarn && rimraf ./bld && yarn build:server && yarn build:client',
             'build:client':
-              'env-cmd -f ./.env.production -x --use-shell "parcel build src/client/index.html --public-url $PUBLIC_URL --no-source-maps --out-dir bld/client"',
+              "dotenv -c production -- bash -c 'parcel build src/client/index.html --public-url $PUBLIC_URL --no-source-maps --out-dir bld/client'",
             'build:server': 'tsc --P ./src/server/tsconfig.json',
             dev:
               'tsnd --respawn --P ./src/server/tsconfig.json --T ./src/server/main.ts ',
             start:
-              'env-cmd -f ./.env.development -x --use-shell "parcel src/client/index.html --open -p $CLIENT_PORT --out-dir bld/client"',
+              "dotenv -c development -- bash -c 'yarn parcel src/client/index.html --open -p $CLIENT_PORT --out-dir bld/client'",
+            'power-publish-dev': 'yarn mf publish ./power-app.dev.json',
           },
           'asc',
         ),
