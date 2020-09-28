@@ -17,7 +17,7 @@ services:
       - makeflow-${name}_data:/data/${image}/`)
             .join('\n')
             : ''}
-  makeflow_repeat_task:
+  makeflow_${name.replace(/-/g, '_')}:
     image: makeflow-${name}:\${VERSION:-latest}
     build:
       context: .
