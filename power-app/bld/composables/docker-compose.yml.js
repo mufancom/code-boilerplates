@@ -23,7 +23,7 @@ services:
       context: .
     depends_on:
       - mongo
-      ${(images === null || images === void 0 ? void 0 : images.length) ? images.map(image => `-${image}`).join('\n') : ''}
+      ${(images === null || images === void 0 ? void 0 : images.length) ? images.map(image => `- ${image}`).join('\n') : ''}
     ports:
       - '${port}:${port}'
 

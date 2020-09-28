@@ -32,7 +32,7 @@ services:
       context: .
     depends_on:
       - mongo
-      ${images?.length ? images.map(image => `-${image}`).join('\n') : ''}
+      ${images?.length ? images.map(image => `- ${image}`).join('\n') : ''}
     ports:
       - '${port}:${port}'
 
