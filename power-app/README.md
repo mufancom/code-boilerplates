@@ -1,21 +1,27 @@
 # Power App TypeScript Project Boilerplate
 
-> Steps for reference only
+> 使用步骤（仅供参考）
 
 0. `npm install --global magicspace makeflow/mufan-code-boilerplates`
-1. `mkdir test && cd test`
-2. `magicspace create @mufan/code-boilerplates/power-app`
-3. Edit `test/.magicspace/boilerplate.json`
+1. `mkdir awesome-power-app`
+2. `cd awesome-power-app`
+3. `magicspace create @mufan/code-boilerplates/power-app`
+4. 编辑 `awesome-power-app/.magicspace/boilerplate.json`
 
 ```json
 {
   "extends": "@mufan/code-boilerplates/power-app",
   "options": {
-    "name": "test"
+    "name": "awesome-power-app",
+    "powerApp": {
+      "port": 9966 // 设置一个你喜欢的端口号
+    }
   }
 }
 ```
 
-4. `git init`
-5. `git commit`
-6. `magicspace init`
+5. `git init`
+6. `git add .`
+7. `git commit -m "init"`
+8. `magicspace init`
+9. 开发和部署请查看 `awesome-power-app/README.md`

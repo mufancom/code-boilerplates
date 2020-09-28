@@ -7,7 +7,7 @@ const composable = options => {
     return [
         core_1.json('tsconfig.json', {
             references: projects
-                .filter(({ package: { tsProjects } }) => (tsProjects === null || tsProjects === void 0 ? void 0 : tsProjects[0].name) !== 'client')
+                .filter(({ srcDir }) => !srcDir.includes('client'))
                 .map(project => {
                 return { path: project.srcDir };
             }),
@@ -15,14 +15,12 @@ const composable = options => {
         }),
         ...projects.map(project => {
             return core_1.json(project.tsconfigPath, (data) => {
-                var _a;
-                let name = (_a = project.package.tsProjects) === null || _a === void 0 ? void 0 : _a[0].name;
                 return {
                     ...data,
                     compilerOptions: {
                         ...data.compilerOptions,
                         experimentalDecorators: true,
-                        ...(name === 'client'
+                        ...(project.srcDir.includes('client')
                             ? {
                                 jsx: 'react',
                                 types: ['@types/node'],

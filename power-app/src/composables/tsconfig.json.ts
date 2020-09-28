@@ -8,7 +8,7 @@ const composable: ComposableModuleFunction = options => {
   return [
     json('tsconfig.json', {
       references: projects
-        .filter(({package: {tsProjects}}) => tsProjects?.[0].name !== 'client')
+        .filter(({srcDir}) => !srcDir.includes('client'))
         .map(project => {
           return {path: project.srcDir};
         }),
@@ -16,14 +16,12 @@ const composable: ComposableModuleFunction = options => {
     }),
     ...projects.map(project => {
       return json(project.tsconfigPath, (data: any) => {
-        let name = project.package.tsProjects?.[0].name;
-
         return {
           ...data,
           compilerOptions: {
             ...data.compilerOptions,
             experimentalDecorators: true,
-            ...(name === 'client'
+            ...(project.srcDir.includes('client')
               ? {
                   jsx: 'react',
                   types: ['@types/node'],

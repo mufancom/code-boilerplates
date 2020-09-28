@@ -58,7 +58,7 @@ const composable = async () => {
                     build: 'yarn && rimraf ./bld && yarn build:server && yarn build:client',
                     'build:client': "dotenv -c production -- bash -c 'parcel build src/client/index.html --public-url $PUBLIC_URL --no-source-maps --out-dir bld/client'",
                     'build:server': 'tsc --P ./src/server/tsconfig.json',
-                    dev: 'tsnd --respawn --P ./src/server/tsconfig.json --T ./src/server/main.ts ',
+                    serve: 'tsnd --respawn --P ./src/server/tsconfig.json --T ./src/server/main.ts ',
                     start: "dotenv -c development -- bash -c 'yarn parcel src/client/index.html --open -p $CLIENT_PORT --out-dir bld/client'",
                     'power-publish-dev': 'yarn mf publish ./power-app.dev.json',
                 }, 'asc'),

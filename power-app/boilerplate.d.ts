@@ -8,6 +8,7 @@ declare namespace Magicspace {
   namespace BoilerplateOptions {
     interface PowerAppOptions {
       port: number;
+      images?: string[];
     }
   }
 }
