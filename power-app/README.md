@@ -14,7 +14,8 @@
   "options": {
     "name": "awesome-power-app",
     "powerApp": {
-      "port": 9966 // 设置一个你喜欢的端口号
+      "port": 9966, // 设置一个你喜欢的端口号
+      "images": [] // 可选, 如: ["redis"]
     }
   }
 }

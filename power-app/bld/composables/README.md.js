@@ -44,7 +44,7 @@ yarn start
 1. 首次部署
     - 增加数据卷
     \`\`\`bash
-    docker volume create --name=makeflow-${name}_mongo_data
+    docker volume create --name=makeflow-${name}_data
     \`\`\`
     - 配置 nginx 映射
     
