@@ -26,3 +26,7 @@
 7. `git commit -m "init"`
 8. `magicspace init`
 9. 开发和部署请查看 `awesome-power-app/README.md`
+
+**相关链接**
+
+- https://makeflow.github.io/app-builder —— PowerApp 定义编辑器

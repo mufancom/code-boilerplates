@@ -18,8 +18,8 @@
     }
   },
   "dependencies": {
-    "@magicspace/core": "^0.2.27",
-    "@magicspace/utils": "^0.2.27",
+    "@magicspace/core": "^0.2.31",
+    "@magicspace/utils": "^0.2.29",
     "lodash": "^4.17.20",
     "npm-which": "^3.0.1",
     "prettier": "^2.1.1",

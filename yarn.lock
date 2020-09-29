@@ -39,12 +39,12 @@
     minimatch "^3.0.4"
     strip-json-comments "^3.1.1"
 
-"@magicspace/core@^0.2.27":
-  version "0.2.27"
-  resolved "https://registry.yarnpkg.com/@magicspace/core/-/core-0.2.27.tgz#ff0ecb9219920f7bb84dec767574ba362e38a3b0"
-  integrity sha512-8cdZBBTaX3rbxDGg8Vwcy/+LyUu5tztg/XSeMwAlwyM3dGsqSee/tUWOrbcjVNBi7XgL88sHUlwZMpDdjnWnIw==
+"@magicspace/core@^0.2.31":
+  version "0.2.31"
+  resolved "https://registry.yarnpkg.com/@magicspace/core/-/core-0.2.31.tgz#953593b9105bedbc357dd9f147abecb8a061bd3f"
+  integrity sha512-HOSUbhNg+ZH6IqJcePADI3NoPlbxnFUVeh3O82IWcDlWbjBvvgbjmnECEx6hOTsYun7ZWvAVsYReCkH5nF55Cw==
   dependencies:
-    "@magicspace/utils" "^0.2.27"
+    "@magicspace/utils" "^0.2.29"
     fast-glob "^3.2.4"
     fs-extra "^9.0.1"
     handlebars "^4.7.6"
@@ -56,11 +56,12 @@
     tslang "^0.1.22"
     tslib "^2.0.1"
     typescript "^3.9.7"
+    yaml "^1.10.0"
 
-"@magicspace/utils@^0.2.27":
-  version "0.2.27"
-  resolved "https://registry.yarnpkg.com/@magicspace/utils/-/utils-0.2.27.tgz#c2c079220a66b95c0696cdd1b45bfe379332bb72"
-  integrity sha512-vweUBsD/uc9CORy41dt0aPKQNZB3hHqdWDlnvY9fEAN9M09bncdCNysR5QIZcB02Yq3LFd7RovUxbBJC017RxA==
+"@magicspace/utils@^0.2.29":
+  version "0.2.29"
+  resolved "https://registry.yarnpkg.com/@magicspace/utils/-/utils-0.2.29.tgz#7c592e24f3084a4b7a4bc90b17d645ea558770ef"
+  integrity sha512-LSdjp/QQiJZU8F5wF/FRGgSTfssNMd+gm3cXaaNdoqzEI8Vv+abP66q46c82wS272jaze+3LUgj4tgojga9gEA==
   dependencies:
     chalk "^4.1.0"
     latest-version "^5.1.0"
