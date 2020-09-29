@@ -56,7 +56,6 @@ const composable: ComposableModuleFunction = options => {
       },
       {template: PAGE_INDEX_PATH},
     ),
-
     handlebars(
       Path.join(serverSrc, 'helper', 'page.ts'),
       {
