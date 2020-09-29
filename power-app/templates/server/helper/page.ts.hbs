@@ -1,0 +1,15 @@
+import {Config} from '../config';
+
+export type Pages = {{pageTypeString}};
+
+export type GetPageURL = (page: Pages) => string;
+
+export function buildPageURLHelper(config: Config): GetPageURL {
+  if (config.production) {
+    let {host, path = '/'} = config.client;
+    return page => `${host}${path}#/${page}`;
+  } else {
+    let {port} = config.client;
+    return page => `http://localhost:${port}#/${page}`;
+  }
+}

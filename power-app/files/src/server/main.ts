@@ -12,6 +12,7 @@ import koaStatic from 'koa-static';
 import SocketIO from 'socket.io';
 
 import {DevConfig, ProductionConfig, getConfig} from './config';
+import {GetPageURL, buildPageURLHelper} from './helper';
 import * as versions from './version';
 
 declare global {
@@ -24,6 +25,11 @@ declare global {
   interface PowerAppContext {
     powerApp: PowerApp;
     socket: SocketIO.Server;
+    helper: {
+      page: {
+        getPageURL: GetPageURL;
+      };
+    };
   }
 }
 
@@ -56,7 +62,15 @@ app
   );
 
 // register
-global.context = {powerApp, socket};
+global.context = {
+  powerApp,
+  socket,
+  helper: {
+    page: {
+      getPageURL: buildPageURLHelper(config),
+    },
+  },
+};
 
 // start
 server.listen(config.port);

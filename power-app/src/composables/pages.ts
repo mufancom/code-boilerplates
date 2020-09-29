@@ -4,15 +4,23 @@ import {ComposableModuleFunction, handlebars} from '@magicspace/core';
 
 import {resolveTypeScriptProjects} from '../../../typescript/bld/library';
 
-import {TEMPLATES_CLIENT_DIR} from './@constants';
+import {
+  TEMPLATES_CLIENT_DIR,
+  TEMPLATES_CLIENT_PAGES_DIR,
+  TEMPLATES_SERVER_HELPER_DIR,
+} from './@constants';
 
 const APP_PATH = Path.join(TEMPLATES_CLIENT_DIR, 'app.tsx.hbs');
 
-const PAGE_PATH = Path.join(TEMPLATES_CLIENT_DIR, 'pages');
+const PAGE_INDEX_PATH = Path.join(TEMPLATES_CLIENT_PAGES_DIR, 'index.ts.hbs');
 
-const PAGE_INDEX_PATH = Path.join(PAGE_PATH, 'index.ts.hbs');
+const PAGE_COMPONENT_PATH = Path.join(
+  TEMPLATES_CLIENT_PAGES_DIR,
+  '@page',
+  'index.tsx.hbs',
+);
 
-const PAGE_COMPONENT_PATH = Path.join(PAGE_PATH, '@page', 'index.tsx.hbs');
+const PAGE_HELPER_PATH = Path.join(TEMPLATES_SERVER_HELPER_DIR, 'page.ts.hbs');
 
 const composable: ComposableModuleFunction = options => {
   let {
@@ -20,11 +28,13 @@ const composable: ComposableModuleFunction = options => {
   } = options;
   let projects = resolveTypeScriptProjects(options);
 
-  let clientProject = projects.projects.find(project =>
+  let clientSrc = projects.projects.find(project =>
     project.srcDir.includes('client'),
-  );
+  )!.srcDir;
 
-  let src = clientProject!.srcDir;
+  let serverSrc = projects.projects.find(project =>
+    project.srcDir.includes('server'),
+  )!.srcDir;
 
   let pagesInfos = pages.map(page => ({
     name: page,
@@ -33,23 +43,35 @@ const composable: ComposableModuleFunction = options => {
 
   return [
     handlebars(
-      Path.join(src, 'app.tsx'),
+      Path.join(clientSrc, 'app.tsx'),
       {
         pages: pagesInfos,
       },
       {template: APP_PATH},
     ),
     handlebars(
-      Path.join(src, 'pages', 'index.ts'),
+      Path.join(clientSrc, 'pages', 'index.ts'),
       {
         pages: pagesInfos,
       },
       {template: PAGE_INDEX_PATH},
     ),
+
+    handlebars(
+      Path.join(serverSrc, 'helper', 'page.ts'),
+      {
+        pageTypeString: pages.map(page => `'${page}'`).join(' | '),
+      },
+      {template: PAGE_HELPER_PATH},
+    ),
     ...pagesInfos.map(page =>
-      handlebars(Path.join(src, 'pages', `@${page.name}`, 'index.tsx'), page, {
-        template: PAGE_COMPONENT_PATH,
-      }),
+      handlebars(
+        Path.join(clientSrc, 'pages', `@${page.name}`, 'index.tsx'),
+        page,
+        {
+          template: PAGE_COMPONENT_PATH,
+        },
+      ),
     ),
   ];
 };

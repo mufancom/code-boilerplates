@@ -27,6 +27,7 @@ export interface ProductionConfig extends BasicConfig {
   production: true;
   client: {
     host: string;
+    path?: string;
   };
 }
 
@@ -39,6 +40,7 @@ export function getConfig(): Config {
     APP_NAME,
     HOST,
     CLIENT_PORT,
+    PUBLIC_URL,
     SERVER_PORT,
     MONGO_URI,
     MONGO_NAME,
@@ -62,6 +64,7 @@ export function getConfig(): Config {
         production,
         client: {
           host: HOST!,
+          path: PUBLIC_URL,
         },
         ...basic,
       }
