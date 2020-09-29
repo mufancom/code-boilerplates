@@ -1,7 +1,10 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.FILES_DIR = exports.BOILERPLATE_ROOT = void 0;
+exports.TEMPLATES_CLIENT_PAGES_DIR = exports.TEMPLATES_CLIENT_DIR = exports.TEMPLATES_DIR = exports.FILES_DIR = exports.BOILERPLATE_ROOT = void 0;
 const tslib_1 = require("tslib");
 const Path = tslib_1.__importStar(require("path"));
 exports.BOILERPLATE_ROOT = Path.join(__dirname, '../..');
 exports.FILES_DIR = Path.join(exports.BOILERPLATE_ROOT, 'files');
+exports.TEMPLATES_DIR = Path.join(exports.BOILERPLATE_ROOT, 'templates');
+exports.TEMPLATES_CLIENT_DIR = Path.join(exports.TEMPLATES_DIR, 'client');
+exports.TEMPLATES_CLIENT_PAGES_DIR = Path.join(exports.TEMPLATES_CLIENT_DIR, 'pages');

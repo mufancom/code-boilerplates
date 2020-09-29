@@ -27,6 +27,25 @@
 8. `magicspace init`
 9. 开发和部署请查看 `awesome-power-app/README.md`
 
+**新增 page**
+
+1. 编辑 `awesome-power-app/.magicspace/boilerplate.json`
+
+```json
+{
+  "extends": "@mufan/code-boilerplates/power-app",
+  "options": {
+    "name": "awesome-power-app",
+    "powerApp": {
+      // 添加 page name, 风格: `need-help`
+      "pages": ["hello"]
+    }
+  }
+}
+```
+
+2. magicspace update
+
 **相关链接**
 
 - https://makeflow.github.io/app-builder —— PowerApp 定义编辑器
