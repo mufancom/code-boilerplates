@@ -43,7 +43,7 @@ export function getConfig(): Config {
     PUBLIC_URL,
     SERVER_PORT,
     MONGO_URI,
-    MONGO_NAME,
+    MONGO_NAME = APP_NAME,
     NODE_ENV,
   } = process.env;
 

@@ -18,6 +18,7 @@ const DEPENDENCY_DICT = {
   'react-dom': '^16.13.0',
   'react-router-dom': '^5.2.0',
   'socket.io': '^2.3.0',
+  'socket.io-client': '^2.3.0',
   'styled-components': '^5.2.0',
   uuid: '^8.3.0',
 };
@@ -39,6 +40,7 @@ const DEV_DEPENDENCIES_DICT = {
   '@types/react-dom': '^16.9.0',
   '@types/react-router-dom': '^5.1.0',
   '@types/socket.io': '^2.1.11',
+  '@types/socket.io-client': '^1.4.33',
   '@types/uuid': '^8.3.0',
   '@types/styled-components': '^5.1.0',
   'cross-env': '^7.0.0',
@@ -64,7 +66,7 @@ const composable: ComposableModuleFunction = async () => {
               "dotenv -c production -- bash -c 'parcel build src/client/index.html --public-url $PUBLIC_URL --no-source-maps --out-dir bld/client'",
             'build:server': 'tsc --P ./src/server/tsconfig.json',
             serve:
-              'tsnd --respawn --P ./src/server/tsconfig.json --T ./src/server/main.ts ',
+              'tsnd --respawn --P ./src/server/tsconfig.json --T ./src/server/main.ts',
             start:
               "dotenv -c development -- bash -c 'yarn parcel src/client/index.html --open -p $CLIENT_PORT --out-dir bld/client'",
             'power-publish-dev': 'yarn mf publish ./power-app.dev.json',
