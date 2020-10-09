@@ -61,7 +61,7 @@ const composable: ComposableModuleFunction = options => {
     handlebars(
       Path.join(serverSrc, 'helper', 'page.ts'),
       {
-        pageTypeString: pages.map(page => `'${page}'`).join(' | '),
+        pageTypeString: pages.map(page => `'${page}'`).join(' | ') || `''`,
       },
       {template: PAGE_HELPER_PATH},
     ),

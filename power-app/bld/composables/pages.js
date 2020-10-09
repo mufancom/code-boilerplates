@@ -28,7 +28,7 @@ const composable = options => {
             pages: pagesInfos,
         }, { template: PAGE_INDEX_PATH }),
         core_1.handlebars(Path.join(serverSrc, 'helper', 'page.ts'), {
-            pageTypeString: pages.map(page => `'${page}'`).join(' | '),
+            pageTypeString: pages.map(page => `'${page}'`).join(' | ') || `''`,
         }, { template: PAGE_HELPER_PATH }),
         ...pagesInfos.map(page => core_1.handlebars(Path.join(clientSrc, 'pages', `@${page.name}`, 'index.tsx'), page, {
             template: PAGE_COMPONENT_PATH,
