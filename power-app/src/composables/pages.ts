@@ -7,7 +7,7 @@ import {resolveTypeScriptProjects} from '../../../typescript/bld/library';
 import {
   TEMPLATES_CLIENT_DIR,
   TEMPLATES_CLIENT_PAGES_DIR,
-  TEMPLATES_SERVER_HELPER_DIR,
+  TEMPLATES_SERVER_HELPERS_DIR,
 } from './@constants';
 
 const APP_PATH = Path.join(TEMPLATES_CLIENT_DIR, 'app.tsx.hbs');
@@ -16,11 +16,13 @@ const PAGE_INDEX_PATH = Path.join(TEMPLATES_CLIENT_PAGES_DIR, 'index.ts.hbs');
 
 const PAGE_COMPONENT_PATH = Path.join(
   TEMPLATES_CLIENT_PAGES_DIR,
-  '@page',
-  'index.tsx.hbs',
+  '@page/index.tsx.hbs',
 );
 
-const PAGE_HELPER_PATH = Path.join(TEMPLATES_SERVER_HELPER_DIR, 'page.ts.hbs');
+const PAGE_URL_HELPERS_PATH = Path.join(
+  TEMPLATES_SERVER_HELPERS_DIR,
+  'page/url.ts.hbs',
+);
 
 const composable: ComposableModuleFunction = options => {
   let {
@@ -52,27 +54,23 @@ const composable: ComposableModuleFunction = options => {
       {template: APP_PATH},
     ),
     handlebars(
-      Path.join(clientSrc, 'pages', 'index.ts'),
+      Path.join(clientSrc, 'pages/index.ts'),
       {
         pages: pagesInfos,
       },
       {template: PAGE_INDEX_PATH},
     ),
     handlebars(
-      Path.join(serverSrc, 'helper', 'page.ts'),
+      Path.join(serverSrc, 'helpers/page/url.ts'),
       {
         pageTypeString: pages.map(page => `'${page}'`).join(' | ') || `''`,
       },
-      {template: PAGE_HELPER_PATH},
+      {template: PAGE_URL_HELPERS_PATH},
     ),
     ...pagesInfos.map(page =>
-      handlebars(
-        Path.join(clientSrc, 'pages', `@${page.name}`, 'index.tsx'),
-        page,
-        {
-          template: PAGE_COMPONENT_PATH,
-        },
-      ),
+      handlebars(Path.join(clientSrc, `pages/@${page.name}/index.tsx`), page, {
+        template: PAGE_COMPONENT_PATH,
+      }),
     ),
   ];
 };

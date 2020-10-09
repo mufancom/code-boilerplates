@@ -15,7 +15,7 @@ export const TEMPLATES_CLIENT_PAGES_DIR = Path.join(
   'pages',
 );
 
-export const TEMPLATES_SERVER_HELPER_DIR = Path.join(
+export const TEMPLATES_SERVER_HELPERS_DIR = Path.join(
   TEMPLATES_SERVER_DIR,
-  'helper',
+  'helpers',
 );

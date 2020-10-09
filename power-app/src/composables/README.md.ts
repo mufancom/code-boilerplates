@@ -19,8 +19,8 @@ const composable: ComposableModuleFunction = ({name, powerApp: {port}}) => {
   │   │   └── app.tsx             // page 注册 route 处
   |   |
   │   ├── server
-  |   |   |—— helper              // 工具函数
-  │   │   |── version             // 应用版本文件夹
+  |   |   |—— helpers             // 工具函数
+  │   │   |── versions            // 应用版本文件夹
   |   |   |  |── 0.1.0.ts         // 单个 version 的代码
   |   |   |  └── index.ts         // 将 version 汇总的文件
   │   │   └── config.ts           // 配置文件

@@ -1,4 +1,4 @@
-import {Version} from '../helper';
+import {Version} from '../helpers';
 
 export const V010 = {
   '0.1.0': Version<{

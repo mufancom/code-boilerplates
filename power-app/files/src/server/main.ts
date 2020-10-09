@@ -12,8 +12,8 @@ import {
   initializeAuth,
   initializeClient,
   initializePowerAppVersion,
-} from './helper';
-import * as versions from './version';
+} from './helpers';
+import * as versions from './versions';
 
 declare global {
   namespace NodeJS {
