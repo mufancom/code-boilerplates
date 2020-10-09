@@ -1,5 +1,5 @@
 import React, {FC, createContext, useContext, useEffect, useState} from 'react';
-import {useHistory, useLocation} from 'react-router-dom';
+import {useLocation} from 'react-router-dom';
 import io from 'socket.io-client';
 
 const PRODUCTION = process.env.NODE_ENV === 'production';
@@ -23,7 +23,6 @@ export const Authorization: FC = ({children}) => {
   );
 
   let location = useLocation();
-  let history = useHistory();
 
   useEffect(() => {
     let code = new URLSearchParams(location.search).get('code');

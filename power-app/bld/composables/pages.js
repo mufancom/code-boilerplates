@@ -14,10 +14,12 @@ const composable = options => {
     let projects = library_1.resolveTypeScriptProjects(options);
     let clientSrc = projects.projects.find(project => project.srcDir.includes('client')).srcDir;
     let serverSrc = projects.projects.find(project => project.srcDir.includes('server')).srcDir;
-    let pagesInfos = pages.map(page => ({
+    let pagesInfos = pages
+        .map(page => ({
         name: page,
         componentName: pageToComponentName(page),
-    }));
+    }))
+        .sort(({ componentName: cna }, { componentName: cnb }) => (cna > cnb ? 1 : -1));
     return [
         core_1.handlebars(Path.join(clientSrc, 'app.tsx'), {
             pages: pagesInfos,

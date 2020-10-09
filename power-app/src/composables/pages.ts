@@ -36,10 +36,12 @@ const composable: ComposableModuleFunction = options => {
     project.srcDir.includes('server'),
   )!.srcDir;
 
-  let pagesInfos = pages.map(page => ({
-    name: page,
-    componentName: pageToComponentName(page),
-  }));
+  let pagesInfos = pages
+    .map(page => ({
+      name: page,
+      componentName: pageToComponentName(page),
+    }))
+    .sort(({componentName: cna}, {componentName: cnb}) => (cna > cnb ? 1 : -1));
 
   return [
     handlebars(
