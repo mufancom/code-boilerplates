@@ -8,7 +8,6 @@ FROM node:12
 
 WORKDIR /app
 
-COPY .npmrc                 /app/.npmrc
 COPY package.json           /app/package.json
 COPY yarn.lock              /app/yarn.lock
 COPY .env                   /app/.env
