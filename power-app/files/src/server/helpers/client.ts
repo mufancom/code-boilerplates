@@ -15,7 +15,7 @@ export function initializeClient(app: Koa, config: Config): void {
 
 function clientMiddleware(config: Config): Middleware {
   return config.production
-    ? koaMount('/app', koaStatic(join(__dirname, '../client')))
+    ? koaMount('/app', koaStatic(join(__dirname, '../../client')))
     : koaMount(
         new Koa().use(
           new Router()
