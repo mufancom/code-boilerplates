@@ -9,23 +9,31 @@ const composable: ComposableModuleFunction = ({
     services: {
       mongo: {
         image: 'mongo:latest',
+        restart: 'always',
         volumes: [`makeflow-${name}_data:/data/db/`],
       },
       ...(images?.length
-        ? images.reduce<{[key in string]: {image: string; volumes: string[]}}>(
-            (dict, image) => {
-              dict[image] = {
-                image: `${image}:latest`,
-                volumes: [`makeflow-${name}_data:/data/${image}/`],
+        ? images.reduce<
+            {
+              [key in string]: {
+                image: string;
+                restart: 'always';
+                volumes: string[];
               };
+            }
+          >((dict, image) => {
+            dict[image] = {
+              image: `${image}:latest`,
+              restart: 'always',
+              volumes: [`makeflow-${name}_data:/data/${image}/`],
+            };
 
-              return dict;
-            },
-            {},
-          )
+            return dict;
+          }, {})
         : {}),
       [`makeflow_${name.replace(/-/g, '_')}`]: {
         image: `makeflow-${name}:\${VERSION:-latest}`,
+        restart: 'always',
         build: {
           context: '.',
         },

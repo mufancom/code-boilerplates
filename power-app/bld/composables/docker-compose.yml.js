@@ -7,11 +7,13 @@ const composable = ({ name, powerApp: { port, images }, }) => {
         services: {
             mongo: {
                 image: 'mongo:latest',
+                restart: 'always',
                 volumes: [`makeflow-${name}_data:/data/db/`],
             },
             ...((images === null || images === void 0 ? void 0 : images.length) ? images.reduce((dict, image) => {
                 dict[image] = {
                     image: `${image}:latest`,
+                    restart: 'always',
                     volumes: [`makeflow-${name}_data:/data/${image}/`],
                 };
                 return dict;
@@ -19,6 +21,7 @@ const composable = ({ name, powerApp: { port, images }, }) => {
                 : {}),
             [`makeflow_${name.replace(/-/g, '_')}`]: {
                 image: `makeflow-${name}:\${VERSION:-latest}`,
+                restart: 'always',
                 build: {
                     context: '.',
                 },
