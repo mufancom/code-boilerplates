@@ -2,6 +2,15 @@
 
 > 使用步骤（仅供参考）
 
+方法 1:
+
+```bash
+# 快速创建脚本, 将会自动安装依赖, 只需修改 name 和 port
+curl -sSL https://raw.githubusercontent.com/makeflow/mufan-code-boilerplates/master/power-app/init.sh |bash -s -- --name=awesome-power-app --port=9966
+```
+
+方法 2:
+
 0. `npm install --global magicspace makeflow/mufan-code-boilerplates`
 1. `mkdir awesome-power-app`
 2. `cd awesome-power-app`
