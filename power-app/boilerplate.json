@@ -1,0 +1,18 @@
+{
+  "extends": "../typescript",
+  "root": "bld/composables",
+  "composables": ["(?!@)*.js"],
+  "options": {
+    "tsProjects": [
+      {
+        "name": "client"
+      },
+      {
+        "name": "server"
+      }
+    ],
+    "powerApp": {
+      "port": 3300
+    }
+  }
+}
