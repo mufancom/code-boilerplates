@@ -55,36 +55,28 @@ export function resolveTypeScriptProjects(
       return {
         ...projectOptions,
         references: references?.map(rawReference => {
-          let referencedPackageOptions: ResolvedPackageOptions | undefined;
+          let referencedPackageName: string;
           let referencedProjectName: string;
 
           if (typeof rawReference === 'string') {
-            referencedPackageOptions = projectOptions.package;
+            referencedPackageName = projectOptions.package.name;
             referencedProjectName = rawReference;
           } else {
-            referencedPackageOptions = resolvedOptions.packages.find(
-              packageOptions => packageOptions.name === rawReference.package,
-            );
+            referencedPackageName = rawReference.package;
             referencedProjectName = rawReference.project;
-
-            if (!referencedPackageOptions) {
-              throw new Error(
-                `Unknown package name ${JSON.stringify(rawReference.package)}`,
-              );
-            }
           }
 
           let referencedProjectOptions = projectOptionsArray.find(
-            projectOptions => projectOptions.name === referencedProjectName,
+            projectOptions =>
+              projectOptions.package.name === referencedPackageName &&
+              projectOptions.name === referencedProjectName,
           );
 
           if (!referencedProjectOptions) {
             throw new Error(
               `Unknown TypeScript project name ${JSON.stringify(
                 referencedProjectName,
-              )} under package ${JSON.stringify(
-                referencedPackageOptions.name,
-              )}`,
+              )} under package ${JSON.stringify(referencedPackageName)}`,
             );
           }
 

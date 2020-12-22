@@ -13,22 +13,20 @@ function resolveTypeScriptProjects(options) {
             return {
                 ...projectOptions,
                 references: references === null || references === void 0 ? void 0 : references.map(rawReference => {
-                    let referencedPackageOptions;
+                    let referencedPackageName;
                     let referencedProjectName;
                     if (typeof rawReference === 'string') {
-                        referencedPackageOptions = projectOptions.package;
+                        referencedPackageName = projectOptions.package.name;
                         referencedProjectName = rawReference;
                     }
                     else {
-                        referencedPackageOptions = resolvedOptions.packages.find(packageOptions => packageOptions.name === rawReference.package);
+                        referencedPackageName = rawReference.package;
                         referencedProjectName = rawReference.project;
-                        if (!referencedPackageOptions) {
-                            throw new Error(`Unknown package name ${JSON.stringify(rawReference.package)}`);
-                        }
                     }
-                    let referencedProjectOptions = projectOptionsArray.find(projectOptions => projectOptions.name === referencedProjectName);
+                    let referencedProjectOptions = projectOptionsArray.find(projectOptions => projectOptions.package.name === referencedPackageName &&
+                        projectOptions.name === referencedProjectName);
                     if (!referencedProjectOptions) {
-                        throw new Error(`Unknown TypeScript project name ${JSON.stringify(referencedProjectName)} under package ${JSON.stringify(referencedPackageOptions.name)}`);
+                        throw new Error(`Unknown TypeScript project name ${JSON.stringify(referencedProjectName)} under package ${JSON.stringify(referencedPackageName)}`);
                     }
                     return {
                         path: Path.posix.relative(projectOptions.srcDir, referencedProjectOptions.srcDir),
