@@ -10,15 +10,15 @@ const TEMPLATE_PATH = Path.join(TEMPLATES_DIR, '@entrances.ts.hbs');
 const composable: ComposableModuleFunction = options => {
   let projects = resolveTypeScriptProjectsWithEntrances(options);
 
-  return projects.flatMap(project => {
-    return project.entrances.map(name =>
+  return projects.flatMap(project =>
+    project.entrances.map(name =>
       handlebars(
         Path.join(project.srcDir, `${name}.ts`),
         {},
         {template: TEMPLATE_PATH},
       ),
-    );
-  });
+    ),
+  );
 };
 
 export default composable;
