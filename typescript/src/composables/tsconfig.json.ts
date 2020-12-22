@@ -39,7 +39,7 @@ const composable: ComposableModuleFunction = options => {
       },
       JSON_OPTIONS,
     ),
-    ...projects.map(({tsconfigPath, srcDir, outDir}) =>
+    ...projects.map(({tsconfigPath, srcDir, outDir, references}) =>
       json(
         tsconfigPath,
         {
@@ -48,6 +48,7 @@ const composable: ComposableModuleFunction = options => {
             composite: true,
             outDir: Path.posix.relative(srcDir, outDir),
           },
+          references,
         },
         JSON_OPTIONS,
       ),

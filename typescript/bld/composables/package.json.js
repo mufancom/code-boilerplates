@@ -6,21 +6,21 @@ const core_1 = require("@magicspace/core");
 const utils_1 = require("@magicspace/utils");
 const lodash_1 = tslib_1.__importDefault(require("lodash"));
 const library_1 = require("../library");
-const DEPENDENCY_DICT = {
-    tslib: '2',
-};
-const DEV_DEPENDENCY_DICT = {
+const ROOT_DEV_DEPENDENCY_DICT = {
     '@mufan/code': '0.2',
     '@mufan/eslint-plugin': '0.1',
     rimraf: '3',
     typescript: '4',
 };
+const PROJECT_DEPENDENCY_DICT = {
+    tslib: '2',
+};
 const composable = async (options) => {
     let { projects } = library_1.resolveTypeScriptProjects(options);
     let packagesWithTypeScriptProject = lodash_1.default.uniqBy(projects.map(project => project.package), packageOptions => packageOptions.packageJSONPath);
-    let [dependencies, devDependencies] = await Promise.all([
-        utils_1.fetchPackageVersions(DEPENDENCY_DICT),
-        utils_1.fetchPackageVersions(DEV_DEPENDENCY_DICT),
+    let [rootDevDependencies, projectDependencies] = await Promise.all([
+        utils_1.fetchPackageVersions(ROOT_DEV_DEPENDENCY_DICT),
+        utils_1.fetchPackageVersions(PROJECT_DEPENDENCY_DICT),
     ]);
     return [
         core_1.json('package.json', (data) => {
@@ -49,16 +49,23 @@ const composable = async (options) => {
                 scripts,
                 devDependencies: {
                     ...data.devDependencies,
-                    ...devDependencies,
+                    ...rootDevDependencies,
                 },
             };
         }),
         ...packagesWithTypeScriptProject.map(packageOptions => core_1.json(packageOptions.packageJSONPath, (data) => {
+            var _a, _b;
+            let referencedPackageNames = lodash_1.default.compact(lodash_1.default.union(...((_b = (_a = packageOptions.tsProjects) === null || _a === void 0 ? void 0 : _a.map(projectOptions => { var _a; return (_a = projectOptions.references) === null || _a === void 0 ? void 0 : _a.map(reference => typeof reference === 'string'
+                ? undefined
+                : reference.package !== packageOptions.name
+                    ? reference.package
+                    : undefined); })) !== null && _b !== void 0 ? _b : [])));
             return {
                 ...data,
                 dependencies: {
                     ...data.dependencies,
-                    ...dependencies,
+                    ...projectDependencies,
+                    ...lodash_1.default.fromPairs(referencedPackageNames.map(name => [name, '*'])),
                 },
             };
         })),

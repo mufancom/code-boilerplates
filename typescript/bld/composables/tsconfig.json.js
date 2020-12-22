@@ -29,12 +29,13 @@ const composable = options => {
             }),
             files: [],
         }, JSON_OPTIONS),
-        ...projects.map(({ tsconfigPath, srcDir, outDir }) => core_1.json(tsconfigPath, {
+        ...projects.map(({ tsconfigPath, srcDir, outDir, references }) => core_1.json(tsconfigPath, {
             extends: '@mufan/code/tsconfig.json',
             compilerOptions: {
                 composite: true,
                 outDir: Path.posix.relative(srcDir, outDir),
             },
+            references,
         }, JSON_OPTIONS)),
     ];
 };

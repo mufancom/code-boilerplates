@@ -48,6 +48,29 @@ declare namespace Magicspace {
        * set `outDir` as '.bld-cache' instead of 'bld'.
        */
       noEmit?: boolean;
+      /**
+       * References to other TypeScript projects, will be convert to
+       * `references` field in 'tsconfig.json'.
+       */
+      references?: GeneralTypeScriptProjectReferenceOptions[];
+    }
+
+    /**
+     * String as the shorthand of project reference under the same package.
+     */
+    type GeneralTypeScriptProjectReferenceOptions =
+      | string
+      | TypeScriptProjectReferenceOptions;
+
+    interface TypeScriptProjectReferenceOptions {
+      /**
+       * Package name to reference.
+       */
+      package: string;
+      /**
+       * Project name to reference.
+       */
+      project: string;
     }
   }
 }

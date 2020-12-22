@@ -10,15 +10,15 @@ import _ from 'lodash';
 
 import {resolveTypeScriptProjects} from '../library';
 
-const DEPENDENCY_DICT = {
-  tslib: '2',
-};
-
-const DEV_DEPENDENCY_DICT = {
+const ROOT_DEV_DEPENDENCY_DICT = {
   '@mufan/code': '0.2',
   '@mufan/eslint-plugin': '0.1',
   rimraf: '3',
   typescript: '4',
+};
+
+const PROJECT_DEPENDENCY_DICT = {
+  tslib: '2',
 };
 
 const composable: ComposableModuleFunction = async options => {
@@ -29,9 +29,9 @@ const composable: ComposableModuleFunction = async options => {
     packageOptions => packageOptions.packageJSONPath,
   );
 
-  let [dependencies, devDependencies] = await Promise.all([
-    fetchPackageVersions(DEPENDENCY_DICT),
-    fetchPackageVersions(DEV_DEPENDENCY_DICT),
+  let [rootDevDependencies, projectDependencies] = await Promise.all([
+    fetchPackageVersions(ROOT_DEV_DEPENDENCY_DICT),
+    fetchPackageVersions(PROJECT_DEPENDENCY_DICT),
   ]);
 
   return [
@@ -82,17 +82,32 @@ const composable: ComposableModuleFunction = async options => {
         scripts,
         devDependencies: {
           ...data.devDependencies,
-          ...devDependencies,
+          ...rootDevDependencies,
         },
       };
     }),
     ...packagesWithTypeScriptProject.map(packageOptions =>
       json(packageOptions.packageJSONPath, (data: any) => {
+        let referencedPackageNames = _.compact(
+          _.union(
+            ...(packageOptions.tsProjects?.map(projectOptions =>
+              projectOptions.references?.map(reference =>
+                typeof reference === 'string'
+                  ? undefined
+                  : reference.package !== packageOptions.name
+                  ? reference.package
+                  : undefined,
+              ),
+            ) ?? []),
+          ),
+        );
+
         return {
           ...data,
           dependencies: {
             ...data.dependencies,
-            ...dependencies,
+            ...projectDependencies,
+            ..._.fromPairs(referencedPackageNames.map(name => [name, '*'])),
           },
         };
       }),

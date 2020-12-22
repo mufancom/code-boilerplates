@@ -6,12 +6,38 @@ const tslib_1 = require("tslib");
 const Path = tslib_1.__importStar(require("path"));
 const library_1 = require("../../../general/bld/library");
 function resolveTypeScriptProjects(options) {
-    let packageOptions = library_1.resolveOptions(options);
+    let resolvedOptions = library_1.resolveOptions(options);
+    let projectOptionsArray = resolvedOptions.packages.flatMap(packageOptions => { var _a, _b; return (_b = (_a = packageOptions.tsProjects) === null || _a === void 0 ? void 0 : _a.map(project => buildResolvedTypeScriptProjectOptions(project, packageOptions))) !== null && _b !== void 0 ? _b : []; });
     return {
-        projects: [
-            ...packageOptions.packages.flatMap(packageOptions => { var _a, _b; return (_b = (_a = packageOptions.tsProjects) === null || _a === void 0 ? void 0 : _a.map(project => buildResolvedTypeScriptProjectOptions(project, packageOptions))) !== null && _b !== void 0 ? _b : []; }),
-        ],
-        package: packageOptions,
+        projects: projectOptionsArray.map(({ references, ...projectOptions }) => {
+            return {
+                ...projectOptions,
+                references: references === null || references === void 0 ? void 0 : references.map(rawReference => {
+                    let referencedPackageOptions;
+                    let referencedProjectName;
+                    if (typeof rawReference === 'string') {
+                        referencedPackageOptions = projectOptions.package;
+                        referencedProjectName = rawReference;
+                    }
+                    else {
+                        referencedPackageOptions = resolvedOptions.packages.find(packageOptions => packageOptions.name === rawReference.package);
+                        referencedProjectName = rawReference.project;
+                        if (!referencedPackageOptions) {
+                            throw new Error(`Unknown package name ${JSON.stringify(rawReference.package)}`);
+                        }
+                    }
+                    let referencedProjectOptions = projectOptionsArray.find(projectOptions => projectOptions.name === referencedProjectName);
+                    if (!referencedProjectOptions) {
+                        throw new Error(`Unknown TypeScript project name ${JSON.stringify(referencedProjectName)} under package ${JSON.stringify(referencedPackageOptions.name)}`);
+                    }
+                    return {
+                        path: Path.posix.relative(projectOptions.srcDir, referencedProjectOptions.srcDir),
+                    };
+                }),
+            };
+        }),
+        options: resolvedOptions,
+        package: resolvedOptions,
     };
 }
 exports.resolveTypeScriptProjects = resolveTypeScriptProjects;
@@ -22,6 +48,7 @@ function buildResolvedTypeScriptProjectOptions({ name, type = name && name.inclu
     let bldDir = Path.posix.join(packageDir, parentDir, noEmit ? '.bld-cache' : 'bld');
     let outDir = Path.posix.join(bldDir, dir);
     return {
+        name,
         srcDir,
         bldDir,
         outDir,
