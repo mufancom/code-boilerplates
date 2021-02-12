@@ -15,7 +15,7 @@ npm install --global magicspace makeflow/mufan-code-boilerplates
 Create magicspace configuration file with `magicspace create` command.
 
 ```bash
-magicspace create @mufan/code-boilerplates/general
+magicspace create @mufan/code-boilerplates/typescript
 ```
 
 Select an example and review/edit the configuration options.
