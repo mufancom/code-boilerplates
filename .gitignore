@@ -5,6 +5,6 @@ node_modules/
 yarn-error.log
 npm-debug.log
 # TypeScript Build Artifacts
-*/bld/**/*.d.ts
+*/bld/
 *.tsbuildinfo
 .bld-cache/

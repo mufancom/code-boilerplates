@@ -5,10 +5,8 @@ Code boilerplates for our projects, powered by [Magicspace](https://github.com/m
 ## Usage
 
 ```bash
-npm install --global magicspace makeflow/mufan-code-boilerplates
+npm install --global magicspace @mufan/code-boilerplates
 ```
-
-> As this repository is updated on a daily basis, the package `@mufan/code-boilerplates` is not published to NPM registry. Instead we are installing from GitHub `makeflow/mufan-code-boilerplates`.
 
 ### Create magicspace configuration
 

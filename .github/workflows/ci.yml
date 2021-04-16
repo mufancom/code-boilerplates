@@ -19,3 +19,9 @@ jobs:
       - run: npm install --global yarn
       - run: yarn install
       - run: yarn test
+      - run: npm --no-git-tag-version 0.0.0-${{GITHUB_SHA}}
+      - name: Publish to NPM
+        uses: JS-DevTools/npm-publish@v1
+        with:
+          token: ${{secrets.NPM_TOKEN}}
+          access: public
