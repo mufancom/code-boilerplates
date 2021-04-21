@@ -11,9 +11,6 @@
     },
     {
       "path": "typescript/src/library"
-    },
-    {
-      "path": "typescript-entrances/src/composables"
     }
   ],
   "files": []
