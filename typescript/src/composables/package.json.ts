@@ -117,16 +117,37 @@ const composable: ComposableModuleFunction = async options => {
           ),
         );
 
+        let packageProjects = projects.filter(
+          project =>
+            project.package.packageJSONPath === packageOptions.packageJSONPath,
+        );
+
+        let firstLibraryProject = packageProjects.find(
+          project => project.type === 'library',
+        );
+
         let entrances =
           anyProjectWithEntrances &&
-          projects.some(
-            project =>
-              project.package.packageJSONPath ===
-                packageOptions.packageJSONPath && project.entrances.length > 0,
-          );
+          packageProjects.some(project => project.entrances.length > 0);
 
         return {
           ...data,
+          ...(firstLibraryProject
+            ? {
+                [firstLibraryProject.esModule
+                  ? 'module'
+                  : 'main']: firstLibraryProject.noEmit
+                  ? undefined
+                  : `${Path.posix.relative(
+                      packageOptions.dir,
+                      Path.posix.join(firstLibraryProject.outDir, 'index.js'),
+                    )}`,
+                types: `${Path.posix.relative(
+                  packageOptions.dir,
+                  Path.posix.join(firstLibraryProject.outDir, 'index.d.ts'),
+                )}`,
+              }
+            : undefined),
           dependencies: {
             ...data.dependencies,
             ...projectDependencies,

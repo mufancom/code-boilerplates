@@ -21,6 +21,7 @@ export interface ResolvedTypeScriptProjectOptions
   outDir: string;
   tsconfigPath: string;
   type: 'library' | 'program' | 'script';
+  esModule: boolean;
   dev: boolean;
   noEmit: boolean;
   entrances: string[];
@@ -104,6 +105,7 @@ function buildResolvedTypeScriptProjectOptions(
   {
     name,
     type = name && name.includes('library') ? 'library' : 'program',
+    esModule = false,
     dev = (name && name.includes('test')) || type === 'script' ? true : false,
     parentDir = '',
     src = 'src',
@@ -114,7 +116,7 @@ function buildResolvedTypeScriptProjectOptions(
   }: Magicspace.BoilerplateOptions.TypeScriptProjectOptions,
   packageOptions: ResolvedPackageOptions,
 ): ResolvedTypeScriptProjectOptionsWithRawReferences {
-  let packageDir = packageOptions?.dir ?? '';
+  let packageDir = packageOptions.dir;
 
   let srcDir = Path.posix.join(packageDir, parentDir, src || '', dir);
   let bldDir = Path.posix.join(
@@ -131,6 +133,7 @@ function buildResolvedTypeScriptProjectOptions(
     outDir,
     tsconfigPath: Path.posix.join(srcDir, 'tsconfig.json'),
     type,
+    esModule,
     dev,
     noEmit,
     entrances:

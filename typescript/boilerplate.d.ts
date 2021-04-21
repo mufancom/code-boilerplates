@@ -26,6 +26,10 @@ declare namespace Magicspace {
        */
       type?: 'library' | 'program' | 'script';
       /**
+       * Whether to compile as ES module.
+       */
+      esModule?: boolean;
+      /**
        * Is this TypeScript project a development-time project? Defaults to
        * true if the project name is 'test', otherwise false.
        */

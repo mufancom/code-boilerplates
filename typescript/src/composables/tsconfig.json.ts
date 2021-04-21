@@ -14,7 +14,7 @@ const JSON_OPTIONS: JSONFileOptions = {
     {
       key: 'compilerOptions',
       subKeys: {
-        top: ['composite'],
+        top: ['composite', 'module', 'moduleResolution'],
         bottom: ['outDir'],
       },
     },
@@ -39,21 +39,24 @@ const composable: ComposableModuleFunction = options => {
       },
       JSON_OPTIONS,
     ),
-    ...projects.map(({tsconfigPath, srcDir, outDir, entrances, references}) =>
-      json(
-        tsconfigPath,
-        {
-          extends: '@mufan/code/tsconfig.json',
-          compilerOptions: {
-            composite: true,
-            // fallback to undefined if no condition matched.
-            experimentalDecorators: entrances.length > 0 || undefined,
-            outDir: Path.posix.relative(srcDir, outDir),
+    ...projects.map(
+      ({tsconfigPath, srcDir, outDir, esModule, entrances, references}) =>
+        json(
+          tsconfigPath,
+          {
+            extends: '@mufan/code/tsconfig.json',
+            compilerOptions: {
+              composite: true,
+              module: esModule ? 'ESNext' : undefined,
+              moduleResolution: esModule ? 'Node' : undefined,
+              // fallback to undefined if no condition matched.
+              experimentalDecorators: entrances.length > 0 || undefined,
+              outDir: Path.posix.relative(srcDir, outDir),
+            },
+            references,
           },
-          references,
-        },
-        JSON_OPTIONS,
-      ),
+          JSON_OPTIONS,
+        ),
     ),
   ];
 };
