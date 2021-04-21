@@ -23,6 +23,7 @@ export interface ResolvedTypeScriptProjectOptions
   type: 'library' | 'program' | 'script';
   dev: boolean;
   noEmit: boolean;
+  entrances: string[];
   package: ResolvedPackageOptions;
   references: ResolvedTypeScriptProjectReference[] | undefined;
 }
@@ -108,6 +109,7 @@ function buildResolvedTypeScriptProjectOptions(
     src = 'src',
     dir = name ?? 'program',
     noEmit = type === 'script',
+    entrances = false,
     ...rest
   }: Magicspace.BoilerplateOptions.TypeScriptProjectOptions,
   packageOptions: ResolvedPackageOptions,
@@ -131,6 +133,12 @@ function buildResolvedTypeScriptProjectOptions(
     type,
     dev,
     noEmit,
+    entrances:
+      typeof entrances === 'boolean'
+        ? entrances
+          ? ['@entrances.ts']
+          : []
+        : entrances,
     package: packageOptions,
     ...rest,
   };

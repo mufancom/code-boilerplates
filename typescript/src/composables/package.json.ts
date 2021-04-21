@@ -21,17 +21,32 @@ const PROJECT_DEPENDENCY_DICT = {
   tslib: '2',
 };
 
+const PROJECT_ENTRANCES_DEPENDENCY_DICT = {
+  'entrance-decorator': '0.1',
+};
+
 const composable: ComposableModuleFunction = async options => {
   let {projects} = resolveTypeScriptProjects(options);
+
+  let anyProjectWithEntrances = projects.some(
+    project => project.entrances.length > 0,
+  );
 
   let packagesWithTypeScriptProject = _.uniqBy(
     projects.map(project => project.package),
     packageOptions => packageOptions.packageJSONPath,
   );
 
-  let [rootDevDependencies, projectDependencies] = await Promise.all([
+  let [
+    rootDevDependencies,
+    projectDependencies,
+    projectEntrancesDependencies,
+  ] = await Promise.all([
     fetchPackageVersions(ROOT_DEV_DEPENDENCY_DICT),
     fetchPackageVersions(PROJECT_DEPENDENCY_DICT),
+    anyProjectWithEntrances
+      ? fetchPackageVersions(PROJECT_ENTRANCES_DEPENDENCY_DICT)
+      : undefined,
   ]);
 
   return [
@@ -102,11 +117,20 @@ const composable: ComposableModuleFunction = async options => {
           ),
         );
 
+        let entrances =
+          anyProjectWithEntrances &&
+          projects.some(
+            project =>
+              project.package.packageJSONPath ===
+                packageOptions.packageJSONPath && project.entrances.length > 0,
+          );
+
         return {
           ...data,
           dependencies: {
             ...data.dependencies,
             ...projectDependencies,
+            ...(entrances ? projectEntrancesDependencies : undefined),
             ..._.fromPairs(referencedPackageNames.map(name => [name, '*'])),
           },
         };

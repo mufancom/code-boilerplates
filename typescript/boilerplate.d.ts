@@ -49,6 +49,11 @@ declare namespace Magicspace {
        */
       noEmit?: boolean;
       /**
+       * Add entrances file(s) and related package/configuration. If true, it
+       * will use the default `['@entrances.ts']`.
+       */
+      entrances?: string[] | boolean;
+      /**
        * References to other TypeScript projects, will be convert to
        * `references` field in 'tsconfig.json'.
        */

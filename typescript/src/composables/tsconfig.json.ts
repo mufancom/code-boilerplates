@@ -39,13 +39,15 @@ const composable: ComposableModuleFunction = options => {
       },
       JSON_OPTIONS,
     ),
-    ...projects.map(({tsconfigPath, srcDir, outDir, references}) =>
+    ...projects.map(({tsconfigPath, srcDir, outDir, entrances, references}) =>
       json(
         tsconfigPath,
         {
           extends: '@mufan/code/tsconfig.json',
           compilerOptions: {
             composite: true,
+            // fallback to undefined if no condition matched.
+            experimentalDecorators: entrances.length > 0 || undefined,
             outDir: Path.posix.relative(srcDir, outDir),
           },
           references,
