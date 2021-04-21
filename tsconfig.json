@@ -13,9 +13,6 @@
       "path": "typescript/src/library"
     },
     {
-      "path": "typescript-entrances/src/composables"
-    },
-    {
       "path": "power-app/src/composables"
     }
   ],

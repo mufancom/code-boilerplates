@@ -24,10 +24,6 @@
         "type": "library",
         "parentDir": "typescript",
         "dir": "library"
-      },
-      {
-        "parentDir": "typescript-entrances",
-        "dir": "composables"
       }
     ]
   }
