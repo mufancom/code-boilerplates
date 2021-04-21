@@ -29,6 +29,7 @@ const JSON_OPTIONS: JSONFileOptions = {
       'type',
       'main',
       'browser',
+      'module',
       'types',
       'bin',
       'files',
