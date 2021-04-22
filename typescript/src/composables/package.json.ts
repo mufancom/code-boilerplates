@@ -122,9 +122,9 @@ const composable: ComposableModuleFunction = async options => {
             project.package.packageJSONPath === packageOptions.packageJSONPath,
         );
 
-        let firstLibraryProject = packageProjects.find(
-          project => project.type === 'library',
-        );
+        let [firstProject] = packageProjects;
+        let firstLibraryProject =
+          firstProject.type === 'library' ? firstProject : undefined;
 
         let entrances =
           anyProjectWithEntrances &&
