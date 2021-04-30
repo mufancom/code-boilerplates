@@ -21,7 +21,7 @@ if [[ !($global_dependencies =~ 'magicspace') ]]; then
 fi
 
 if [[ !($global_dependencies =~ '@mufan/code-boilerplate') ]]; then
-    dependencies+=('makeflow/mufan-code-boilerplates')
+    dependencies+=('@mufan/code-boilerplates')
 fi
 
 if [ ${#dependencies[@]} -gt 0 ]; then
