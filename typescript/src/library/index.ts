@@ -124,6 +124,10 @@ function buildResolvedTypeScriptProjectOptions(
     src = '';
   }
 
+  if (dir === false) {
+    dir = '';
+  }
+
   let packageDir = packageOptions.dir;
 
   let srcDir = Path.posix.join(packageDir, parentDir, src, dir);

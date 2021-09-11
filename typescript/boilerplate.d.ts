@@ -47,7 +47,7 @@ declare namespace Magicspace {
        * TypeScript project directory under source directory, defaults to
        * `name` option.
        */
-      dir?: string;
+      dir?: string | false;
       /**
        * Whether this project does not emit build artifact, defaults to true if
        * `src` is false, otherwise false. If true, it will set `outDir` as
