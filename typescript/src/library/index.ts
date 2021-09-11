@@ -107,18 +107,26 @@ function buildResolvedTypeScriptProjectOptions(
     type = name && name.includes('library') ? 'library' : 'program',
     esModule = false,
     dev = (name && name.includes('test')) || type === 'script' ? true : false,
-    parentDir = '',
-    src = 'src',
+    parentDir = false,
+    src = type === 'script' ? false : 'src',
     dir = name ?? 'program',
-    noEmit = type === 'script',
+    noEmit = src === false ? true : false,
     entrances = false,
     ...rest
   }: Magicspace.BoilerplateOptions.TypeScriptProjectOptions,
   packageOptions: ResolvedPackageOptions,
 ): ResolvedTypeScriptProjectOptionsWithRawReferences {
+  if (parentDir === false) {
+    parentDir = '';
+  }
+
+  if (src === false) {
+    src = '';
+  }
+
   let packageDir = packageOptions.dir;
 
-  let srcDir = Path.posix.join(packageDir, parentDir, src || '', dir);
+  let srcDir = Path.posix.join(packageDir, parentDir, src, dir);
   let bldDir = Path.posix.join(
     packageDir,
     parentDir,

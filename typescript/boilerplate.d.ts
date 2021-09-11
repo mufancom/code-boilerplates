@@ -35,11 +35,12 @@ declare namespace Magicspace {
        */
       dev?: boolean;
       /**
-       * Parent directory, defaults to ''.
+       * Parent directory, defaults to false (package directory).
        */
-      parentDir?: string;
+      parentDir?: string | false;
       /**
-       * Source directory, defaults to 'src'.
+       * Source directory, defaults to false if the project type is 'script',
+       * otherwise 'src'.
        */
       src?: string | false;
       /**
@@ -48,8 +49,9 @@ declare namespace Magicspace {
        */
       dir?: string;
       /**
-       * Whether this project does not emit build artifact. If true, it will
-       * set `outDir` as '.bld-cache' instead of 'bld'.
+       * Whether this project does not emit build artifact, defaults to true if
+       * `src` is false, otherwise false. If true, it will set `outDir` as
+       * '.bld-cache' instead of 'bld'.
        */
       noEmit?: boolean;
       /**
