@@ -26,7 +26,7 @@ declare namespace Magicspace {
       jsxSingleQuote?: boolean;
       trailingComma?: 'es5' | 'none' | 'all';
       bracketSpacing?: boolean;
-      jsxBracketSameLine?: boolean;
+      bracketSameLine?: boolean;
       arrowParens?: 'always' | 'avoid';
     }
   }

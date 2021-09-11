@@ -37,17 +37,14 @@ const composable: ComposableModuleFunction = async options => {
     packageOptions => packageOptions.packageJSONPath,
   );
 
-  let [
-    rootDevDependencies,
-    projectDependencies,
-    projectEntrancesDependencies,
-  ] = await Promise.all([
-    fetchPackageVersions(ROOT_DEV_DEPENDENCY_DICT),
-    fetchPackageVersions(PROJECT_DEPENDENCY_DICT),
-    anyProjectWithEntrances
-      ? fetchPackageVersions(PROJECT_ENTRANCES_DEPENDENCY_DICT)
-      : undefined,
-  ]);
+  let [rootDevDependencies, projectDependencies, projectEntrancesDependencies] =
+    await Promise.all([
+      fetchPackageVersions(ROOT_DEV_DEPENDENCY_DICT),
+      fetchPackageVersions(PROJECT_DEPENDENCY_DICT),
+      anyProjectWithEntrances
+        ? fetchPackageVersions(PROJECT_ENTRANCES_DEPENDENCY_DICT)
+        : undefined,
+    ]);
 
   return [
     json('package.json', (data: any) => {
@@ -134,14 +131,13 @@ const composable: ComposableModuleFunction = async options => {
           ...data,
           ...(firstLibraryProject
             ? {
-                [firstLibraryProject.esModule
-                  ? 'module'
-                  : 'main']: firstLibraryProject.noEmit
-                  ? undefined
-                  : `${Path.posix.relative(
-                      packageOptions.dir,
-                      Path.posix.join(firstLibraryProject.outDir, 'index.js'),
-                    )}`,
+                [firstLibraryProject.esModule ? 'module' : 'main']:
+                  firstLibraryProject.noEmit
+                    ? undefined
+                    : `${Path.posix.relative(
+                        packageOptions.dir,
+                        Path.posix.join(firstLibraryProject.outDir, 'index.js'),
+                      )}`,
                 types: `${Path.posix.relative(
                   packageOptions.dir,
                   Path.posix.join(firstLibraryProject.outDir, 'index.d.ts'),

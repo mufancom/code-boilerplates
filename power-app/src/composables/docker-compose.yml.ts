@@ -13,15 +13,13 @@ const composable: ComposableModuleFunction = ({
         volumes: [`makeflow-${name}_data:/data/db/`],
       },
       ...(images?.length
-        ? images.reduce<
-            {
-              [key in string]: {
-                image: string;
-                restart: 'always';
-                volumes: string[];
-              };
-            }
-          >((dict, image) => {
+        ? images.reduce<{
+            [key in string]: {
+              image: string;
+              restart: 'always';
+              volumes: string[];
+            };
+          }>((dict, image) => {
             dict[image] = {
               image: `${image}:latest`,
               restart: 'always',
