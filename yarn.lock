@@ -83,15 +83,15 @@
     tslang "^0.1.22"
     tslib "^2.0.1"
 
-"@mufan/code@^0.2.8":
-  version "0.2.8"
-  resolved "https://registry.yarnpkg.com/@mufan/code/-/code-0.2.8.tgz#de10109c6d46981e317f0010dbf9b42efc85bbbf"
-  integrity sha512-IZKLkbOPFsOmIodDEtONFKO1PXM4m7prrNvmSTmUoGtC/lWtGZdV9GGOy6gFSNUmqWZSl3pC4riy0GHtXR3Onw==
+"@mufan/code@^0.2.9":
+  version "0.2.9"
+  resolved "https://registry.yarnpkg.com/@mufan/code/-/code-0.2.9.tgz#c735505090ca2c733ab294e520dcbd9d2c6c2b06"
+  integrity sha512-ETtAu/LOeSYzcAnMLYEfhV2DOcH+/NsPS8lHDLIew/DCIRUJ0fO8fhLkdbORJaCjjzuKI4hmZIk1lD02SgUgTA==
 
-"@mufan/eslint-plugin@^0.1.40":
-  version "0.1.40"
-  resolved "https://registry.yarnpkg.com/@mufan/eslint-plugin/-/eslint-plugin-0.1.40.tgz#4ce3d6c8211098686eb93982ad35218b95e46653"
-  integrity sha512-Xj6+bsnwcQdScT1VTthW2DzJUHKETn0XfOBaOZ4B6F4CJ286X8nhpfaGvUoGeWlLO24vFOpGI2JArKApqIITGA==
+"@mufan/eslint-plugin@^0.1.41":
+  version "0.1.41"
+  resolved "https://registry.yarnpkg.com/@mufan/eslint-plugin/-/eslint-plugin-0.1.41.tgz#7723eccb97652431dbd10c32404c9527b2e41447"
+  integrity sha512-y+8zAyOVaFRjFl00ecMR3+VaUG87hpe4O4HPbUhCVjoxbDUlb0EQJLoirduNWWgJEP3zwtijaPCKrxsugadn9Q==
   dependencies:
     "@typescript-eslint/eslint-plugin" "^4.16.1"
     "@typescript-eslint/experimental-utils" "^4.16.1"
