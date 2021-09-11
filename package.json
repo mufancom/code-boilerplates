@@ -15,8 +15,8 @@
     "tslib": "^2.3.1"
   },
   "devDependencies": {
-    "@mufan/code": "^0.2.8",
-    "@mufan/eslint-plugin": "^0.1.40",
+    "@mufan/code": "^0.2.9",
+    "@mufan/eslint-plugin": "^0.1.41",
     "eslint": "^7.32.0",
     "prettier": "^2.4.0",
     "rimraf": "^3.0.2",
