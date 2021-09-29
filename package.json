@@ -16,7 +16,7 @@
     "@magicspace/utils": "^0.2.29",
     "lodash": "^4.17.20",
     "npm-which": "^3.0.1",
-    "prettier": "^2.4.0",
+    "prettier": "^2.4.1",
     "tslang": "^0.1.22",
     "tslib": "^2.3.1",
     "typescript": "^4.4.3"
