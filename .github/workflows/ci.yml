@@ -20,6 +20,7 @@ jobs:
       - run: yarn test
       - run: npm --no-git-tag-version version 0.0.0-$GITHUB_SHA
       - name: Publish to NPM
+        if: ${{matrix.node-version == '16'}}
         uses: JS-DevTools/npm-publish@v1
         with:
           token: ${{secrets.NPM_TOKEN}}
