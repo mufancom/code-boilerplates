@@ -72,7 +72,7 @@ const JSON_OPTIONS: JSONFileOptions = {
 };
 
 const DEV_DEPENDENCY_DICT = {
-  eslint: '7',
+  eslint: '8',
   prettier: '2',
 };
 
