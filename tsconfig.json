@@ -11,6 +11,12 @@
     },
     {
       "path": "typescript/src/library"
+    },
+    {
+      "path": "digshare-script/src/composables"
+    },
+    {
+      "path": "digshare-script/src/library"
     }
   ],
   "files": []
