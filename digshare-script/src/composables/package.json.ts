@@ -7,11 +7,11 @@ import _ from 'lodash';
 import {resolveTypeScriptProjects} from '../../../typescript/bld/library';
 
 const DEPENDENCY_DICT = {
-  'dss-sdk': '^0.1.1',
+  'dss-sdk': '^0.1.0',
 };
 
 const DEV_DEPENDENCIES_DICT = {
-  'cross-env': '^7.0.3',
+  'cross-env': '^7.0.0',
 };
 
 const ROOT_DEPENDENCY_DICT = {};
