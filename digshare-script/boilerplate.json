@@ -1,0 +1,33 @@
+{
+  "extends": "../typescript",
+  "root": "bld/composables",
+  "composables": ["(?!@)*.js"],
+  "examples": [
+    {
+      "name": "channels",
+      "description": "多频道仓库",
+      "options": {
+        "name": "digshare-channels",
+        "digshareScript": {
+          "openAPI": {
+            "host": "https://api.dingshao.cn",
+            "version": "v1"
+          },
+          "runtime": "nodejs12"
+        },
+        "packages": [
+          {
+            "name": "@digshare/awesome-channel",
+            "displayName": "一个好频道👍",
+            "registry": "",
+            "tsProjects": [
+              {
+                "name": "library"
+              }
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}
