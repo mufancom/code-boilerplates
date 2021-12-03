@@ -24,6 +24,15 @@
         "type": "library",
         "parentDir": "typescript",
         "dir": "library"
+      },
+      {
+        "parentDir": "digshare-script",
+        "dir": "composables"
+      },
+      {
+        "type": "library",
+        "parentDir": "digshare-script",
+        "dir": "library"
       }
     ]
   }
