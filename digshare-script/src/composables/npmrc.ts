@@ -10,7 +10,10 @@ const composable: ComposableModuleFunction = options => {
       text(
         Path.join(packageOptions.dir, '.npmrc'),
         () =>
-          `${options.digshareScript.openAPI.host}/registry/:_authToken=${packageOptions.registry}`,
+          `${options.digshareScript.openAPI.host.replace(
+            /^http(s)*\:/,
+            '',
+          )}/registry/:_authToken=${packageOptions.registry}`,
       ),
     ),
   ];
