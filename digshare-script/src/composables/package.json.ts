@@ -48,7 +48,7 @@ const composable: ComposableModuleFunction = async options => {
         scripts: sortObjectKeys(
           {
             ...data.scripts,
-            'lerna:publish': 'yarn build && lerna publish patch',
+            'lerna:publish': 'lerna publish patch',
             build:
               'run-in-every directory-with-file --pattern "packages/*/package.json" --data "scripts.build" --echo --parallel -- yarn build',
           },
@@ -101,10 +101,8 @@ const composable: ComposableModuleFunction = async options => {
             },
             'asc',
           ),
-          publishConfig: {
-            registry: `${options.digshareScript.openAPI.host}/registry/`,
-          },
           digshare: {
+            registry: packageOptions.registry,
             runtime: packageOptions.runtime || options.digshareScript.runtime,
           },
           files: ['out'],

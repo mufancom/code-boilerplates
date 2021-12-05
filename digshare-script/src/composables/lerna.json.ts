@@ -1,6 +1,6 @@
 import {ComposableModuleFunction, json} from '@magicspace/core';
 
-const composable: ComposableModuleFunction = async () => {
+const composable: ComposableModuleFunction = async options => {
   return [
     json('lerna.json', () => {
       return {
@@ -8,6 +8,8 @@ const composable: ComposableModuleFunction = async () => {
         command: {
           publish: {
             npmClient: 'npm',
+            registry: `${options.digshareScript.openAPI.host}/registry/`,
+            verifyAccess: false,
           },
         },
         packages: ['packages/*'],
