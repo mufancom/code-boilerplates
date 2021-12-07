@@ -9,8 +9,15 @@ const composable: ComposableModuleFunction = options => {
     json(tsconfigPath, (data: any) => ({
       ...data,
       compilerOptions: {
-        lib: ['DOM', 'ESNext'],
+        module: 'ESNext',
+        moduleResolution: 'node',
+        lib: ['ESNext'],
         ...data.compilerOptions,
+      },
+      'ts-node': {
+        compilerOptions: {
+          module: 'CommonJS',
+        },
       },
     })),
   );

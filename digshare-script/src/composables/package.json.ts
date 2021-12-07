@@ -16,6 +16,7 @@ const DEPENDENCY_DICT = {
 
 const DEV_DEPENDENCIES_DICT = {
   'cross-env': '^7.0.0',
+  'ts-node': '^10.4.0',
 };
 
 const ROOT_DEPENDENCY_DICT = {};
@@ -85,7 +86,7 @@ const composable: ComposableModuleFunction = async options => {
               'ts-build':
                 'rimraf ./bld && tsc --build src/library/tsconfig.json',
               'dev-run':
-                'cross-env DIGSHARE_ENV=development node bld/library/index.js',
+                'cross-env DIGSHARE_ENV=development ts-node src/library/index.ts',
             },
             'asc',
           ),
