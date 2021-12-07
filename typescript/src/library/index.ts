@@ -101,7 +101,7 @@ interface ResolvedTypeScriptProjectOptionsWithRawReferences
   references?: Magicspace.BoilerplateOptions.GeneralTypeScriptProjectReferenceOptions[];
 }
 
-function buildResolvedTypeScriptProjectOptions(
+export function buildResolvedTypeScriptProjectOptions(
   {
     name,
     type = name && name.includes('library') ? 'library' : 'program',

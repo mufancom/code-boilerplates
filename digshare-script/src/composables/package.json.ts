@@ -4,7 +4,10 @@ import {ComposableModuleFunction, json} from '@magicspace/core';
 import {fetchPackageVersions, sortObjectKeys} from '@magicspace/utils';
 import _ from 'lodash';
 
-import {resolveTypeScriptProjects} from '../../../typescript/bld/library';
+import {
+  buildResolvedTypeScriptProjectOptions,
+  resolveTypeScriptProjects,
+} from '../../../typescript/bld/library';
 
 const DEPENDENCY_DICT = {
   '@types/cheerio': '^0.22.30',
@@ -73,6 +76,11 @@ const composable: ComposableModuleFunction = async options => {
     }),
     ...packagesWithTypeScriptProject.map(packageOptions =>
       json(packageOptions.packageJSONPath, (data: any) => {
+        let tsProjectName = buildResolvedTypeScriptProjectOptions(
+          packageOptions.tsProjects?.[0]!,
+          packageOptions,
+        ).name!;
+
         return {
           ...data,
           description: packageOptions.displayName,
@@ -82,11 +90,9 @@ const composable: ComposableModuleFunction = async options => {
             {
               ...data.scripts,
               prepublishOnly: 'yarn build',
-              build: `yarn ts-build && cross-env DIGSHARE_API=${options.digshareScript.openAPI.host}/${options.digshareScript.openAPI.version} dss build -i bld/library/index.js`,
-              'ts-build':
-                'rimraf ./bld && tsc --build src/library/tsconfig.json',
-              'dev-run':
-                'cross-env DIGSHARE_ENV=development ts-node src/library/index.ts',
+              build: `yarn ts-build && cross-env DIGSHARE_API=${options.digshareScript.openAPI.host}/${options.digshareScript.openAPI.version} dss build -i bld/${tsProjectName}/index.js`,
+              'ts-build': `rimraf ./bld && tsc --build src/${tsProjectName}/tsconfig.json`,
+              'dev-run': `cross-env DIGSHARE_ENV=development ts-node src/${tsProjectName}/index.ts`,
             },
             'asc',
           ),
