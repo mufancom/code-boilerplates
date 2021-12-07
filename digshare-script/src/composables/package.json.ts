@@ -10,7 +10,7 @@ const DEPENDENCY_DICT = {
   '@types/cheerio': '^0.22.30',
   '@types/node-fetch': '^2.5.12',
   cheerio: '^1.0.0-rc.10',
-  'dss-sdk': '^0.1.0',
+  'dss-sdk': '^0.2.0',
   'node-fetch': '2.6.5',
 };
 
@@ -84,6 +84,8 @@ const composable: ComposableModuleFunction = async options => {
               build: `yarn ts-build && cross-env DIGSHARE_API=${options.digshareScript.openAPI.host}/${options.digshareScript.openAPI.version} dss build -i bld/library/index.js`,
               'ts-build':
                 'rimraf ./bld && tsc --build src/library/tsconfig.json',
+              'dev-run':
+                'cross-env DIGSHARE_ENV=development node bld/library/index.js',
             },
             'asc',
           ),
