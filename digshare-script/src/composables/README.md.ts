@@ -17,10 +17,6 @@ ${packages?.map(
     }\``,
 ).join(`
 `)}
-
-### API 信息
-- Host \`${digshareScript.openAPI.host}\`
-- Version \`${digshareScript.openAPI.version}\`
 `,
   );
 };

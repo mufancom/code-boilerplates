@@ -26,7 +26,6 @@ const ROOT_DEPENDENCY_DICT = {};
 
 const ROOT_DEV_DEPENDENCIES_DICT = {
   lerna: '^4.0.0',
-  'run-in-every': '^0.2.0',
 };
 
 const composable: ComposableModuleFunction = async options => {
@@ -52,9 +51,7 @@ const composable: ComposableModuleFunction = async options => {
         scripts: sortObjectKeys(
           {
             ...data.scripts,
-            'lerna:publish': 'lerna publish patch',
-            build:
-              'run-in-every directory-with-file --pattern "packages/*/package.json" --data "scripts.build" --echo --parallel -- yarn build',
+            'packages:publish': 'node ./publish.js',
           },
           'asc',
         ),
@@ -90,7 +87,7 @@ const composable: ComposableModuleFunction = async options => {
             {
               ...data.scripts,
               prepublishOnly: 'yarn build',
-              build: `yarn ts-build && cross-env DIGSHARE_API=${options.digshareScript.openAPI.host}/${options.digshareScript.openAPI.version} dss build -i bld/${tsProjectName}/index.js`,
+              build: `yarn ts-build && dss build -i bld/${tsProjectName}/index.js -e ${packageOptions.name}`,
               'ts-build': `rimraf ./bld && tsc --build src/${tsProjectName}/tsconfig.json`,
               'dev-run': `cross-env DIGSHARE_ENV=development ts-node src/${tsProjectName}/index.ts`,
             },
@@ -111,7 +108,6 @@ const composable: ComposableModuleFunction = async options => {
             'asc',
           ),
           digshare: {
-            registry: packageOptions.registry,
             runtime: packageOptions.runtime || options.digshareScript.runtime,
           },
           files: ['out'],

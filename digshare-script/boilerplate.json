@@ -9,18 +9,17 @@
       "options": {
         "name": "digshare-channels",
         "digshareScript": {
-          "openAPI": {
-            "host": "https://api.dingshao.cn",
-            "version": "v1"
-          },
           "runtime": "nodejs14"
         },
         "packages": [
           {
             "name": "@digshare/awesome-channel",
             "displayName": "一个好频道👍",
-            "registry": "",
-            "tsProjects": [{}]
+            "tsProjects": [
+              {
+                "name": "library"
+              }
+            ]
           }
         ]
       }

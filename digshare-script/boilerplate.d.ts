@@ -7,15 +7,10 @@ declare namespace Magicspace {
 
   namespace BoilerplateOptions {
     interface DigshareScriptOptions {
-      openAPI: {
-        host: string;
-        version: string;
-      };
       runtime: string;
     }
 
     interface PackageOptions {
-      registry: string;
       displayName?: string;
       runtime?: string;
     }

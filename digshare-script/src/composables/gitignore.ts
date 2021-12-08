@@ -6,5 +6,7 @@ export default text(
     `${content}\
 # Digshare Build Out
 out/
+# config
+.config.js
 `,
 );
