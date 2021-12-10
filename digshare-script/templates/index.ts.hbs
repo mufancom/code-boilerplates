@@ -1,13 +1,8 @@
-import {devRun, script} from 'dss-sdk';
+import {script} from 'dss-sdk';
 
 interface Store {}
 
-export const main = script<Store>(async function (_payload, context) {
+export default script<Store>(async function (_payload, context) {
   // ...
 });
 
-devRun(
-  process.env.DIGSHARE_ENV === 'development',
-  {},
-  main,
-);

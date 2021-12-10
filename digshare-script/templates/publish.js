@@ -1,10 +1,21 @@
 #!/usr/bin/node
 
 const {exec} = require('child_process');
+const path = require('path');
+const fs = require('fs');
 
-let [mode] = process.argv.slice(2);
+let [package, mode] = process.argv.slice(2);
 
 let config;
+let packageDir;
+
+try {
+  packageDir = path.join('./packages', package);
+
+  fs.statSync(path.join(packageDir, 'package.json'));
+} catch (error) {
+  throw Error(`parameter \`package\` is invalid`);
+}
 
 try {
   // @ts-ignore
@@ -37,15 +48,13 @@ console.log('Using config:', {
   DIGSHARE_REGISTRY,
 });
 
-let child = exec(
-  `node ./node_modules/lerna/cli publish patch --registry=${DIGSHARE_REGISTRY}`,
-  {
-    env: {
-      ...env,
-      ...process.env,
-    },
+let child = exec(`npm publish --registry=${DIGSHARE_REGISTRY}`, {
+  env: {
+    ...env,
+    ...process.env,
   },
-);
+  cwd: packageDir,
+});
 
 child.on('exit', code => process.exit(code ?? 0));
 

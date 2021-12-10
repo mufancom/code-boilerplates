@@ -13,7 +13,7 @@ const DEPENDENCY_DICT = {
   '@types/cheerio': '^0.22.30',
   '@types/node-fetch': '^2.5.12',
   cheerio: '^1.0.0-rc.10',
-  'dss-sdk': '^0.2.0',
+  'dss-sdk': '^0.3.0',
   'node-fetch': '2.6.5',
 };
 
@@ -22,20 +22,9 @@ const DEV_DEPENDENCIES_DICT = {
   'ts-node': '^10.4.0',
 };
 
-const ROOT_DEPENDENCY_DICT = {};
-
-const ROOT_DEV_DEPENDENCIES_DICT = {
-  lerna: '^4.0.0',
-};
-
 const composable: ComposableModuleFunction = async options => {
   let dependencies = await fetchPackageVersions(DEPENDENCY_DICT);
   let devDependencies = await fetchPackageVersions(DEV_DEPENDENCIES_DICT);
-
-  let rootDependencies = await fetchPackageVersions(ROOT_DEPENDENCY_DICT);
-  let rootDevDependencies = await fetchPackageVersions(
-    ROOT_DEV_DEPENDENCIES_DICT,
-  );
 
   let {projects} = resolveTypeScriptProjects(options);
 
@@ -51,21 +40,7 @@ const composable: ComposableModuleFunction = async options => {
         scripts: sortObjectKeys(
           {
             ...data.scripts,
-            'packages:publish': 'node ./publish.js',
-          },
-          'asc',
-        ),
-        dependencies: sortObjectKeys(
-          {
-            ...data.dependencies,
-            ...rootDependencies,
-          },
-          'asc',
-        ),
-        devDependencies: sortObjectKeys(
-          {
-            ...data.devDependencies,
-            ...rootDevDependencies,
+            pub: 'node ./publish.js',
           },
           'asc',
         ),
@@ -87,9 +62,9 @@ const composable: ComposableModuleFunction = async options => {
             {
               ...data.scripts,
               prepublishOnly: 'yarn build',
-              build: `yarn ts-build && dss build -i bld/${tsProjectName}/index.js -e ${packageOptions.name}`,
+              build: `yarn ts-build && dss build -i bld/${tsProjectName}/index.js`,
               'ts-build': `rimraf ./bld && tsc --build src/${tsProjectName}/tsconfig.json`,
-              'dev-run': `cross-env DIGSHARE_ENV=development ts-node src/${tsProjectName}/index.ts`,
+              'dev-run': `cross-env DIGSHARE_ENV=development ts-node src/${tsProjectName}/@run.ts`,
             },
             'asc',
           ),

@@ -7,14 +7,14 @@ import {resolveTypeScriptProjects} from '../../../typescript/bld/library';
 
 import {TEMPLATES_DIR} from './@constants';
 
-const TEMPLATE_PATH = Path.join(TEMPLATES_DIR, 'index.ts.hbs');
+const TEMPLATE_PATH = Path.join(TEMPLATES_DIR, 'run.ts.hbs');
 
 const composable: ComposableModuleFunction = options => {
   let {projects} = resolveTypeScriptProjects(options);
 
   return projects.map(project =>
     handlebars(
-      Path.join(project.srcDir, 'index.ts'),
+      Path.join(project.srcDir, '@run.ts'),
       {},
       {
         template: TEMPLATE_PATH,
