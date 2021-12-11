@@ -8,7 +8,7 @@ const composable: ComposableModuleFunction = options => {
   let {projects} = resolveTypeScriptProjects(options);
 
   return projects.map(project =>
-    text(Path.join(project.srcDir, '.npmrc'), content => content ?? ''),
+    text(Path.join(project.package.dir, '.npmrc'), content => content ?? ''),
   );
 };
 
