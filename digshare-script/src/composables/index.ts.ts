@@ -1,7 +1,6 @@
 import * as Path from 'path';
 
 import {ComposableModuleFunction, handlebars} from '@magicspace/core';
-import _ from 'lodash';
 
 import {resolveTypeScriptProjects} from '../../../typescript/bld/library';
 
