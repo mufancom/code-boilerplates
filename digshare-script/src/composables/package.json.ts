@@ -10,10 +10,10 @@ import {
 } from '../../../typescript/bld/library';
 
 const DEPENDENCY_DICT = {
+  '@digshare/script': '^0.1.0',
   '@types/cheerio': '^0.22.30',
   '@types/node-fetch': '^2.5.12',
   cheerio: '^1.0.0-rc.10',
-  'dss-sdk': '^0.3.0',
   'node-fetch': '2.6.5',
 };
 
