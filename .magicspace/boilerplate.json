@@ -26,6 +26,10 @@
         "dir": "library"
       },
       {
+        "parentDir": "power-app",
+        "dir": "composables"
+      },
+      {
         "parentDir": "digshare-script",
         "dir": "composables"
       },
