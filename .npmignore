@@ -1,0 +1,14 @@
+*
+!/general/src/composables/**/*.ts
+!/general/bld/**
+!/general/src/library/**/*.ts
+!/general/bld/**
+!/typescript/src/composables/**/*.ts
+!/typescript/bld/**
+!/typescript/src/library/**/*.ts
+!/typescript/bld/**
+!/digshare-script/src/composables/**/*.ts
+!/digshare-script/bld/**
+!/digshare-script/src/library/**/*.ts
+!/digshare-script/bld/**
+*.tsbuildinfo
