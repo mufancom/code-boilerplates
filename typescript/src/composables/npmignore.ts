@@ -8,12 +8,12 @@ import {resolveTypeScriptProjects} from '../library';
 const composable: ComposableModuleFunction = async options => {
   let {projects} = resolveTypeScriptProjects(options);
 
-  let emittingTypeScriptProjectsDict = _.groupBy(
-    projects.filter(project => !project.noEmit),
+  let packingTypeScriptProjectsDict = _.groupBy(
+    projects.filter(project => !project.noEmit && !project.dev),
     project => project.package.packageJSONPath,
   );
 
-  return Object.values(emittingTypeScriptProjectsDict).map(projects => {
+  return Object.values(packingTypeScriptProjectsDict).map(projects => {
     let packageDir = projects[0].package.dir;
 
     return text(Path.join(packageDir, '.npmignore'), content => {
