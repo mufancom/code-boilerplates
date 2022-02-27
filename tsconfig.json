@@ -13,6 +13,9 @@
       "path": "typescript/src/library"
     },
     {
+      "path": "power-app/src/composables"
+    },
+    {
       "path": "digshare-script/src/composables"
     },
     {
