@@ -15,5 +15,5 @@
 !/digshare-script/bld/**
 !/*/templates/**
 !/*/files/**
-!/*/boilerplates.*
+!/*/boilerplate.*
 *.tsbuildinfo
