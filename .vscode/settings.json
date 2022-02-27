@@ -18,12 +18,13 @@
     "typescriptreact"
   ],
   "cSpell.words": [
-    "Mufan",
-    "Parens",
     "boilerplates",
     "composables",
     "magicspace",
     "makeflow",
+    "Mufan",
+    "npmignore",
+    "Parens",
     "postgenerate",
     "prettierignore",
     "prettierrc",
