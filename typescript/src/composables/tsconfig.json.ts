@@ -33,14 +33,14 @@ const composable: ComposableModuleFunction = options => {
       'tsconfig.json',
       {
         references: projects.map(project => {
-          return {path: project.srcDir};
+          return {path: project.inDir};
         }),
         files: [],
       },
       JSON_OPTIONS,
     ),
     ...projects.map(
-      ({tsconfigPath, srcDir, outDir, esModule, entrances, references}) =>
+      ({tsconfigPath, inDir, outDir, esModule, entrances, references}) =>
         json(
           tsconfigPath,
           {
@@ -51,7 +51,7 @@ const composable: ComposableModuleFunction = options => {
               moduleResolution: esModule ? 'Node' : undefined,
               // fallback to undefined if no condition matched.
               experimentalDecorators: entrances.length > 0 || undefined,
-              outDir: Path.posix.relative(srcDir, outDir),
+              outDir: Path.posix.relative(inDir, outDir),
             },
             references,
           },

@@ -8,9 +8,9 @@ const composable: ComposableModuleFunction = options => {
   return [
     json('tsconfig.json', {
       references: projects
-        .filter(({srcDir}) => !srcDir.includes('client'))
+        .filter(({inDir}) => !inDir.includes('client'))
         .map(project => {
-          return {path: project.srcDir};
+          return {path: project.inDir};
         }),
       files: [],
     }),
@@ -21,7 +21,7 @@ const composable: ComposableModuleFunction = options => {
           compilerOptions: {
             ...data.compilerOptions,
             experimentalDecorators: true,
-            ...(project.srcDir.includes('client')
+            ...(project.inDir.includes('client')
               ? {
                   jsx: 'react',
                   types: ['@types/node'],

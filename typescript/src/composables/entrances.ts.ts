@@ -14,7 +14,7 @@ const composable: ComposableModuleFunction = options => {
   return projects.flatMap(project =>
     project.entrances.map(name =>
       handlebars(
-        Path.join(project.srcDir, /\.tsx?$/.test(name) ? name : `${name}.ts`),
+        Path.join(project.inDir, /\.tsx?$/.test(name) ? name : `${name}.ts`),
         {},
         {template: TEMPLATE_PATH},
       ),

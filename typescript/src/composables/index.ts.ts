@@ -16,7 +16,7 @@ const composable: ComposableModuleFunction = options => {
     projects.map(project =>
       project.type === 'library'
         ? handlebars(
-            Path.join(project.srcDir, 'index.ts'),
+            Path.join(project.inDir, 'index.ts'),
             {},
             {template: TEMPLATE_PATH},
           )

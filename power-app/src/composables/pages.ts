@@ -31,12 +31,12 @@ const composable: ComposableModuleFunction = options => {
   let projects = resolveTypeScriptProjects(options);
 
   let clientSrc = projects.projects.find(project =>
-    project.srcDir.includes('client'),
-  )!.srcDir;
+    project.inDir.includes('client'),
+  )!.inDir;
 
   let serverSrc = projects.projects.find(project =>
-    project.srcDir.includes('server'),
-  )!.srcDir;
+    project.inDir.includes('server'),
+  )!.inDir;
 
   let pagesInfos = pages
     .map(page => ({

@@ -26,7 +26,7 @@ const composable: ComposableModuleFunction = options => {
         },
         ...devProjects.map(project => {
           return {
-            files: [`${project.srcDir}/**/*.{ts,tsx}`],
+            files: [`${project.inDir}/**/*.{ts,tsx}`],
             extends: ['plugin:@mufan/override-dev'],
           };
         }),

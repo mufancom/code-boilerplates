@@ -14,7 +14,7 @@ const composable: ComposableModuleFunction = options => {
 
   return projects.map(project =>
     handlebars(
-      Path.join(project.srcDir, '@run.ts'),
+      Path.join(project.inDir, '@run.ts'),
       {},
       {
         template: TEMPLATE_PATH,

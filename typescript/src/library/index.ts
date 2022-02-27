@@ -18,6 +18,7 @@ export interface ResolvedTypeScriptProjectOptions
   name: string | undefined;
   srcDir: string;
   bldDir: string;
+  inDir: string;
   outDir: string;
   tsconfigPath: string;
   type: 'library' | 'program' | 'script';
@@ -84,8 +85,8 @@ export function resolveTypeScriptProjects(
 
           return {
             path: Path.posix.relative(
-              projectOptions.srcDir,
-              referencedProjectOptions.srcDir,
+              projectOptions.inDir,
+              referencedProjectOptions.inDir,
             ),
           };
         }),
@@ -130,7 +131,8 @@ export function buildResolvedTypeScriptProjectOptions(
 
   let packageDir = packageOptions.dir;
 
-  let srcDir = Path.posix.join(packageDir, parentDir, src, dir);
+  let srcDir = Path.posix.join(packageDir, parentDir, src);
+  let inDir = Path.posix.join(srcDir, dir);
   let bldDir = Path.posix.join(
     packageDir,
     parentDir,
@@ -142,8 +144,9 @@ export function buildResolvedTypeScriptProjectOptions(
     name,
     srcDir,
     bldDir,
+    inDir,
     outDir,
-    tsconfigPath: Path.posix.join(srcDir, 'tsconfig.json'),
+    tsconfigPath: Path.posix.join(inDir, 'tsconfig.json'),
     type,
     esModule,
     dev,
