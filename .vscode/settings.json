@@ -10,7 +10,17 @@
   "files.eol": "\n",
   "files.insertFinalNewline": true,
   "files.trimTrailingWhitespace": true,
-  "typescript.tsdk": "node_modules/typescript/lib",
+  "typescript.sdk": "node_modules/typescript/lib",
+  "eslint.workingDirectories": [
+    ".",
+    "general/src/composables",
+    "general/src/library",
+    "typescript/src/composables",
+    "typescript/src/library",
+    "power-app/src/composables",
+    "digshare-script/src/composables",
+    "digshare-script/src/library"
+  ],
   "eslint.validate": [
     "javascript",
     "javascriptreact",
