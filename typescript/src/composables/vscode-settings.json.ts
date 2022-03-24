@@ -10,7 +10,7 @@ const composable: ComposableModuleFunction = async options => {
     data = extendObjectProperties(
       data,
       {
-        'typescript.sdk': 'node_modules/typescript/lib',
+        'typescript.tsdk': 'node_modules/typescript/lib',
       },
       {
         before: 'eslint.*',
