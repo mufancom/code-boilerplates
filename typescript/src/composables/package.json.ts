@@ -6,7 +6,7 @@ import {
   extendPackageScript,
   fetchPackageVersions,
 } from '@magicspace/utils';
-import _ from 'lodash';
+import * as _ from 'lodash';
 
 import {resolveTypeScriptProjects} from '../library';
 
@@ -15,6 +15,7 @@ const ROOT_DEV_DEPENDENCY_DICT = {
   '@mufan/eslint-plugin': '0.1',
   rimraf: '3',
   typescript: '4',
+  'run-in-every': '0.2',
 };
 
 const PROJECT_DEPENDENCY_DICT = {
@@ -63,6 +64,9 @@ const composable: ComposableModuleFunction = async options => {
           }`;
         }
       }
+
+      scripts['lint'] =
+        'run-in-every eslint-project --parallel --echo -- eslint --config {configFileName} .';
 
       scripts = extendObjectProperties(
         scripts,

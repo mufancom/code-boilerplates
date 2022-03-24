@@ -2,7 +2,7 @@
 
 import * as Path from 'path';
 
-import _ from 'lodash';
+import * as _ from 'lodash';
 
 export interface ResolvedPackageOptions
   extends Magicspace.BoilerplateOptions.PackageOptions {

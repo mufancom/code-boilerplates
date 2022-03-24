@@ -2,7 +2,7 @@
 
 import {ComposableModuleFunction, json} from '@magicspace/core';
 import {fetchPackageVersions, sortObjectKeys} from '@magicspace/utils';
-import _ from 'lodash';
+import * as _ from 'lodash';
 
 import {
   buildResolvedTypeScriptProjectOptions,

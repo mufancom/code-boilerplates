@@ -1,38 +1,50 @@
+import * as Path from 'path';
+
 import {ComposableModuleFunction, json} from '@magicspace/core';
-import _ from 'lodash';
+import * as _ from 'lodash';
 
 import {resolveTypeScriptProjects} from '../library';
 
 const composable: ComposableModuleFunction = options => {
   let {projects} = resolveTypeScriptProjects(options);
 
-  let devProjects = projects.filter(project => project.dev);
-
-  return json('.eslintrc', (data: any) => {
-    return {
-      ...data,
-      ignorePatterns: _.union(_.castArray(data.ignorePatterns ?? []), [
-        'bld',
-        '.bld-cache',
-      ]),
-      overrides: [
-        ...(data.overrides ?? []),
-        {
-          files: ['**/*.{ts,tsx}'],
-          extends: ['plugin:@mufan/default'],
-          parserOptions: {
-            project: '**/tsconfig.json',
-          },
-        },
-        ...devProjects.map(project => {
-          return {
-            files: [`${project.inDir}/**/*.{ts,tsx}`],
-            extends: ['plugin:@mufan/override-dev'],
-          };
-        }),
-      ],
-    };
-  });
+  return [
+    json('.eslintrc', (data: any) => {
+      return {
+        ...data,
+        ignorePatterns: [
+          ...new Set([
+            ...(data.ignorePatterns ?? []),
+            ...projects.flatMap(project => [
+              `/${project.srcDir}/`,
+              `/${project.bldDir}/`,
+            ]),
+          ]),
+        ],
+      };
+    }),
+    ...projects.map(project =>
+      json(Path.join(project.inDir, '.eslintrc'), (data: any) => {
+        return {
+          ...data,
+          root: true,
+          overrides: [
+            ...(data?.overrides ?? []),
+            {
+              files: ['**/*.{ts,tsx}'],
+              extends: [
+                'plugin:@mufan/default',
+                ...(project.dev ? ['plugin:@mufan/override-dev'] : []),
+              ],
+              parserOptions: {
+                project: 'tsconfig.json',
+              },
+            },
+          ],
+        };
+      }),
+    ),
+  ];
 };
 
 export default composable;
