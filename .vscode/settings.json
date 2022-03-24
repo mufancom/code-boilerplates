@@ -10,7 +10,7 @@
   "files.eol": "\n",
   "files.insertFinalNewline": true,
   "files.trimTrailingWhitespace": true,
-  "typescript.sdk": "node_modules/typescript/lib",
+  "typescript.tsdk": "node_modules/typescript/lib",
   "eslint.workingDirectories": [
     ".",
     "general/src/composables",
