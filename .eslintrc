@@ -1,18 +1,18 @@
 {
   "root": true,
-  "ignorePatterns": ["bld", ".bld-cache"],
+  "ignorePatterns": [
+    "/general/src/",
+    "/general/bld/",
+    "/typescript/src/",
+    "/typescript/bld/",
+    "/power-app/src/",
+    "/power-app/bld/",
+    "/digshare-script/src/",
+    "/digshare-script/bld/"
+  ],
   "extends": ["eslint:recommended"],
   "env": {
     "node": true,
     "es2020": true
-  },
-  "overrides": [
-    {
-      "files": ["**/*.{ts,tsx}"],
-      "extends": ["plugin:@mufan/default"],
-      "parserOptions": {
-        "project": "**/tsconfig.json"
-      }
-    }
-  ]
+  }
 }
