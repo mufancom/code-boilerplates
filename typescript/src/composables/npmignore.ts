@@ -21,7 +21,7 @@ const composable: ComposableModuleFunction = async options => {
 *
 ${projects
   .flatMap(project => [
-    `!/${Path.posix.relative(packageDir, project.inDir)}/**/*.ts`,
+    `!/${Path.posix.relative(packageDir, project.inDir)}/**/*.{ts,tsx}`,
     `!/${Path.posix.relative(packageDir, project.outDir)}/**`,
   ])
   .join('\n')}
