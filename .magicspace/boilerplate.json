@@ -8,33 +8,43 @@
     "author": "Chengdu Mufan Technology Co., Ltd.",
     "tsProjects": [
       {
+        "name": "general-composables",
         "parentDir": "general",
         "dir": "composables"
       },
       {
+        "name": "general",
         "type": "library",
+        "exportAs": false,
         "parentDir": "general",
         "dir": "library"
       },
       {
+        "name": "typescript-composables",
         "parentDir": "typescript",
         "dir": "composables"
       },
       {
+        "name": "typescript",
         "type": "library",
+        "exportAs": false,
         "parentDir": "typescript",
         "dir": "library"
       },
       {
+        "name": "power-app-composables",
         "parentDir": "power-app",
         "dir": "composables"
       },
       {
+        "name": "digshare-script-composables",
         "parentDir": "digshare-script",
         "dir": "composables"
       },
       {
+        "name": "digshare-script",
         "type": "library",
+        "exportAs": false,
         "parentDir": "digshare-script",
         "dir": "library"
       }
