@@ -8,5 +8,9 @@
 
     "outDir": "../../bld/composables"
   },
-  "references": [{"path": "../library"}]
+  "references": [
+    {
+      "path": "../library"
+    }
+  ]
 }

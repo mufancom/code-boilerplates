@@ -8,5 +8,9 @@
 
     "outDir": "../../bld/composables"
   },
-  "references": [{"path": "../../../typescript/src/library"}]
+  "references": [
+    {
+      "path": "../library"
+    }
+  ]
 }

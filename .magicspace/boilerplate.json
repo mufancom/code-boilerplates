@@ -10,7 +10,8 @@
       {
         "name": "general-composables",
         "parentDir": "general",
-        "dir": "composables"
+        "dir": "composables",
+        "references": ["general"]
       },
       {
         "name": "general",
@@ -22,7 +23,8 @@
       {
         "name": "typescript-composables",
         "parentDir": "typescript",
-        "dir": "composables"
+        "dir": "composables",
+        "references": ["typescript"]
       },
       {
         "name": "typescript",
