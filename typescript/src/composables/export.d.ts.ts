@@ -14,7 +14,9 @@ const composable: ComposableModuleFunction = options => {
 
   return _.compact(
     projects.map(project =>
-      project.type === 'library' && project.exportAs
+      project.type === 'library' &&
+      project.name !== 'library' &&
+      project.exportAs
         ? handlebars(
             Path.join(project.package.dir, `${project.name}.d.ts`),
             {
