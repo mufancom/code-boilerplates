@@ -16,6 +16,15 @@ const composable: ComposableModuleFunction = options => {
           ...new Set([
             ...(data.ignorePatterns ?? []),
             ...projects.flatMap(project => [
+              ...(project.type === 'library' &&
+              project.name !== 'library' &&
+              project.exportAs
+                ? [
+                    `${project.package.dir ? `/${project.package.dir}` : ''}/${
+                      project.name
+                    }.d.ts`,
+                  ]
+                : []),
               `/${project.srcDir}/`,
               `/${project.bldDir}/`,
             ]),

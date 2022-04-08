@@ -30,6 +30,15 @@ declare namespace Magicspace {
        */
       esModule?: boolean;
       /**
+       * Export with specific condition name, defaults to 'import' if `esModule`
+       * is true, otherwise 'require'.
+       */
+      exportAs?: string | false;
+      /**
+       * Export source with specific condition name, e.g.: "vite".
+       */
+      exportSourceAs?: string;
+      /**
        * Is this TypeScript project a development-time project? Defaults to
        * true if the project name is 'test', otherwise false.
        */

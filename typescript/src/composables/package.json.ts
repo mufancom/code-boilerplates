@@ -8,7 +8,11 @@ import {
 } from '@magicspace/utils';
 import * as _ from 'lodash';
 
-import {resolveTypeScriptProjects} from '../library';
+import {ResolvedPackageOptions} from '../../../general/bld/library';
+import {
+  ResolvedTypeScriptProjectOptions,
+  resolveTypeScriptProjects,
+} from '../library';
 
 const ROOT_DEV_DEPENDENCY_DICT = {
   '@mufan/code': '0.2',
@@ -123,9 +127,24 @@ const composable: ComposableModuleFunction = async options => {
             project.package.packageJSONPath === packageOptions.packageJSONPath,
         );
 
-        let [firstProject] = packageProjects;
-        let firstLibraryProject =
-          firstProject.type === 'library' ? firstProject : undefined;
+        let libraryProjects = projects
+          .filter(project => project.type === 'library')
+          .sort((a, b) => {
+            return a.name === 'library'
+              ? -Infinity
+              : b.name === 'library'
+              ? Infinity
+              : a.name < b.name
+              ? -1
+              : 1;
+          });
+
+        let [firstLibraryProject] = libraryProjects;
+
+        let mainLibraryProject =
+          firstLibraryProject && firstLibraryProject.name === 'library'
+            ? firstLibraryProject
+            : undefined;
 
         let entrances =
           anyProjectWithEntrances &&
@@ -133,19 +152,31 @@ const composable: ComposableModuleFunction = async options => {
 
         return {
           ...data,
-          ...(firstLibraryProject
+          ...(mainLibraryProject && mainLibraryProject.exportAs
             ? {
-                [firstLibraryProject.esModule ? 'module' : 'main']:
-                  firstLibraryProject.noEmit
-                    ? undefined
-                    : `${Path.posix.relative(
-                        packageOptions.dir,
-                        Path.posix.join(firstLibraryProject.outDir, 'index.js'),
-                      )}`,
                 types: `${Path.posix.relative(
                   packageOptions.dir,
-                  Path.posix.join(firstLibraryProject.outDir, 'index.d.ts'),
+                  Path.posix.join(mainLibraryProject.outDir, 'index.d.ts'),
                 )}`,
+              }
+            : undefined),
+          ...(mainLibraryProject && libraryProjects.length === 1
+            ? {
+                exports: buildProjectExport(packageOptions, mainLibraryProject),
+              }
+            : libraryProjects.length > 0
+            ? {
+                exports: emptyObjectAsUndefined({
+                  ...data.exports,
+                  ...Object.fromEntries(
+                    libraryProjects
+                      .map(project => [
+                        project.name,
+                        buildProjectExport(packageOptions, project),
+                      ])
+                      .filter(([, value]) => !!value),
+                  ),
+                }),
               }
             : undefined),
           dependencies: {
@@ -193,4 +224,34 @@ function guessReadableGlobPattern(paths: string[]): string | undefined {
     baseNames.length > 1 ? `{${baseNames.sort().join(',')}}` : baseNames[0];
 
   return `${parentPattern.replace(/^\.\//, '')}/${baseNamePattern}`;
+}
+
+function buildProjectExport(
+  {dir}: ResolvedPackageOptions,
+  {exportAs, exportSourceAs, inDir, outDir}: ResolvedTypeScriptProjectOptions,
+): Record<string, string> | undefined {
+  return emptyObjectAsUndefined({
+    ...(exportAs
+      ? {
+          [exportAs]: `./${Path.posix.relative(
+            dir,
+            Path.posix.join(outDir, 'index.js'),
+          )}`,
+        }
+      : undefined),
+    ...(exportSourceAs
+      ? {
+          [exportSourceAs]: `./${Path.posix.relative(
+            dir,
+            Path.posix.join(inDir, 'index.ts'),
+          )}`,
+        }
+      : undefined),
+  });
+}
+
+export function emptyObjectAsUndefined<T extends object>(
+  object: T,
+): T | undefined {
+  return Object.entries(object).length > 0 ? object : undefined;
 }
