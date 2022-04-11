@@ -6,9 +6,6 @@
       "extends": ["plugin:@mufan/default"],
       "parserOptions": {
         "project": "tsconfig.json"
-      },
-      "rules": {
-        "@mufan/reference-missing-proof": "off"
       }
     }
   ]
