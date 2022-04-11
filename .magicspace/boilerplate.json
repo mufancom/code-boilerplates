@@ -24,7 +24,7 @@
         "name": "typescript-composables",
         "parentDir": "typescript",
         "dir": "composables",
-        "references": ["typescript"]
+        "references": ["typescript", "general"]
       },
       {
         "name": "typescript",
@@ -36,12 +36,14 @@
       {
         "name": "power-app-composables",
         "parentDir": "power-app",
-        "dir": "composables"
+        "dir": "composables",
+        "references": ["typescript"]
       },
       {
         "name": "digshare-script-composables",
         "parentDir": "digshare-script",
-        "dir": "composables"
+        "dir": "composables",
+        "references": ["typescript"]
       },
       {
         "name": "digshare-script",
