@@ -3,5 +3,10 @@
   "compilerOptions": {
     "composite": true,
     "outDir": "../../bld/composables"
-  }
+  },
+  "references": [
+    {
+      "path": "../../../typescript/src/library"
+    }
+  ]
 }
