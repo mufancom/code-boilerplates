@@ -9,10 +9,6 @@
 !/typescript/bld/library/**
 !/power-app/src/composables/**/*.{ts,tsx}
 !/power-app/bld/composables/**
-!/digshare-script/src/composables/**/*.{ts,tsx}
-!/digshare-script/bld/composables/**
-!/digshare-script/src/library/**/*.{ts,tsx}
-!/digshare-script/bld/library/**
 !/*/templates/**
 !/*/files/**
 !/*/boilerplate.*

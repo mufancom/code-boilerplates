@@ -37,18 +37,6 @@
         "name": "power-app-composables",
         "parentDir": "power-app",
         "dir": "composables"
-      },
-      {
-        "name": "digshare-script-composables",
-        "parentDir": "digshare-script",
-        "dir": "composables"
-      },
-      {
-        "name": "digshare-script",
-        "type": "library",
-        "exportAs": false,
-        "parentDir": "digshare-script",
-        "dir": "library"
       }
     ]
   }
