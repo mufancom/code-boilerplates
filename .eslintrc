@@ -6,9 +6,7 @@
     "/typescript/src/",
     "/typescript/bld/",
     "/power-app/src/",
-    "/power-app/bld/",
-    "/digshare-script/src/",
-    "/digshare-script/bld/"
+    "/power-app/bld/"
   ],
   "extends": ["eslint:recommended"],
   "env": {

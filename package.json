@@ -16,7 +16,7 @@
   },
   "devDependencies": {
     "@mufan/code": "^0.2.10",
-    "@mufan/eslint-plugin": "^0.1.58",
+    "@mufan/eslint-plugin": "^0.1.59",
     "eslint": "^8.13.0",
     "prettier": "^2.6.2",
     "rimraf": "^3.0.2",

@@ -17,9 +17,7 @@
     "general/src/library",
     "typescript/src/composables",
     "typescript/src/library",
-    "power-app/src/composables",
-    "digshare-script/src/composables",
-    "digshare-script/src/library"
+    "power-app/src/composables"
   ],
   "eslint.validate": [
     "javascript",
