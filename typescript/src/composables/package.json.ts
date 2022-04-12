@@ -127,7 +127,7 @@ const composable: ComposableModuleFunction = async options => {
             project.package.packageJSONPath === packageOptions.packageJSONPath,
         );
 
-        let libraryProjects = projects
+        let libraryProjects = packageProjects
           .filter(project => project.type === 'library')
           .sort((a, b) => {
             return a.name === 'library'
