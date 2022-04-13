@@ -24,19 +24,21 @@
         "name": "typescript-composables",
         "parentDir": "typescript",
         "dir": "composables",
-        "references": ["typescript"]
+        "references": ["typescript", "general"]
       },
       {
         "name": "typescript",
         "type": "library",
         "exportAs": false,
         "parentDir": "typescript",
-        "dir": "library"
+        "dir": "library",
+        "references": ["general"]
       },
       {
         "name": "power-app-composables",
         "parentDir": "power-app",
-        "dir": "composables"
+        "dir": "composables",
+        "references": ["typescript"]
       }
     ]
   }

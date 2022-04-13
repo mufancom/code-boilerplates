@@ -8,5 +8,9 @@
 
     "outDir": "../../bld/library"
   },
-  "references": [{"path": "../../../general/src/library"}]
+  "references": [
+    {
+      "path": "../../../general/src/library"
+    }
+  ]
 }
