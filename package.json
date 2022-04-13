@@ -23,7 +23,7 @@
   },
   "devDependencies": {
     "@mufan/code": "^0.2.10",
-    "@mufan/eslint-plugin": "^0.1.59",
+    "@mufan/eslint-plugin": "^0.1.61",
     "@types/lodash": "^4.14.159",
     "@types/node": "^14.0.27",
     "eslint": "^8.13.0",

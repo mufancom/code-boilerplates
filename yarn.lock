@@ -67,10 +67,10 @@
   resolved "https://registry.yarnpkg.com/@mufan/code/-/code-0.2.10.tgz#4cd96602c60a405b2ee0e4daaed5f324a90693b4"
   integrity sha512-eRrZOs9H4js++YCjBb3MDorxJ9dzRyBghmDOAkV9naC0jJjyBeCPB2fLPomE8UH1uCpLRamkO29TM/qBtkd8LQ==
 
-"@mufan/eslint-plugin@^0.1.59":
-  version "0.1.59"
-  resolved "https://registry.yarnpkg.com/@mufan/eslint-plugin/-/eslint-plugin-0.1.59.tgz#ac4396e3edddc860b0f45e11dcee333b437d8fcf"
-  integrity sha512-gKkwW3+yVsyxGB/OnefpBkZmSFSfcbdHkGpOnk9HlW3yVqZBdairXPQF0ZCUfB1BHd/7NlVJ8nmuoByh9vT4ZA==
+"@mufan/eslint-plugin@^0.1.61":
+  version "0.1.61"
+  resolved "https://registry.yarnpkg.com/@mufan/eslint-plugin/-/eslint-plugin-0.1.61.tgz#d4b53343fc07902fe3b22a2c21de4210d9d7c5e6"
+  integrity sha512-OIB1uCYgb7AtryWOEGS5vCX3kPf35q3Sh9DVLfeOBlZZe7K/roPuRIgIrxrpAhb4++zBZGaQtC6oEoQQybMdlQ==
   dependencies:
     "@typescript-eslint/eslint-plugin" "^5.18.0"
     "@typescript-eslint/parser" "^5.18.0"
