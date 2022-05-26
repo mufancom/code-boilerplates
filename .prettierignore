@@ -1,7 +1,10 @@
 # TypeScript Build Artifacts
 bld/
+<<<<<<< HEAD
 .bld-cache/
 # Some Handlebars Templates
 *.ts.hbs
 *.tsx.hbs
 *.md.hbs
+=======
+>>>>>>> b345010a89aa330427adfbf6f992a5a06679b1d6
