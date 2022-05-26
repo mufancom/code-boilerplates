@@ -152,14 +152,6 @@ const composable: ComposableModuleFunction = async options => {
 
         return {
           ...data,
-          ...(mainLibraryProject && mainLibraryProject.exportAs
-            ? {
-                types: `${Path.posix.relative(
-                  packageOptions.dir,
-                  Path.posix.join(mainLibraryProject.outDir, 'index.d.ts'),
-                )}`,
-              }
-            : undefined),
           ...(mainLibraryProject && libraryProjects.length === 1
             ? {
                 exports: buildProjectExport(packageOptions, mainLibraryProject),
@@ -233,6 +225,10 @@ function buildProjectExport(
   return emptyObjectAsUndefined({
     ...(exportAs
       ? {
+          types: `./${Path.posix.relative(
+            dir,
+            Path.posix.join(outDir, 'index.d.ts'),
+          )}`,
           [exportAs]: `./${Path.posix.relative(
             dir,
             Path.posix.join(outDir, 'index.js'),
