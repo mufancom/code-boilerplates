@@ -1,4 +1,5 @@
-import {ComposableModuleFunction, text} from '@magicspace/core';
+import type {ComposableModuleFunction} from '@magicspace/core';
+import {text} from '@magicspace/core';
 
 const composable: ComposableModuleFunction = ({name, powerApp: {port}}) => {
   return text(

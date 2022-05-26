@@ -5,6 +5,5 @@ export default text(
   content => `${content}\
 # TypeScript Build Artifacts
 bld/
-.bld-cache/
 `,
 );

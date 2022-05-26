@@ -1,10 +1,7 @@
 import * as Path from 'path';
 
-import {
-  ComposableModuleFunction,
-  JSONFileOptions,
-  json,
-} from '@magicspace/core';
+import type {ComposableModuleFunction, JSONFileOptions} from '@magicspace/core';
+import {json} from '@magicspace/core';
 import {fetchPackageVersions} from '@magicspace/utils';
 
 import {resolveOptions} from '../library';

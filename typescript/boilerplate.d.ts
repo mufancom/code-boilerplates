@@ -20,9 +20,6 @@ declare namespace Magicspace {
       /**
        * Is this TypeScript project a library or program? Defaults to 'library'
        * if project name is 'library', otherwise 'program'.
-       *
-       * If the type is specified as 'script', the project will output to
-       * '.bld-cache' instead of 'bld'.
        */
       type?: 'library' | 'program' | 'script';
       /**
@@ -59,8 +56,7 @@ declare namespace Magicspace {
       dir?: string | false;
       /**
        * Whether this project does not emit build artifact, defaults to true if
-       * `src` is false, otherwise false. If true, it will set `outDir` as
-       * '.bld-cache' instead of 'bld'.
+       * `src` is false, otherwise false.
        */
       noEmit?: boolean;
       /**

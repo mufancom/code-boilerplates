@@ -1,4 +1,5 @@
-import {JSONFileOptions, json} from '@magicspace/core';
+import type {JSONFileOptions} from '@magicspace/core';
+import {json} from '@magicspace/core';
 
 const JSON_OPTIONS: JSONFileOptions = {
   /** @link https://eslint.org/docs/user-guide/configuring */

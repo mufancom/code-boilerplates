@@ -1,7 +1,8 @@
 import * as FS from 'fs';
 import * as Path from 'path';
 
-import {ComposableModuleFunction, handlebars} from '@magicspace/core';
+import type {ComposableModuleFunction} from '@magicspace/core';
+import {handlebars} from '@magicspace/core';
 
 import {LICENSE_TEMPLATES_DIR} from './@constants';
 

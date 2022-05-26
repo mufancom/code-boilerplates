@@ -1,6 +1,7 @@
 import * as Path from 'path';
 
-import {ComposableModuleFunction, handlebars} from '@magicspace/core';
+import type {ComposableModuleFunction} from '@magicspace/core';
+import {handlebars} from '@magicspace/core';
 import * as _ from 'lodash';
 
 import {resolveTypeScriptProjects} from '../library';

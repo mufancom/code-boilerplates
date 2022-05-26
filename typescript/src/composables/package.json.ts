@@ -1,6 +1,7 @@
 import * as Path from 'path';
 
-import {ComposableModuleFunction, json} from '@magicspace/core';
+import type {ComposableModuleFunction} from '@magicspace/core';
+import {json} from '@magicspace/core';
 import {
   extendObjectProperties,
   extendPackageScript,
@@ -8,11 +9,9 @@ import {
 } from '@magicspace/utils';
 import * as _ from 'lodash';
 
-import {ResolvedPackageOptions} from '../../../general/bld/library';
-import {
-  ResolvedTypeScriptProjectOptions,
-  resolveTypeScriptProjects,
-} from '../library';
+import type {ResolvedPackageOptions} from '../../../general/bld/library';
+import type {ResolvedTypeScriptProjectOptions} from '../library';
+import {resolveTypeScriptProjects} from '../library';
 
 const ROOT_DEV_DEPENDENCY_DICT = {
   '@mufan/code': '0.2',
@@ -139,12 +138,9 @@ const composable: ComposableModuleFunction = async options => {
               : 1;
           });
 
-        let [firstLibraryProject] = libraryProjects;
-
-        let mainLibraryProject =
-          firstLibraryProject && firstLibraryProject.name === 'library'
-            ? firstLibraryProject
-            : undefined;
+        let mainLibraryProject = libraryProjects.find(
+          project => project.name === 'library',
+        );
 
         let entrances =
           anyProjectWithEntrances &&
@@ -163,7 +159,7 @@ const composable: ComposableModuleFunction = async options => {
                   ...Object.fromEntries(
                     libraryProjects
                       .map(project => [
-                        project.name,
+                        project.name === 'library' ? '.' : `./${project.name}`,
                         buildProjectExport(packageOptions, project),
                       ])
                       .filter(([, value]) => !!value),
@@ -221,7 +217,7 @@ function guessReadableGlobPattern(paths: string[]): string | undefined {
 function buildProjectExport(
   {dir}: ResolvedPackageOptions,
   {exportAs, exportSourceAs, inDir, outDir}: ResolvedTypeScriptProjectOptions,
-): Record<string, string> | undefined {
+): Record<string, string | Record<string, string>> | undefined {
   return emptyObjectAsUndefined({
     ...(exportAs
       ? {

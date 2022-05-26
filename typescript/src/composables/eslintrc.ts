@@ -1,6 +1,7 @@
 import * as Path from 'path';
 
-import {ComposableModuleFunction, json} from '@magicspace/core';
+import type {ComposableModuleFunction} from '@magicspace/core';
+import {json} from '@magicspace/core';
 import * as _ from 'lodash';
 
 import {resolveTypeScriptProjects} from '../library';

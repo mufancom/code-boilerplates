@@ -1,4 +1,5 @@
-import {ComposableModuleFunction, json} from '@magicspace/core';
+import type {ComposableModuleFunction} from '@magicspace/core';
+import {json} from '@magicspace/core';
 import {fetchPackageVersions, sortObjectKeys} from '@magicspace/utils';
 
 const DEPENDENCY_DICT = {

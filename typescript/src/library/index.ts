@@ -2,13 +2,13 @@
 
 import * as Path from 'path';
 
-import {OmitValueOfKey} from 'tslang';
+import type {OmitValueOfKey} from 'tslang';
 
-import {
+import type {
   ResolvedOptions,
   ResolvedPackageOptions,
-  resolveOptions,
 } from '../../../general/bld/library';
+import {resolveOptions} from '../../../general/bld/library';
 
 export interface ResolvedTypeScriptProjectOptions
   extends OmitValueOfKey<
@@ -140,7 +140,7 @@ export function buildResolvedTypeScriptProjectOptions(
   let bldDir = Path.posix.join(
     packageDir,
     parentDir,
-    noEmit ? '.bld-cache' : 'bld',
+    noEmit && src === '' ? '' : 'bld',
   );
   let outDir = Path.posix.join(bldDir, dir);
 

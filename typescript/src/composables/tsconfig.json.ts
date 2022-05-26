@@ -1,10 +1,7 @@
 import * as Path from 'path';
 
-import {
-  ComposableModuleFunction,
-  JSONFileOptions,
-  json,
-} from '@magicspace/core';
+import type {ComposableModuleFunction, JSONFileOptions} from '@magicspace/core';
+import {json} from '@magicspace/core';
 
 import {resolveTypeScriptProjects} from '../library';
 
@@ -40,7 +37,15 @@ const composable: ComposableModuleFunction = options => {
       JSON_OPTIONS,
     ),
     ...projects.map(
-      ({tsconfigPath, inDir, outDir, esModule, entrances, references}) =>
+      ({
+        tsconfigPath,
+        inDir,
+        outDir,
+        esModule,
+        entrances,
+        noEmit,
+        references,
+      }) =>
         json(
           tsconfigPath,
           {
@@ -52,6 +57,7 @@ const composable: ComposableModuleFunction = options => {
               // fallback to undefined if no condition matched.
               experimentalDecorators: entrances.length > 0 || undefined,
               outDir: Path.posix.relative(inDir, outDir),
+              noEmit: noEmit ? true : undefined,
             },
             references,
           },

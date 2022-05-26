@@ -1,4 +1,5 @@
-import {ComposableModuleFunction, json} from '@magicspace/core';
+import type {ComposableModuleFunction} from '@magicspace/core';
+import {json} from '@magicspace/core';
 
 const DEFAULT_PRETTIER_OPTIONS: Magicspace.BoilerplateOptions.PrettierOptions =
   {

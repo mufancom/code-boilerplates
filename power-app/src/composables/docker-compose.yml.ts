@@ -1,4 +1,5 @@
-import {ComposableModuleFunction, yaml} from '@magicspace/core';
+import type {ComposableModuleFunction} from '@magicspace/core';
+import {yaml} from '@magicspace/core';
 
 const composable: ComposableModuleFunction = ({
   name,
