@@ -12,15 +12,15 @@
     "test": "yarn lint-prettier && yarn build && yarn lint"
   },
   "dependencies": {
-    "tslib": "^2.3.1"
+    "tslib": "^2.4.0"
   },
   "devDependencies": {
-    "@mufan/code": "^0.2.10",
-    "@mufan/eslint-plugin": "^0.1.59",
-    "eslint": "^8.13.0",
+    "@mufan/code": "^0.2.13",
+    "@mufan/eslint-plugin": "^0.1.67",
+    "eslint": "^8.16.0",
     "prettier": "^2.6.2",
     "rimraf": "^3.0.2",
     "run-in-every": "^0.2.0",
-    "typescript": "^4.6.3"
+    "typescript": "^4.7.2"
   }
 }
