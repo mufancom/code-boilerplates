@@ -69,7 +69,7 @@ const composable: ComposableModuleFunction = async options => {
       }
 
       scripts['lint'] =
-        'run-in-every eslint-project --parallel --echo -- eslint --config {configFileName} .';
+        'run-in-every eslint-project --parallel --echo -- eslint --config {configFileName} --no-error-on-unmatched-pattern .';
 
       scripts = extendObjectProperties(
         scripts,
