@@ -218,6 +218,15 @@ function buildProjectExport(
   {dir}: ResolvedPackageOptions,
   {exportAs, exportSourceAs, inDir, outDir}: ResolvedTypeScriptProjectOptions,
 ): Record<string, string | Record<string, string>> | undefined {
+  let exportSourceAsPart = exportSourceAs
+    ? {
+        [exportSourceAs]: `./${Path.posix.relative(
+          dir,
+          Path.posix.join(inDir, 'index.ts'),
+        )}`,
+      }
+    : undefined;
+
   return emptyObjectAsUndefined({
     ...(exportAs
       ? {
@@ -225,20 +234,13 @@ function buildProjectExport(
             dir,
             Path.posix.join(outDir, 'index.d.ts'),
           )}`,
+          ...exportSourceAsPart,
           [exportAs]: `./${Path.posix.relative(
             dir,
             Path.posix.join(outDir, 'index.js'),
           )}`,
         }
-      : undefined),
-    ...(exportSourceAs
-      ? {
-          [exportSourceAs]: `./${Path.posix.relative(
-            dir,
-            Path.posix.join(inDir, 'index.ts'),
-          )}`,
-        }
-      : undefined),
+      : exportSourceAsPart),
   });
 }
 
