@@ -58,7 +58,9 @@ const composable: ComposableModuleFunction = async options => {
 
       {
         let rimrafPattern = guessReadableGlobPattern(
-          projects.map(project => project.bldDir),
+          projects
+            .filter(project => !project.noEmit)
+            .map(project => project.bldDir),
         );
 
         if (rimrafPattern) {
