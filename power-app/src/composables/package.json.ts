@@ -51,8 +51,8 @@ const DEV_DEPENDENCIES_DICT = {
 };
 
 const composable: ComposableModuleFunction = async () => {
-  let dependencies = await fetchPackageVersions(DEPENDENCY_DICT);
-  let devDependencies = await fetchPackageVersions(DEV_DEPENDENCIES_DICT);
+  const dependencies = await fetchPackageVersions(DEPENDENCY_DICT);
+  const devDependencies = await fetchPackageVersions(DEV_DEPENDENCIES_DICT);
 
   return [
     json('package.json', (data: any) => {

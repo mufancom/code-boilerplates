@@ -4,7 +4,7 @@ import {json} from '@magicspace/core';
 import {resolveTypeScriptProjects} from '../../../typescript/bld/library';
 
 const composable: ComposableModuleFunction = options => {
-  let {projects} = resolveTypeScriptProjects(options);
+  const {projects} = resolveTypeScriptProjects(options);
 
   return [
     json('tsconfig.json', {

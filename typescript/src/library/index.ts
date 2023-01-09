@@ -46,9 +46,9 @@ export interface ResolveTypeScriptProjectsResult {
 export function resolveTypeScriptProjects(
   options: Magicspace.BoilerplateOptions,
 ): ResolveTypeScriptProjectsResult {
-  let resolvedOptions = resolveOptions(options);
+  const resolvedOptions = resolveOptions(options);
 
-  let projectOptionsArray = resolvedOptions.packages.flatMap(
+  const projectOptionsArray = resolvedOptions.packages.flatMap(
     packageOptions =>
       packageOptions.tsProjects?.map(project =>
         buildResolvedTypeScriptProjectOptions(project, packageOptions),
@@ -71,7 +71,7 @@ export function resolveTypeScriptProjects(
             referencedProjectName = rawReference.project;
           }
 
-          let referencedProjectOptions = projectOptionsArray.find(
+          const referencedProjectOptions = projectOptionsArray.find(
             projectOptions =>
               projectOptions.package.name === referencedPackageName &&
               projectOptions.name === referencedProjectName,
@@ -133,16 +133,16 @@ export function buildResolvedTypeScriptProjectOptions(
     dir = '';
   }
 
-  let packageDir = packageOptions.dir;
+  const packageDir = packageOptions.dir;
 
-  let srcDir = Path.posix.join(packageDir, parentDir, src);
-  let inDir = Path.posix.join(srcDir, dir);
-  let bldDir = Path.posix.join(
+  const srcDir = Path.posix.join(packageDir, parentDir, src);
+  const inDir = Path.posix.join(srcDir, dir);
+  const bldDir = Path.posix.join(
     packageDir,
     parentDir,
     noEmit && src === '' ? '' : 'bld',
   );
-  let outDir = Path.posix.join(bldDir, dir);
+  const outDir = Path.posix.join(bldDir, dir);
 
   if (noEmit) {
     exportAs = false;

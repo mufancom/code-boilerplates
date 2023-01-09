@@ -74,16 +74,23 @@ const DEV_DEPENDENCY_DICT = {
 };
 
 const composable: ComposableModuleFunction = async options => {
-  let {name, description, repository, author, license, packagesDir, packages} =
-    resolveOptions(options);
+  const {
+    name,
+    description,
+    repository,
+    author,
+    license,
+    packagesDir,
+    packages,
+  } = resolveOptions(options);
 
-  let common = {
+  const common = {
     repository,
     author,
     license,
   };
 
-  let devDependencies = await fetchPackageVersions(DEV_DEPENDENCY_DICT);
+  const devDependencies = await fetchPackageVersions(DEV_DEPENDENCY_DICT);
 
   return [
     json(

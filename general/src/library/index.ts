@@ -28,7 +28,7 @@ export function resolveOptions({
     }
 
     resolvedPackages = (packages ?? []).map(packageOptions => {
-      let dir = Path.posix.join(
+      const dir = Path.posix.join(
         packagesDir!,
         packageOptions.dir || packageOptions.name.replace(/^@[^/]+/, ''),
       );

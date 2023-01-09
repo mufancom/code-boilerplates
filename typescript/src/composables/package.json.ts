@@ -30,25 +30,28 @@ const PROJECT_ENTRANCES_DEPENDENCY_DICT = {
 };
 
 const composable: ComposableModuleFunction = async options => {
-  let {projects} = resolveTypeScriptProjects(options);
+  const {projects} = resolveTypeScriptProjects(options);
 
-  let anyProjectWithEntrances = projects.some(
+  const anyProjectWithEntrances = projects.some(
     project => project.entrances.length > 0,
   );
 
-  let packagesWithTypeScriptProject = _.uniqBy(
+  const packagesWithTypeScriptProject = _.uniqBy(
     projects.map(project => project.package),
     packageOptions => packageOptions.packageJSONPath,
   );
 
-  let [rootDevDependencies, projectDependencies, projectEntrancesDependencies] =
-    await Promise.all([
-      fetchPackageVersions(ROOT_DEV_DEPENDENCY_DICT),
-      fetchPackageVersions(PROJECT_DEPENDENCY_DICT),
-      anyProjectWithEntrances
-        ? fetchPackageVersions(PROJECT_ENTRANCES_DEPENDENCY_DICT)
-        : undefined,
-    ]);
+  const [
+    rootDevDependencies,
+    projectDependencies,
+    projectEntrancesDependencies,
+  ] = await Promise.all([
+    fetchPackageVersions(ROOT_DEV_DEPENDENCY_DICT),
+    fetchPackageVersions(PROJECT_DEPENDENCY_DICT),
+    anyProjectWithEntrances
+      ? fetchPackageVersions(PROJECT_ENTRANCES_DEPENDENCY_DICT)
+      : undefined,
+  ]);
 
   return [
     json('package.json', (data: any) => {
@@ -57,7 +60,7 @@ const composable: ComposableModuleFunction = async options => {
       let rimrafScript: string | undefined;
 
       {
-        let rimrafPattern = guessReadableGlobPattern(
+        const rimrafPattern = guessReadableGlobPattern(
           projects
             .filter(project => !project.noEmit)
             .map(project => project.bldDir),
@@ -109,7 +112,7 @@ const composable: ComposableModuleFunction = async options => {
     }),
     ...packagesWithTypeScriptProject.map(packageOptions =>
       json(packageOptions.packageJSONPath, (data: any) => {
-        let referencedPackageNames = _.compact(
+        const referencedPackageNames = _.compact(
           _.union(
             ...(packageOptions.tsProjects?.map(projectOptions =>
               projectOptions.references?.map(reference =>
@@ -123,12 +126,12 @@ const composable: ComposableModuleFunction = async options => {
           ),
         );
 
-        let packageProjects = projects.filter(
+        const packageProjects = projects.filter(
           project =>
             project.package.packageJSONPath === packageOptions.packageJSONPath,
         );
 
-        let libraryProjects = packageProjects
+        const libraryProjects = packageProjects
           .filter(project => project.type === 'library')
           .sort((a, b) => {
             return a.name === 'library'
@@ -140,11 +143,11 @@ const composable: ComposableModuleFunction = async options => {
               : 1;
           });
 
-        let mainLibraryProject = libraryProjects.find(
+        const mainLibraryProject = libraryProjects.find(
           project => project.name === 'library',
         );
 
-        let entrances =
+        const entrances =
           anyProjectWithEntrances &&
           packageProjects.some(project => project.entrances.length > 0);
 
@@ -188,15 +191,15 @@ function guessReadableGlobPattern(paths: string[]): string | undefined {
     return undefined;
   }
 
-  let parentDirAndBaseNameArray = paths.map(path => {
+  const parentDirAndBaseNameArray = paths.map(path => {
     return {parentDir: Path.dirname(path), baseName: Path.basename(path)};
   });
 
-  let parentDirs = _.uniq(
+  const parentDirs = _.uniq(
     parentDirAndBaseNameArray.map(info => info.parentDir),
   );
 
-  let upperParentDirs = _.uniq(
+  const upperParentDirs = _.uniq(
     parentDirs.map(parentDir => Path.dirname(parentDir)),
   );
 
@@ -205,12 +208,14 @@ function guessReadableGlobPattern(paths: string[]): string | undefined {
     return undefined;
   }
 
-  let parentPattern =
+  const parentPattern =
     parentDirs.length > 1 ? `${upperParentDirs[0]}/*` : parentDirs[0];
 
-  let baseNames = _.uniq(parentDirAndBaseNameArray.map(info => info.baseName));
+  const baseNames = _.uniq(
+    parentDirAndBaseNameArray.map(info => info.baseName),
+  );
 
-  let baseNamePattern =
+  const baseNamePattern =
     baseNames.length > 1 ? `{${baseNames.sort().join(',')}}` : baseNames[0];
 
   return `${parentPattern.replace(/^\.\//, '')}/${baseNamePattern}`;
@@ -220,7 +225,7 @@ function buildProjectExport(
   {dir}: ResolvedPackageOptions,
   {exportAs, exportSourceAs, inDir, outDir}: ResolvedTypeScriptProjectOptions,
 ): Record<string, string | Record<string, string>> | undefined {
-  let exportSourceAsPart = exportSourceAs
+  const exportSourceAsPart = exportSourceAs
     ? {
         [exportSourceAs]: `./${Path.posix.relative(
           dir,

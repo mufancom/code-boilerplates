@@ -23,7 +23,7 @@ const JSON_OPTIONS: JSONFileOptions = {
 };
 
 const composable: ComposableModuleFunction = options => {
-  let {projects} = resolveTypeScriptProjects(options);
+  const {projects} = resolveTypeScriptProjects(options);
 
   return [
     json(

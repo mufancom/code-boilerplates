@@ -11,7 +11,7 @@ const composable: ComposableModuleFunction = ({license, author}) => {
     return undefined;
   }
 
-  let licenses = FS.readdirSync(LICENSE_TEMPLATES_DIR).map(fileName =>
+  const licenses = FS.readdirSync(LICENSE_TEMPLATES_DIR).map(fileName =>
     Path.basename(fileName, '.txt'),
   );
 

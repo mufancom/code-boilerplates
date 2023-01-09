@@ -10,11 +10,11 @@ import {TEMPLATES_DIR} from './@constants';
 const TEMPLATE_PATH = Path.join(TEMPLATES_DIR, 'README.md.hbs');
 
 const composable: ComposableModuleFunction = options => {
-  let data = {
+  const data = {
     license: options.license,
   };
 
-  let {packages} = resolveOptions(options);
+  const {packages} = resolveOptions(options);
 
   return [
     handlebars(

@@ -10,7 +10,7 @@ import {TEMPLATES_DIR} from './@constants';
 const TEMPLATE_PATH = Path.join(TEMPLATES_DIR, '@entrances.ts.hbs');
 
 const composable: ComposableModuleFunction = options => {
-  let {projects} = resolveTypeScriptProjects(options);
+  const {projects} = resolveTypeScriptProjects(options);
 
   return projects.flatMap(project =>
     project.entrances.map(name =>

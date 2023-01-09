@@ -26,20 +26,20 @@ const PAGE_URL_HELPERS_PATH = Path.join(
 );
 
 const composable: ComposableModuleFunction = options => {
-  let {
+  const {
     powerApp: {pages = []},
   } = options;
-  let projects = resolveTypeScriptProjects(options);
+  const projects = resolveTypeScriptProjects(options);
 
-  let clientSrc = projects.projects.find(project =>
+  const clientSrc = projects.projects.find(project =>
     project.inDir.includes('client'),
   )!.inDir;
 
-  let serverSrc = projects.projects.find(project =>
+  const serverSrc = projects.projects.find(project =>
     project.inDir.includes('server'),
   )!.inDir;
 
-  let pagesInfos = pages
+  const pagesInfos = pages
     .map(page => ({
       name: page,
       componentName: pageToComponentName(page),

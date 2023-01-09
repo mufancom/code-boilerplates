@@ -7,7 +7,7 @@ import * as _ from 'lodash';
 import {resolveTypeScriptProjects} from '../library';
 
 const composable: ComposableModuleFunction = options => {
-  let {projects} = resolveTypeScriptProjects(options);
+  const {projects} = resolveTypeScriptProjects(options);
 
   return [
     json('.eslintrc', (data: any) => {

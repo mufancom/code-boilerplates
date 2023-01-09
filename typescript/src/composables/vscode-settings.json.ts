@@ -5,7 +5,7 @@ import {extendObjectProperties} from '@magicspace/utils';
 import {resolveTypeScriptProjects} from '../library';
 
 const composable: ComposableModuleFunction = async options => {
-  let {projects} = resolveTypeScriptProjects(options);
+  const {projects} = resolveTypeScriptProjects(options);
 
   return json('.vscode/settings.json', (data: any) => {
     data = extendObjectProperties(

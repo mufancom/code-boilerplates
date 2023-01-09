@@ -7,15 +7,15 @@ import * as _ from 'lodash';
 import {resolveTypeScriptProjects} from '../library';
 
 const composable: ComposableModuleFunction = async options => {
-  let {projects} = resolveTypeScriptProjects(options);
+  const {projects} = resolveTypeScriptProjects(options);
 
-  let packingTypeScriptProjectsDict = _.groupBy(
+  const packingTypeScriptProjectsDict = _.groupBy(
     projects.filter(project => !project.noEmit && !project.dev),
     project => project.package.packageJSONPath,
   );
 
   return Object.values(packingTypeScriptProjectsDict).map(projects => {
-    let packageDir = projects[0].package.dir;
+    const packageDir = projects[0].package.dir;
 
     return text(Path.join(packageDir, '.npmignore'), content => {
       return `${content}\
