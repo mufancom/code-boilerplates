@@ -26,7 +26,7 @@ const PROJECT_DEPENDENCY_DICT = {
 };
 
 const PROJECT_ENTRANCES_DEPENDENCY_DICT = {
-  'entrance-decorator': '0.1',
+  'entrance-decorator': '0.2',
 };
 
 const composable: ComposableModuleFunction = async options => {
