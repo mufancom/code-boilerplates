@@ -1,7 +1,7 @@
 // @ts-check
 
-export default {
-  boilerplate: '../typescript',
+module.exports = {
+  boilerplate: '../typescript/bld/library/index.js',
   options: {
     name: '@mufan/code-boilerplates',
     description: 'Code boilerplates for Mufan',
@@ -18,7 +18,6 @@ export default {
       {
         name: 'general',
         type: 'library',
-        exportAs: false,
         parentDir: 'general',
         dir: 'library',
       },
@@ -31,7 +30,6 @@ export default {
       {
         name: 'typescript',
         type: 'library',
-        exportAs: false,
         parentDir: 'typescript',
         dir: 'library',
         references: ['general'],

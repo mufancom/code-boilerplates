@@ -5,9 +5,7 @@
     "/general/src/",
     "/general/bld/",
     "/typescript/src/",
-    "/typescript/bld/",
-    "/power-app/src/",
-    "/power-app/bld/"
+    "/typescript/bld/"
   ],
   "extends": ["eslint:recommended"],
   "env": {
