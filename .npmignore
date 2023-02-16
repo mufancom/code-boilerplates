@@ -7,6 +7,4 @@
 !/typescript/bld/composables/**
 !/typescript/src/library/**/*.{ts,tsx}
 !/typescript/bld/library/**
-!/power-app/src/composables/**/*.{ts,tsx}
-!/power-app/bld/composables/**
 *.tsbuildinfo

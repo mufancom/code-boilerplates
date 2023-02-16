@@ -16,8 +16,7 @@
     "general/src/composables",
     "general/src/library",
     "typescript/src/composables",
-    "typescript/src/library",
-    "power-app/src/composables"
+    "typescript/src/library"
   ],
   "eslint.validate": [
     "javascript",
