@@ -1,10 +1,10 @@
 import * as Path from 'path';
 
-import type {ComposableModuleFunction, JSONFileOptions} from '@magicspace/core';
-import {json} from '@magicspace/core';
+import type {JSONFileOptions} from '@magicspace/core';
+import {composable, json} from '@magicspace/core';
 import {fetchPackageVersions} from '@magicspace/utils';
 
-import {resolveOptions} from '../library';
+import type {ResolvedOptions} from '../library';
 
 const JSON_OPTIONS: JSONFileOptions = {
   /** @link https://docs.npmjs.com/files/package.json */
@@ -73,8 +73,8 @@ const DEV_DEPENDENCY_DICT = {
   prettier: '2',
 };
 
-const composable: ComposableModuleFunction = async options => {
-  const {
+export default composable<ResolvedOptions>(
+  async ({
     name,
     description,
     repository,
@@ -82,53 +82,53 @@ const composable: ComposableModuleFunction = async options => {
     license,
     packagesDir,
     packages,
-  } = resolveOptions(options);
+  }) => {
+    const common = {
+      repository,
+      author,
+      license,
+    };
 
-  const common = {
-    repository,
-    author,
-    license,
-  };
+    const devDependencies = await fetchPackageVersions(DEV_DEPENDENCY_DICT);
 
-  const devDependencies = await fetchPackageVersions(DEV_DEPENDENCY_DICT);
-
-  return [
-    json(
-      'package.json',
-      {
-        name,
-        description,
-        scripts: {
-          lint: 'eslint .',
-          'lint-prettier': 'prettier --check .',
-          test: 'yarn lint-prettier && yarn lint',
-        },
-        devDependencies,
-        ...(packagesDir !== undefined
-          ? {
-              private: true,
-              workspaces: packages.map(packageOptions => packageOptions.dir),
-            }
-          : {}),
-        ...common,
-      },
-      JSON_OPTIONS,
-    ),
-    ...packages.map(packageOptions =>
+    return [
       json(
-        Path.posix.join(packageOptions.dir, 'package.json'),
-        (data: any) => {
-          return {
-            ...data,
-            ...common,
-            name: packageOptions.name,
-            version: '0.0.0',
-          };
+        'package.json',
+        {
+          name,
+          description,
+          scripts: {
+            lint: 'eslint .',
+            'lint-prettier': 'prettier --check .',
+            test: 'yarn lint-prettier && yarn lint',
+          },
+          devDependencies,
+          ...(packagesDir !== undefined
+            ? {
+                private: true,
+                workspaces: packages.map(
+                  packageOptions => packageOptions.resolvedDir,
+                ),
+              }
+            : {}),
+          ...common,
         },
         JSON_OPTIONS,
       ),
-    ),
-  ];
-};
-
-export default composable;
+      ...packages.map(packageOptions =>
+        json(
+          Path.join(packageOptions.resolvedDir, 'package.json'),
+          (data: any) => {
+            return {
+              ...data,
+              ...common,
+              name: packageOptions.name,
+              version: '0.0.0',
+            };
+          },
+          JSON_OPTIONS,
+        ),
+      ),
+    ];
+  },
+);

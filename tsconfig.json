@@ -11,9 +11,6 @@
     },
     {
       "path": "typescript/src/library"
-    },
-    {
-      "path": "power-app/src/composables"
     }
   ],
   "files": []

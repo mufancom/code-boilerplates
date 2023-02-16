@@ -1,6 +1,0 @@
-import loadable from '@loadable/component';
-
-{{#each pages}}
-export const {{this.componentName}} = loadable(() => import('./@{{this.name}}'));
-{{/each}}
-export const NoMatch = loadable(() => import('./@404'));

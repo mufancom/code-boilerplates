@@ -1,12 +1,13 @@
 import * as FS from 'fs';
 import * as Path from 'path';
 
-import type {ComposableModuleFunction} from '@magicspace/core';
-import {handlebars} from '@magicspace/core';
+import {composable, handlebars} from '@magicspace/core';
+
+import type {ResolvedOptions} from '../library';
 
 import {LICENSE_TEMPLATES_DIR} from './@constants';
 
-const composable: ComposableModuleFunction = ({license, author}) => {
+export default composable<ResolvedOptions>(({license, author}) => {
   if (!license) {
     return undefined;
   }
@@ -35,6 +36,4 @@ const composable: ComposableModuleFunction = ({license, author}) => {
       noEscape: true,
     },
   );
-};
-
-export default composable;
+});

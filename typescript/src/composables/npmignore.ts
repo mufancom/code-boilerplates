@@ -1,24 +1,22 @@
 import * as Path from 'path';
 
-import type {ComposableModuleFunction} from '@magicspace/core';
-import {text} from '@magicspace/core';
+import {composable, text} from '@magicspace/core';
 import * as _ from 'lodash';
 
-import {resolveTypeScriptProjects} from '../library';
+import type {ResolvedOptions} from '../library';
 
-const composable: ComposableModuleFunction = async options => {
-  const {projects} = resolveTypeScriptProjects(options);
+export default composable<ResolvedOptions>(
+  async ({resolvedTSProjects: projects}) => {
+    const packingTypeScriptProjectsDict = _.groupBy(
+      projects.filter(project => !project.noEmit && !project.dev),
+      project => project.package.packageJSONPath,
+    );
 
-  const packingTypeScriptProjectsDict = _.groupBy(
-    projects.filter(project => !project.noEmit && !project.dev),
-    project => project.package.packageJSONPath,
-  );
+    return Object.values(packingTypeScriptProjectsDict).map(projects => {
+      const packageDir = projects[0].package.resolvedDir;
 
-  return Object.values(packingTypeScriptProjectsDict).map(projects => {
-    const packageDir = projects[0].package.dir;
-
-    return text(Path.join(packageDir, '.npmignore'), content => {
-      return `${content}\
+      return text(Path.join(packageDir, '.npmignore'), content => {
+        return `${content}\
 *
 ${projects
   .flatMap(project => [
@@ -28,8 +26,7 @@ ${projects
   .join('\n')}
 *.tsbuildinfo
 `;
+      });
     });
-  });
-};
-
-export default composable;
+  },
+);

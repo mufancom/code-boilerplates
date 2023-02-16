@@ -5,6 +5,10 @@
   "repository": "https://github.com/makeflow/mufan-code-boilerplates.git",
   "author": "Chengdu Mufan Technology Co., Ltd.",
   "license": "MIT",
+  "exports": {
+    "./general": "./general/bld/library/index.js",
+    "./typescript": "./typescript/bld/library/index.js"
+  },
   "scripts": {
     "build": "rimraf */bld && tsc --build",
     "lint": "run-in-every eslint-project --parallel --echo -- eslint --config {configFileName} --no-error-on-unmatched-pattern .",
@@ -12,8 +16,8 @@
     "test": "yarn lint-prettier && yarn build && yarn lint"
   },
   "dependencies": {
-    "@magicspace/core": "^0.2.31",
-    "@magicspace/utils": "^0.2.29",
+    "@magicspace/core": "^0.3.0-alpha.1",
+    "@magicspace/utils": "^0.3.0-alpha.1",
     "lodash": "^4.17.20",
     "npm-which": "^3.0.1",
     "prettier": "^2.8.2",

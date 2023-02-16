@@ -1,9 +1,9 @@
 import * as Path from 'path';
 
-import type {ComposableModuleFunction, JSONFileOptions} from '@magicspace/core';
-import {json} from '@magicspace/core';
+import type {JSONFileOptions} from '@magicspace/core';
+import {composable, json} from '@magicspace/core';
 
-import {resolveTypeScriptProjects} from '../library';
+import type {ResolvedOptions} from '../library';
 
 const JSON_OPTIONS: JSONFileOptions = {
   sortKeys: [
@@ -22,9 +22,7 @@ const JSON_OPTIONS: JSONFileOptions = {
   ],
 };
 
-const composable: ComposableModuleFunction = options => {
-  const {projects} = resolveTypeScriptProjects(options);
-
+export default composable<ResolvedOptions>(({resolvedTSProjects: projects}) => {
   return [
     json(
       'tsconfig.json',
@@ -65,6 +63,4 @@ const composable: ComposableModuleFunction = options => {
         ),
     ),
   ];
-};
-
-export default composable;
+});

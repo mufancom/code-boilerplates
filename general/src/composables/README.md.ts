@@ -1,26 +1,23 @@
 import * as Path from 'path';
 
-import type {ComposableModuleFunction} from '@magicspace/core';
-import {handlebars} from '@magicspace/core';
+import {composable, handlebars} from '@magicspace/core';
 
-import {resolveOptions} from '../library';
+import type {ResolvedOptions} from '../library';
 
 import {TEMPLATES_DIR} from './@constants';
 
 const TEMPLATE_PATH = Path.join(TEMPLATES_DIR, 'README.md.hbs');
 
-const composable: ComposableModuleFunction = options => {
+export default composable<ResolvedOptions>(({name, license, packages}) => {
   const data = {
-    license: options.license,
+    license,
   };
-
-  const {packages} = resolveOptions(options);
 
   return [
     handlebars(
       'README.md',
       {
-        name: options.name,
+        name,
         ...data,
       },
       {
@@ -29,7 +26,7 @@ const composable: ComposableModuleFunction = options => {
     ),
     ...packages.map(packageOptions =>
       handlebars(
-        Path.join(packageOptions.dir, 'README.md'),
+        Path.join(packageOptions.resolvedDir, 'README.md'),
         {
           name: packageOptions.name,
           ...data,
@@ -40,6 +37,4 @@ const composable: ComposableModuleFunction = options => {
       ),
     ),
   ];
-};
-
-export default composable;
+});

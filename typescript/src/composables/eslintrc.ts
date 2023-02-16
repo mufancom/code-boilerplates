@@ -1,14 +1,11 @@
 import * as Path from 'path';
 
-import type {ComposableModuleFunction} from '@magicspace/core';
-import {json} from '@magicspace/core';
+import {composable, json} from '@magicspace/core';
 import * as _ from 'lodash';
 
-import {resolveTypeScriptProjects} from '../library';
+import type {ResolvedOptions} from '../library';
 
-const composable: ComposableModuleFunction = options => {
-  const {projects} = resolveTypeScriptProjects(options);
-
+export default composable<ResolvedOptions>(({resolvedTSProjects: projects}) => {
   return [
     json('.eslintrc', (data: any) => {
       return {
@@ -17,15 +14,6 @@ const composable: ComposableModuleFunction = options => {
           ...new Set([
             ...(data.ignorePatterns ?? []),
             ...projects.flatMap(project => [
-              ...(project.type === 'library' &&
-              project.name !== 'library' &&
-              project.exportAs
-                ? [
-                    `${project.package.dir ? `/${project.package.dir}` : ''}/${
-                      project.name
-                    }.d.ts`,
-                  ]
-                : []),
               `/${project.srcDir}/`,
               `/${project.bldDir}/`,
             ]),
@@ -55,6 +43,4 @@ const composable: ComposableModuleFunction = options => {
       }),
     ),
   ];
-};
-
-export default composable;
+});

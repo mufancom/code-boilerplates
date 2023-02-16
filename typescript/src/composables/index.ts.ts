@@ -1,18 +1,15 @@
 import * as Path from 'path';
 
-import type {ComposableModuleFunction} from '@magicspace/core';
-import {handlebars} from '@magicspace/core';
+import {composable, handlebars} from '@magicspace/core';
 import * as _ from 'lodash';
 
-import {resolveTypeScriptProjects} from '../library';
+import type {ResolvedOptions} from '../library';
 
 import {TEMPLATES_DIR} from './@constants';
 
 const TEMPLATE_PATH = Path.join(TEMPLATES_DIR, 'index.ts.hbs');
 
-const composable: ComposableModuleFunction = options => {
-  const {projects} = resolveTypeScriptProjects(options);
-
+export default composable<ResolvedOptions>(({resolvedTSProjects: projects}) => {
   return _.compact(
     projects.map(project =>
       project.type === 'library'
@@ -24,6 +21,4 @@ const composable: ComposableModuleFunction = options => {
         : undefined,
     ),
   );
-};
-
-export default composable;
+});
