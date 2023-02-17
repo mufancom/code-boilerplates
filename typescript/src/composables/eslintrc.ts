@@ -15,7 +15,7 @@ export default composable<ResolvedOptions>(({resolvedProjects: projects}) => {
             ...(data.ignorePatterns ?? []),
             ...projects.flatMap(project => [
               `/${project.srcDir}/`,
-              `/${project.bldDir}/`,
+              ...(project.noEmit ? [] : [`/${project.bldDir}/`]),
             ]),
           ]),
         ],
