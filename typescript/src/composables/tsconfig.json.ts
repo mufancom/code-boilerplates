@@ -67,8 +67,10 @@ export default composable<ResolvedOptions>(({resolvedProjects: projects}) => {
               : {
                   extends: './tsconfig.json',
                   compilerOptions: {
+                    composite: false,
                     module: module === 'esm' ? 'esnext' : undefined,
                     moduleResolution: module === 'esm' ? 'nodenext' : undefined,
+                    declaration: false,
                     outDir: Path.posix.relative(inDir, outDir),
                   },
                 },

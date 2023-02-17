@@ -246,6 +246,9 @@ function buildProjectExport(
       }
     : undefined;
 
+  const primaryBuild =
+    builds.find(build => build.module === 'cjs') ?? builds[0];
+
   builds = _.sortBy(builds, build => ['esm', 'cjs'].indexOf(build.module));
 
   return emptyObjectAsUndefined({
@@ -253,7 +256,7 @@ function buildProjectExport(
       ? {
           types: `./${Path.posix.relative(
             resolvedDir,
-            Path.posix.join(builds[0].outDir, 'index.d.ts'),
+            Path.posix.join(primaryBuild.outDir, 'index.d.ts'),
           )}`,
           ...exportSourceAsPart,
           ...Object.fromEntries(
