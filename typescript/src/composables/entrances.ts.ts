@@ -8,7 +8,7 @@ import {TEMPLATES_DIR} from './@constants';
 
 const TEMPLATE_PATH = Path.join(TEMPLATES_DIR, '@entrances.ts.hbs');
 
-export default composable<ResolvedOptions>(({resolvedTSProjects: projects}) => {
+export default composable<ResolvedOptions>(({resolvedProjects: projects}) => {
   return projects.flatMap(project =>
     project.entrances.map(name =>
       handlebars(

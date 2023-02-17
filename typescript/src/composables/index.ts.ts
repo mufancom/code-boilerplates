@@ -9,7 +9,7 @@ import {TEMPLATES_DIR} from './@constants';
 
 const TEMPLATE_PATH = Path.join(TEMPLATES_DIR, 'index.ts.hbs');
 
-export default composable<ResolvedOptions>(({resolvedTSProjects: projects}) => {
+export default composable<ResolvedOptions>(({resolvedProjects: projects}) => {
   return _.compact(
     projects.map(project =>
       project.type === 'library'

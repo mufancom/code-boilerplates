@@ -8,7 +8,7 @@ export const examples: BoilerplateExample[] = [
       name: 'awesome-library',
       license: 'MIT',
       author: 'Awesome Author',
-      tsProjects: [
+      projects: [
         {
           name: 'library',
         },
@@ -26,7 +26,7 @@ export const examples: BoilerplateExample[] = [
       name: 'awesome-program',
       license: 'MIT',
       author: 'Awesome Author',
-      tsProjects: [
+      projects: [
         {
           name: 'program',
         },
@@ -47,7 +47,7 @@ export const examples: BoilerplateExample[] = [
       packages: [
         {
           name: '@awesome/core',
-          tsProjects: [
+          projects: [
             {
               name: 'library',
             },
@@ -59,7 +59,7 @@ export const examples: BoilerplateExample[] = [
         },
         {
           name: '@awesome/server',
-          tsProjects: [
+          projects: [
             {
               name: 'program',
             },
@@ -71,7 +71,7 @@ export const examples: BoilerplateExample[] = [
         },
         {
           name: '@awesome/client',
-          tsProjects: [
+          projects: [
             {
               name: 'program',
             },

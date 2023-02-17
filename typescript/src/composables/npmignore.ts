@@ -6,7 +6,7 @@ import * as _ from 'lodash';
 import type {ResolvedOptions} from '../library';
 
 export default composable<ResolvedOptions>(
-  async ({resolvedTSProjects: projects}) => {
+  async ({resolvedProjects: projects}) => {
     const packingTypeScriptProjectsDict = _.groupBy(
       projects.filter(project => !project.noEmit && !project.dev),
       project => project.package.packageJSONPath,
@@ -21,7 +21,7 @@ export default composable<ResolvedOptions>(
 ${projects
   .flatMap(project => [
     `!/${Path.posix.relative(packageDir, project.inDir)}/**/*.{ts,tsx}`,
-    `!/${Path.posix.relative(packageDir, project.outDir)}/**`,
+    `!/${Path.posix.relative(packageDir, project.upperOutDir)}/**`,
   ])
   .join('\n')}
 *.tsbuildinfo

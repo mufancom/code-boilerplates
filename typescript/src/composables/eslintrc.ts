@@ -5,7 +5,7 @@ import * as _ from 'lodash';
 
 import type {ResolvedOptions} from '../library';
 
-export default composable<ResolvedOptions>(({resolvedTSProjects: projects}) => {
+export default composable<ResolvedOptions>(({resolvedProjects: projects}) => {
   return [
     json('.eslintrc', (data: any) => {
       return {

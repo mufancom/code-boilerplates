@@ -4,7 +4,7 @@ import {extendObjectProperties} from '@magicspace/utils';
 import type {ResolvedOptions} from '../library';
 
 export default composable<ResolvedOptions>(
-  async ({resolvedTSProjects: projects}) => {
+  async ({resolvedProjects: projects}) => {
     return json('.vscode/settings.json', (data: any) => {
       data = extendObjectProperties(
         data,

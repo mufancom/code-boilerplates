@@ -22,45 +22,57 @@ const JSON_OPTIONS: JSONFileOptions = {
   ],
 };
 
-export default composable<ResolvedOptions>(({resolvedTSProjects: projects}) => {
+export default composable<ResolvedOptions>(({resolvedProjects: projects}) => {
   return [
     json(
       'tsconfig.json',
       {
-        references: projects.map(project => {
-          return {path: project.inDir};
-        }),
+        references: projects.flatMap(({inDir, builds}) =>
+          builds.map(({module}) => ({
+            path:
+              builds.length === 1 || module === 'cjs'
+                ? inDir
+                : Path.posix.join(inDir, `tsconfig.${module}.json`),
+          })),
+        ),
         files: [],
       },
       JSON_OPTIONS,
     ),
-    ...projects.map(
-      ({
-        tsconfigPath,
-        inDir,
-        outDir,
-        esModule,
-        entrances,
-        noEmit,
-        references,
-      }) =>
-        json(
-          tsconfigPath,
-          {
-            extends: '@mufan/code/tsconfig.json',
-            compilerOptions: {
-              composite: true,
-              module: esModule ? 'ESNext' : undefined,
-              moduleResolution: esModule ? 'Node' : undefined,
-              // fallback to undefined if no condition matched.
-              experimentalDecorators: entrances.length > 0 || undefined,
-              outDir: Path.posix.relative(inDir, outDir),
-              noEmit: noEmit ? true : undefined,
-            },
-            references,
-          },
+    ...projects.flatMap(({inDir, entrances, noEmit, references, builds}) =>
+      builds.map(({module, outDir}) => {
+        const primary = builds.length === 1 || module === 'cjs';
+
+        return json(
+          Path.posix.join(
+            inDir,
+            primary ? 'tsconfig.json' : `tsconfig.${module}.json`,
+          ),
+          primary
+            ? {
+                extends: '@mufan/code/tsconfig.json',
+                compilerOptions: {
+                  composite: true,
+                  module: module === 'esm' ? 'esnext' : undefined,
+                  moduleResolution: module === 'esm' ? 'nodenext' : undefined,
+                  // fallback to undefined if no condition matched.
+                  experimentalDecorators: entrances.length > 0 || undefined,
+                  outDir: Path.posix.relative(inDir, outDir),
+                  noEmit: noEmit ? true : undefined,
+                },
+                references,
+              }
+            : {
+                extends: './tsconfig.json',
+                compilerOptions: {
+                  module: module === 'esm' ? 'esnext' : undefined,
+                  moduleResolution: module === 'esm' ? 'nodenext' : undefined,
+                  outDir: Path.posix.relative(inDir, outDir),
+                },
+              },
           JSON_OPTIONS,
-        ),
+        );
+      }),
     ),
   ];
 });

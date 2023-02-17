@@ -8,7 +8,7 @@ module.exports = {
     repository: 'https://github.com/makeflow/mufan-code-boilerplates.git',
     license: 'MIT',
     author: 'Chengdu Mufan Technology Co., Ltd.',
-    tsProjects: [
+    projects: [
       {
         name: 'general-composables',
         parentDir: 'general',

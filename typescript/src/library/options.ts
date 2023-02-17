@@ -37,6 +37,10 @@ export type GeneralTypeScriptProjectReferenceOptions = x.TypeOf<
   typeof GeneralTypeScriptProjectReferenceOptions
 >;
 
+export const BuildModuleType = x.union([x.literal('cjs'), x.literal('esm')]);
+
+export type BuildModuleType = x.TypeOf<typeof BuildModuleType>;
+
 export const TypeScriptProjectOptions = x.object({
   /**
    * TypeScript project name, defaults to 'program'.
@@ -50,14 +54,13 @@ export const TypeScriptProjectOptions = x.object({
     .union([x.literal('library'), x.literal('program'), x.literal('script')])
     .optional(),
   /**
-   * Whether to compile as ES module.
+   * Module type to build, defaults to 'cjs'.
    */
-  esModule: x.boolean.optional(),
+  module: x.union([BuildModuleType, x.array(BuildModuleType)]).optional(),
   /**
-   * Export with specific condition name, defaults to 'import' if `esModule`
-   * is true, otherwise 'require'.
+   * Whether to export.
    */
-  exportAs: x.union([x.string, x.literal(false)]).optional(),
+  exports: x.boolean.optional(),
   /**
    * Export source with specific condition name, e.g.: "vite".
    */
@@ -103,29 +106,33 @@ export type TypeScriptProjectOptions = x.TypeOf<
 >;
 
 export const PackageOptions = GeneralPackageOptions.extend({
-  tsProjects: x.array(TypeScriptProjectOptions).optional(),
+  projects: x.array(TypeScriptProjectOptions).optional(),
 });
 
 export type PackageOptions = x.TypeOf<typeof PackageOptions>;
 
 export const Options = GeneralOptions.extend({
-  tsProjects: x.array(TypeScriptProjectOptions).optional(),
+  projects: x.array(TypeScriptProjectOptions).optional(),
   packages: x.array(PackageOptions).optional(),
 });
 
 export type Options = x.TypeOf<typeof Options>;
+
+export interface ResolvedTypeScriptBuild {
+  outDir: string;
+  module: BuildModuleType;
+}
 
 export interface ResolvedTypeScriptProjectOptions {
   name: string;
   srcDir: string;
   bldDir: string;
   inDir: string;
-  outDir: string;
-  tsconfigPath: string;
+  upperOutDir: string;
   type: 'library' | 'program' | 'script';
-  esModule: boolean;
+  builds: ResolvedTypeScriptBuild[];
+  exports: boolean;
   exportSourceAs: string | undefined;
-  exportAs: string | false;
   dev: boolean;
   noEmit: boolean;
   entrances: string[];
@@ -142,7 +149,7 @@ export interface ResolvedTypeScriptProjectReference {
 
 export type ResolvedOptions = Options &
   ResolvedGeneralOptions & {
-    resolvedTSProjects: ResolvedTypeScriptProjectOptions[];
+    resolvedProjects: ResolvedTypeScriptProjectOptions[];
   };
 
 export function resolveOptions(options: Options): ResolvedOptions {
@@ -150,14 +157,14 @@ export function resolveOptions(options: Options): ResolvedOptions {
 
   const projectOptionsArray = resolvedOptions.packages.flatMap(
     (packageOptions: ResolvedPackageOptions) =>
-      packageOptions.tsProjects?.map(project =>
+      packageOptions.projects?.map(project =>
         buildResolvedTypeScriptProjectOptions(project, packageOptions),
       ) ?? [],
   );
 
   return {
     ...resolvedOptions,
-    resolvedTSProjects: projectOptionsArray.map(
+    resolvedProjects: projectOptionsArray.map(
       ({references, ...projectOptions}) => {
         return {
           ...projectOptions,
@@ -209,8 +216,8 @@ export function buildResolvedTypeScriptProjectOptions(
   {
     name = 'program',
     type = name.includes('library') ? 'library' : 'program',
-    esModule = false,
-    exportAs = esModule ? 'import' : 'require',
+    module = 'cjs',
+    exports = true,
     exportSourceAs,
     dev = name.includes('test') || type === 'script' ? true : false,
     parentDir = false,
@@ -220,7 +227,7 @@ export function buildResolvedTypeScriptProjectOptions(
     entrances = false,
     ...rest
   }: TypeScriptProjectOptions,
-  packageOptions: ResolvedGeneralPackageOptions,
+  packageOptions: ResolvedPackageOptions,
 ): ResolvedTypeScriptProjectOptionsWithRawReferences {
   if (parentDir === false) {
     parentDir = '';
@@ -234,27 +241,43 @@ export function buildResolvedTypeScriptProjectOptions(
     dir = '';
   }
 
+  const modules = Array.isArray(module) ? module : [module];
+
   const packageDir = packageOptions.resolvedDir;
 
   const srcDir = Path.posix.join(packageDir, parentDir, src);
   const inDir = Path.posix.join(srcDir, dir);
   const bldDir = Path.posix.join(packageDir, parentDir, 'bld');
-  const outDir = Path.posix.join(bldDir, dir || name);
 
-  if (noEmit) {
-    exportAs = false;
+  const outFolderName = dir || name;
+  const upperOutDir = Path.posix.join(bldDir, outFolderName);
+
+  const builds: ResolvedTypeScriptBuild[] = [];
+
+  if (modules.length > 1) {
+    builds.push(
+      ...modules.map(module => ({
+        module,
+        outDir: Path.posix.join(upperOutDir, module),
+      })),
+    );
+  } else if (modules.length > 0) {
+    builds.push({
+      module: modules[0],
+      outDir: upperOutDir,
+    });
+  } else {
+    throw new Error('At least one of `cjs` and `esm` must be true');
   }
 
   return {
     name,
     srcDir,
+    upperOutDir,
     bldDir,
     inDir,
-    outDir,
-    tsconfigPath: Path.posix.join(inDir, 'tsconfig.json'),
     type,
-    esModule,
-    exportAs,
+    exports,
     exportSourceAs,
     dev,
     noEmit,
@@ -265,6 +288,7 @@ export function buildResolvedTypeScriptProjectOptions(
           : []
         : entrances,
     package: packageOptions,
+    builds,
     ...rest,
   };
 }

@@ -31,7 +31,7 @@ const PROJECT_ENTRANCES_DEPENDENCY_DICT = {
 };
 
 export default composable<ResolvedOptions>(
-  async ({resolvedTSProjects: projects}) => {
+  async ({resolvedProjects: projects}) => {
     const anyProjectWithEntrances = projects.some(
       project => project.entrances.length > 0,
     );
@@ -110,7 +110,7 @@ export default composable<ResolvedOptions>(
         json(packageOptions.packageJSONPath, (data: any) => {
           const referencedPackageNames = _.compact(
             _.union(
-              ...(packageOptions.tsProjects?.map(projectOptions =>
+              ...(packageOptions.projects?.map(projectOptions =>
                 projectOptions.references?.map(reference =>
                   typeof reference === 'string'
                     ? undefined
@@ -235,7 +235,7 @@ function guessReadableGlobPattern(pathGroups: string[][]): string | undefined {
 
 function buildProjectExport(
   {resolvedDir}: ResolvedPackageOptions,
-  {exportAs, exportSourceAs, inDir, outDir}: ResolvedTypeScriptProjectOptions,
+  {exports, exportSourceAs, inDir, builds}: ResolvedTypeScriptProjectOptions,
 ): Record<string, string | Record<string, string>> | undefined {
   const exportSourceAsPart = exportSourceAs
     ? {
@@ -247,17 +247,22 @@ function buildProjectExport(
     : undefined;
 
   return emptyObjectAsUndefined({
-    ...(exportAs
+    ...(exports
       ? {
           types: `./${Path.posix.relative(
             resolvedDir,
-            Path.posix.join(outDir, 'index.d.ts'),
+            Path.posix.join(builds[0].outDir, 'index.d.ts'),
           )}`,
           ...exportSourceAsPart,
-          [exportAs]: `./${Path.posix.relative(
-            resolvedDir,
-            Path.posix.join(outDir, 'index.js'),
-          )}`,
+          ...Object.fromEntries(
+            builds.map(({module, outDir}) => [
+              module === 'cjs' ? 'require' : 'import',
+              `./${Path.posix.relative(
+                resolvedDir,
+                Path.posix.join(outDir, 'index.js'),
+              )}`,
+            ]),
+          ),
         }
       : exportSourceAsPart),
   });
