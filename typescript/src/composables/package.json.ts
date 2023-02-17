@@ -6,7 +6,7 @@ import {
   extendPackageScript,
   fetchPackageVersions,
 } from '@magicspace/utils';
-import * as _ from 'lodash';
+import _ from 'lodash';
 
 import type {ResolvedPackageOptions} from '../../../general/bld/library';
 import type {
@@ -245,6 +245,8 @@ function buildProjectExport(
         )}`,
       }
     : undefined;
+
+  builds = _.sortBy(builds, build => ['esm', 'cjs'].indexOf(build.module));
 
   return emptyObjectAsUndefined({
     ...(exports

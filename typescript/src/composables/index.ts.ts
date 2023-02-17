@@ -1,7 +1,7 @@
 import * as Path from 'path';
 
 import {composable, handlebars} from '@magicspace/core';
-import * as _ from 'lodash';
+import _ from 'lodash';
 
 import type {ResolvedOptions} from '../library';
 
