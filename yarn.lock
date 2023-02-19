@@ -37,9 +37,9 @@
   integrity sha512-ZnQMnLV4e7hDlUvw8H+U8ASL02SS2Gn6+9Ac3wGGLIe7+je2AeAOxPY+izIPJDfFDb7eDjev0Us8MO1iFRN8hA==
 
 "@magicspace/core@^0.3.0-alpha.1":
-  version "0.3.0-alpha.1"
-  resolved "https://registry.yarnpkg.com/@magicspace/core/-/core-0.3.0-alpha.1.tgz#c7c3f2109727f3e239f364e2cbb70ab48b4a1304"
-  integrity sha512-EgiGENTDlnpjUiE1bo1iH8IfX6pc/jx9tBfYU+pU+oXWy5+sv28vhIbksTlKfNtM5TjeclUwcN7zx1R31Uni7A==
+  version "0.3.0-alpha.4"
+  resolved "https://registry.yarnpkg.com/@magicspace/core/-/core-0.3.0-alpha.4.tgz#8c87a85596dc719939418026d48dcac1ddc49470"
+  integrity sha512-YrLVHM/6fv5mZiDGhh0QKti0ye+16M8OhYJiRiXdXXgjCGDDTKklx7kQ3fy53egMYXvndAAeFYFxfKJvGxH6NQ==
   dependencies:
     "@magicspace/utils" "^0.3.0-alpha.1"
     enhanced-resolve "^5.12.0"
@@ -53,7 +53,7 @@
     tmp "^0.2.1"
     tslang "^0.1.27"
     tslib "^2.5.0"
-    x-value "^0.1.5"
+    x-value "^0.1.8"
     yaml "^2.2.1"
 
 "@magicspace/utils@^0.3.0-alpha.1":
@@ -2130,10 +2130,10 @@ wrappy@1:
   resolved "https://registry.yarnpkg.com/wrappy/-/wrappy-1.0.2.tgz#b5243d8f3ec1aa35f1364605bc0d1036e30ab69f"
   integrity sha1-tSQ9jz7BqjXxNkYFvA0QNuMKtp8=
 
-x-value@^0.1.5:
-  version "0.1.5"
-  resolved "https://registry.yarnpkg.com/x-value/-/x-value-0.1.5.tgz#3b5bfbb916a8a3d1efba54a3f6accc3f6812fa24"
-  integrity sha512-dqAfAfrF3o85hjuGRWUT8NuzlPR/kL8SAb1z0dM+vDmtCOF7lWQD+1RFpEoC6M/akOu9rMR8Jm9t8A0srfsY1g==
+x-value@^0.1.8:
+  version "0.1.8"
+  resolved "https://registry.yarnpkg.com/x-value/-/x-value-0.1.8.tgz#aed6c128abd916f7ccde0d5b05f48a6942e7b78b"
+  integrity sha512-rHJUlrs+eexg34BOIezX22fLWdJkm9e7yUyZ1TCUOAF2EhetSmhScHaIVANBq9phe6q+1P9K+KB5lB+xQmqSAw==
   dependencies:
     lodash.isequal "^4.5.0"
     tslib "^2.5.0"

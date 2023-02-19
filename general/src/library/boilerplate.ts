@@ -32,7 +32,12 @@ export type LicenseName = x.TypeOf<typeof LicenseName>;
 
 export const PackageOptions = x.object({
   name: x.string,
-  dir: x.string.optional(),
+  dir: x.string
+    .nominal({
+      description:
+        'Directory name of this package, defaults to package name ("@*/" removed if any).',
+    })
+    .optional(),
 });
 
 export type PackageOptions = x.TypeOf<typeof PackageOptions>;
@@ -67,7 +72,11 @@ export const Options = x.object({
   repository: x.string.optional(),
   license: LicenseName.optional(),
   author: x.string.optional(),
-  packagesDir: x.string.optional(),
+  packagesDir: x.string
+    .nominal({
+      description: 'Name of the packages directory, defaults to "packages".',
+    })
+    .optional(),
   packages: x.array(PackageOptions).optional(),
   prettier: PrettierOptions.optional(),
 });

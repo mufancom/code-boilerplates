@@ -14,13 +14,7 @@ import {
 } from '../../../general/bld/library';
 
 export const TypeScriptProjectReferenceOptions = x.object({
-  /**
-   * Package name to reference.
-   */
   package: x.string,
-  /**
-   * Project name to reference.
-   */
   project: x.string,
 });
 
@@ -42,63 +36,76 @@ export const BuildModuleType = x.union([x.literal('cjs'), x.literal('esm')]);
 export type BuildModuleType = x.TypeOf<typeof BuildModuleType>;
 
 export const TypeScriptProjectOptions = x.object({
-  /**
-   * TypeScript project name, defaults to 'program'.
-   */
-  name: x.string.optional(),
-  /**
-   * Is this TypeScript project a library or program? Defaults to 'library'
-   * if project name is 'library', otherwise 'program'.
-   */
+  name: x.string
+    .nominal({description: "TypeScript project name, defaults to 'program'."})
+    .optional(),
   type: x
     .union([x.literal('library'), x.literal('program'), x.literal('script')])
+    .nominal({
+      description:
+        "Defaults to 'library' if project name is 'library', otherwise 'program'.",
+    })
     .optional(),
-  /**
-   * Module type to build, defaults to 'cjs'.
-   */
-  module: x.union([BuildModuleType, x.array(BuildModuleType)]).optional(),
-  /**
-   * Whether to export.
-   */
-  exports: x.boolean.optional(),
-  /**
-   * Export source with specific condition name, e.g.: "vite".
-   */
-  exportSourceAs: x.string.optional(),
-  /**
-   * Is this TypeScript project a development-time project? Defaults to
-   * true if the project name is 'test', otherwise false.
-   */
-  dev: x.boolean.optional(),
-  /**
-   * Parent directory, defaults to false (package directory).
-   */
-  parentDir: x.union([x.string, x.literal(false)]).optional(),
-  /**
-   * Source directory, defaults to false if the project type is 'script',
-   * otherwise 'src'.
-   */
-  src: x.union([x.string, x.literal(false)]).optional(),
-  /**
-   * TypeScript project directory under source directory, defaults to
-   * `name` option.
-   */
-  dir: x.union([x.string, x.literal(false)]).optional(),
-  /**
-   * Whether this project does not emit build artifact, defaults to true if
-   * `src` is false, otherwise false.
-   */
-  noEmit: x.boolean.optional(),
-  /**
-   * Add entrances file(s) and related package/configuration. If true, it
-   * will use the default `['@entrances.ts']`.
-   */
-  entrances: x.union([x.array(x.string), x.boolean]).optional(),
-  /**
-   * References to other TypeScript projects, will be convert to
-   * `references` field in 'tsconfig.json'.
-   */
-  references: x.array(GeneralTypeScriptProjectReferenceOptions).optional(),
+  module: x
+    .union([BuildModuleType, x.array(BuildModuleType)])
+    .nominal({description: "Module type to build, defaults to 'cjs'."})
+    .optional(),
+  exports: x.boolean
+    .nominal({description: 'Whether generate `exports` field in package.json'})
+    .optional(),
+  exportSourceAs: x.string
+    .nominal({
+      description: "Export source with specific condition name, e.g.: 'vite'.",
+    })
+    .optional(),
+  dev: x.boolean
+    .nominal({
+      description: `\
+Whether this TypeScript project is a development-time project, \
+defaults to true if the project name is 'test' or project type is 'script', \
+otherwise false.`,
+    })
+    .optional(),
+  parentDir: x
+    .union([x.string, x.literal(false)])
+    .nominal({description: 'Extra parent directory, defaults to false.'})
+    .optional(),
+  src: x
+    .union([x.string, x.literal(false)])
+    .nominal({
+      description:
+        "Source directory, defaults to false if the project type is 'script', otherwise 'src'.",
+    })
+    .optional(),
+  dir: x
+    .union([x.string, x.literal(false)])
+    .nominal({
+      description:
+        'TypeScript project directory under source directory, defaults to `name` option.',
+    })
+    .optional(),
+  noEmit: x.boolean
+    .nominal({
+      description: `\
+Whether this project does not emit build artifact, \
+defaults to true if \`src\` is false, otherwise false.`,
+    })
+    .optional(),
+  entrances: x
+    .union([x.array(x.string), x.boolean])
+    .nominal({
+      description: `\
+Whether to add entrances file(s) and related package/configuration.\
+If true, defaults to ['@entrances.ts'].`,
+    })
+    .optional(),
+  references: x
+    .array(GeneralTypeScriptProjectReferenceOptions)
+    .nominal({
+      description:
+        "References to other TypeScript projects, corresponded to `references` field in 'tsconfig.json'",
+    })
+    .optional(),
 });
 
 export type TypeScriptProjectOptions = x.TypeOf<
