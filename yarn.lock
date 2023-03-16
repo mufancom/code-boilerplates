@@ -53,10 +53,10 @@
   resolved "https://registry.yarnpkg.com/@humanwhocodes/object-schema/-/object-schema-1.2.1.tgz#b520529ec21d8e5945a1851dfd1c32e94e39ff45"
   integrity sha512-ZnQMnLV4e7hDlUvw8H+U8ASL02SS2Gn6+9Ac3wGGLIe7+je2AeAOxPY+izIPJDfFDb7eDjev0Us8MO1iFRN8hA==
 
-"@magicspace/core@^0.3.0-alpha.1":
-  version "0.3.0-alpha.4"
-  resolved "https://registry.yarnpkg.com/@magicspace/core/-/core-0.3.0-alpha.4.tgz#8c87a85596dc719939418026d48dcac1ddc49470"
-  integrity sha512-YrLVHM/6fv5mZiDGhh0QKti0ye+16M8OhYJiRiXdXXgjCGDDTKklx7kQ3fy53egMYXvndAAeFYFxfKJvGxH6NQ==
+"@magicspace/core@^0.3.0-alpha.5":
+  version "0.3.0-alpha.5"
+  resolved "https://registry.yarnpkg.com/@magicspace/core/-/core-0.3.0-alpha.5.tgz#f845f9aaef4622ea457ccc674cd8349e7b5cc67e"
+  integrity sha512-oL0+OyxvzjWLNVyZJuIgej+6mbY8ubdv2zYEBxs43cSmo5oKKgtRPLV0TppVsBe7U4P2+JTM4gD5W/rIw3GbFw==
   dependencies:
     "@magicspace/utils" "^0.3.0-alpha.1"
     enhanced-resolve "^5.12.0"
