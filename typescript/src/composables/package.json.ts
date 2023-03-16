@@ -17,7 +17,7 @@ import type {
 const ROOT_DEV_DEPENDENCY_DICT = {
   '@mufan/code': '0.2',
   '@mufan/eslint-plugin': '0.1',
-  rimraf: '3',
+  rimraf: '4',
   typescript: '4',
   'run-in-every': '0.2',
 };
