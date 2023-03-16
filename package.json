@@ -1,21 +1,35 @@
 {
   "name": "@mufan/code-boilerplates",
+  "version": "0.0.0",
   "description": "Code boilerplates for Mufan",
   "repository": "https://github.com/makeflow/mufan-code-boilerplates.git",
   "license": "MIT",
   "author": "Chengdu Mufan Technology Co., Ltd.",
+  "exports": {
+    "./general": {
+      "types": "./general/bld/library/index.d.ts",
+      "require": "./general/bld/library/index.js"
+    },
+    "./typescript": {
+      "types": "./typescript/bld/library/index.d.ts",
+      "require": "./typescript/bld/library/index.js"
+    }
+  },
   "scripts": {
     "build": "rimraf */bld && tsc --build",
     "lint": "run-in-every eslint-project --parallel --echo -- eslint --config {configFileName} --no-error-on-unmatched-pattern .",
     "lint-prettier": "prettier --check .",
     "test": "yarn lint-prettier && yarn build && yarn lint"
   },
+  "dependencies": {
+    "tslib": "^2.5.0"
+  },
   "devDependencies": {
-    "@mufan/code": "^0.2.15",
+    "@mufan/code": "^0.2.16",
     "@mufan/eslint-plugin": "^0.1.77",
-    "eslint": "^8.34.0",
+    "eslint": "^8.36.0",
     "prettier": "^2.8.4",
-    "rimraf": "^3.0.2",
+    "rimraf": "^4.4.0",
     "run-in-every": "^0.2.0",
     "typescript": "^4.9.5"
   }
