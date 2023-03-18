@@ -59,6 +59,7 @@ export default composable<ResolvedOptions>(({resolvedProjects: projects}) => {
                     moduleResolution: module === 'esm' ? 'nodenext' : undefined,
                     // fallback to undefined if no condition matched.
                     experimentalDecorators: entrances.length > 0 || undefined,
+                    rootDir: '.',
                     outDir: Path.posix.relative(inDir, outDir),
                     noEmit: noEmit ? true : undefined,
                   },
