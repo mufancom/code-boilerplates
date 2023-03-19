@@ -10,6 +10,7 @@ import _ from 'lodash';
 
 import type {ResolvedPackageOptions} from '../../../general/bld/library';
 import type {
+  PackageExports,
   ResolvedOptions,
   ResolvedTypeScriptProjectOptions,
 } from '../library';
@@ -128,21 +129,26 @@ export default composable<ResolvedOptions>(
               packageOptions.packageJSONPath,
           );
 
-          const libraryProjects = packageProjects
-            .filter(project => project.type === 'library')
-            .sort((a, b) => {
-              return a.name === 'library'
-                ? -Infinity
-                : b.name === 'library'
-                ? Infinity
-                : a.name < b.name
-                ? -1
-                : 1;
-            });
-
-          const mainLibraryProject = libraryProjects.find(
-            project => project.name === 'library',
+          const projectAndExportsArray = _.compact(
+            packageProjects.map(
+              (
+                project,
+              ):
+                | [ResolvedTypeScriptProjectOptions, PackageExports]
+                | undefined =>
+                project.exports ? [project, project.exports] : undefined,
+            ),
           );
+
+          const singleProjectAndExports =
+            projectAndExportsArray.length === 1
+              ? projectAndExportsArray[0]
+              : undefined;
+          const singleMainProjectAndExports =
+            singleProjectAndExports &&
+            singleProjectAndExports[1].subpath === '.'
+              ? singleProjectAndExports
+              : undefined;
 
           const entrances =
             anyProjectWithEntrances &&
@@ -150,24 +156,23 @@ export default composable<ResolvedOptions>(
 
           return {
             ...data,
-            ...(mainLibraryProject && libraryProjects.length === 1
+            ...(singleMainProjectAndExports
               ? {
                   exports: buildProjectExport(
                     packageOptions,
-                    mainLibraryProject,
+                    singleMainProjectAndExports[0],
+                    singleMainProjectAndExports[1],
                   ),
                 }
-              : libraryProjects.length > 0
+              : projectAndExportsArray.length > 0
               ? {
                   exports: emptyObjectAsUndefined({
                     ...data.exports,
                     ...Object.fromEntries(
-                      libraryProjects
-                        .map(project => [
-                          project.name === 'library'
-                            ? '.'
-                            : `./${project.name}`,
-                          buildProjectExport(packageOptions, project),
+                      projectAndExportsArray
+                        .map(([project, exports]) => [
+                          exports.subpath,
+                          buildProjectExport(packageOptions, project, exports),
                         ])
                         .filter(([, value]) => !!value),
                     ),
@@ -235,42 +240,43 @@ function guessReadableGlobPattern(pathGroups: string[][]): string | undefined {
 
 function buildProjectExport(
   {resolvedDir}: ResolvedPackageOptions,
-  {exports, exportSourceAs, inDir, builds}: ResolvedTypeScriptProjectOptions,
+  {exportSourceAs, inDir, builds, noEmit}: ResolvedTypeScriptProjectOptions,
+  {module: exportsModule}: PackageExports,
 ): Record<string, string | Record<string, string>> | undefined {
   const exportSourceAsPart = exportSourceAs
     ? {
         [exportSourceAs]: `./${Path.posix.relative(
           resolvedDir,
-          Path.posix.join(inDir, 'index.ts'),
+          Path.posix.join(inDir, `${exportsModule}.ts`),
         )}`,
       }
     : undefined;
+
+  if (noEmit) {
+    return exportSourceAsPart;
+  }
 
   const primaryBuild =
     builds.find(build => build.module === 'cjs') ?? builds[0];
 
   builds = _.sortBy(builds, build => ['esm', 'cjs'].indexOf(build.module));
 
-  return emptyObjectAsUndefined({
-    ...(exports
-      ? {
-          types: `./${Path.posix.relative(
-            resolvedDir,
-            Path.posix.join(primaryBuild.outDir, 'index.d.ts'),
-          )}`,
-          ...exportSourceAsPart,
-          ...Object.fromEntries(
-            builds.map(({module, outDir}) => [
-              module === 'cjs' ? 'require' : 'import',
-              `./${Path.posix.relative(
-                resolvedDir,
-                Path.posix.join(outDir, 'index.js'),
-              )}`,
-            ]),
-          ),
-        }
-      : exportSourceAsPart),
-  });
+  return {
+    types: `./${Path.posix.relative(
+      resolvedDir,
+      Path.posix.join(primaryBuild.outDir, `${exportsModule}.d.ts`),
+    )}`,
+    ...exportSourceAsPart,
+    ...Object.fromEntries(
+      builds.map(({module, outDir}) => [
+        module === 'cjs' ? 'require' : 'import',
+        `./${Path.posix.relative(
+          resolvedDir,
+          Path.posix.join(outDir, `${exportsModule}.js`),
+        )}`,
+      ]),
+    ),
+  };
 }
 
 export function emptyObjectAsUndefined<T extends object>(

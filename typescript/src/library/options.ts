@@ -35,6 +35,25 @@ export const BuildModuleType = x.union([x.literal('cjs'), x.literal('esm')]);
 
 export type BuildModuleType = x.TypeOf<typeof BuildModuleType>;
 
+const PACKAGE_EXPORTS_SUBPATH_PATTERN = /^\.(?:\/.+)?$/;
+
+export const PackageExports = x.object({
+  subpath: x.string.refined(
+    value => x.refinement(PACKAGE_EXPORTS_SUBPATH_PATTERN.test(value), value),
+    {
+      description:
+        'Submodule should be "." or relative path that starts with "./".',
+      pattern: PACKAGE_EXPORTS_SUBPATH_PATTERN.source,
+    },
+  ),
+  module: x.string.nominal({
+    description:
+      'Module should be the source file name without `.ts` extension relative to the source directory, e.g. "index".',
+  }),
+});
+
+export type PackageExports = x.TypeOf<typeof PackageExports>;
+
 export const TypeScriptProjectOptions = x.object({
   name: x.string
     .nominal({description: "TypeScript project name, defaults to 'program'."})
@@ -50,7 +69,8 @@ export const TypeScriptProjectOptions = x.object({
     .union([BuildModuleType, x.array(BuildModuleType)])
     .nominal({description: "Module type to build, defaults to 'cjs'."})
     .optional(),
-  exports: x.boolean
+  exports: x
+    .union([PackageExports, x.string, x.boolean])
     .nominal({description: 'Whether generate `exports` field in package.json'})
     .optional(),
   exportSourceAs: x.string
@@ -138,7 +158,7 @@ export interface ResolvedTypeScriptProjectOptions {
   upperOutDir: string;
   type: 'library' | 'program' | 'script';
   builds: ResolvedTypeScriptBuild[];
-  exports: boolean;
+  exports: PackageExports | false;
   exportSourceAs: string | undefined;
   dev: boolean;
   noEmit: boolean;
@@ -236,6 +256,22 @@ export function buildResolvedTypeScriptProjectOptions(
   }: TypeScriptProjectOptions,
   packageOptions: ResolvedPackageOptions,
 ): ResolvedTypeScriptProjectOptionsWithRawReferences {
+  if (exports === true) {
+    if (type === 'library') {
+      exports = {
+        subpath: name === 'library' ? '.' : `./${name}`,
+        module: 'index',
+      };
+    } else {
+      exports = false;
+    }
+  } else if (typeof exports === 'string') {
+    exports = {
+      subpath: `./${name}`,
+      module: exports,
+    };
+  }
+
   if (parentDir === false) {
     parentDir = '';
   }
