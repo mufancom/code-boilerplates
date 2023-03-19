@@ -66,7 +66,9 @@ export default composable<ResolvedOptions>(
           ]);
 
           if (rimrafPattern) {
-            rimrafScript = `rimraf ${rimrafPattern}`;
+            rimrafScript = `rimraf ${
+              /[\*{]/.test(rimrafPattern) ? '--glob ' : ''
+            }${rimrafPattern}`;
           }
         }
 

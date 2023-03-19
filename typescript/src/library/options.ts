@@ -1,6 +1,7 @@
 import * as Path from 'path';
 
 import {x} from '@magicspace/core';
+import _ from 'lodash';
 import type {OmitValueOfKey} from 'tslang';
 
 import type {
@@ -177,6 +178,7 @@ export interface ResolvedTypeScriptProjectReference {
 export type ResolvedOptions = Options &
   ResolvedGeneralOptions & {
     resolvedProjects: ResolvedTypeScriptProjectOptions[];
+    bldDirNames: string[];
   };
 
 export function resolveOptions(options: Options): ResolvedOptions {
@@ -189,48 +191,58 @@ export function resolveOptions(options: Options): ResolvedOptions {
       ) ?? [],
   );
 
+  const resolvedProjects = projectOptionsArray.map(
+    ({references, ...projectOptions}) => {
+      return {
+        ...projectOptions,
+        references: references?.map(rawReference => {
+          let referencedPackageName: string;
+          let referencedProjectName: string;
+
+          if (typeof rawReference === 'string') {
+            referencedPackageName = projectOptions.package.name;
+            referencedProjectName = rawReference;
+          } else {
+            referencedPackageName = rawReference.package;
+            referencedProjectName = rawReference.project;
+          }
+
+          const referencedProjectOptions = projectOptionsArray.find(
+            projectOptions =>
+              projectOptions.package.name === referencedPackageName &&
+              projectOptions.name === referencedProjectName,
+          );
+
+          if (!referencedProjectOptions) {
+            throw new Error(
+              `Unknown TypeScript project name ${JSON.stringify(
+                referencedProjectName,
+              )} under package ${JSON.stringify(referencedPackageName)}`,
+            );
+          }
+
+          return {
+            path: Path.posix.relative(
+              projectOptions.inDir,
+              referencedProjectOptions.inDir,
+            ),
+          };
+        }),
+      };
+    },
+  );
+
+  const noEmitProjectCount = resolvedProjects.filter(
+    project => project.noEmit,
+  ).length;
+
   return {
     ...resolvedOptions,
-    resolvedProjects: projectOptionsArray.map(
-      ({references, ...projectOptions}) => {
-        return {
-          ...projectOptions,
-          references: references?.map(rawReference => {
-            let referencedPackageName: string;
-            let referencedProjectName: string;
-
-            if (typeof rawReference === 'string') {
-              referencedPackageName = projectOptions.package.name;
-              referencedProjectName = rawReference;
-            } else {
-              referencedPackageName = rawReference.package;
-              referencedProjectName = rawReference.project;
-            }
-
-            const referencedProjectOptions = projectOptionsArray.find(
-              projectOptions =>
-                projectOptions.package.name === referencedPackageName &&
-                projectOptions.name === referencedProjectName,
-            );
-
-            if (!referencedProjectOptions) {
-              throw new Error(
-                `Unknown TypeScript project name ${JSON.stringify(
-                  referencedProjectName,
-                )} under package ${JSON.stringify(referencedPackageName)}`,
-              );
-            }
-
-            return {
-              path: Path.posix.relative(
-                projectOptions.inDir,
-                referencedProjectOptions.inDir,
-              ),
-            };
-          }),
-        };
-      },
-    ),
+    resolvedProjects,
+    bldDirNames: _.compact([
+      noEmitProjectCount < resolvedProjects.length ? 'bld' : undefined,
+      noEmitProjectCount > 0 ? '.bld' : undefined,
+    ]),
   };
 }
 
@@ -290,7 +302,11 @@ export function buildResolvedTypeScriptProjectOptions(
 
   const srcDir = Path.posix.join(packageDir, parentDir, src);
   const inDir = Path.posix.join(srcDir, dir);
-  const bldDir = Path.posix.join(packageDir, parentDir, 'bld');
+  const bldDir = Path.posix.join(
+    packageDir,
+    parentDir,
+    noEmit ? '.bld' : 'bld',
+  );
 
   const outFolderName = dir || name;
   const upperOutDir = Path.posix.join(bldDir, outFolderName);

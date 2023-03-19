@@ -1,9 +1,15 @@
-import {text} from '@magicspace/core';
+import {composable, text} from '@magicspace/core';
 
-export default text(
-  '.prettierignore',
-  content => `${content}\
+import type {ResolvedOptions} from '../library';
+
+export default composable<ResolvedOptions>(({bldDirNames}) =>
+  bldDirNames.length > 0
+    ? text(
+        '.prettierignore',
+        content => `${content}\
 # TypeScript Build Artifacts
-bld/
+${bldDirNames.map(bldDirName => `${bldDirName}/`).join('\n')}
 `,
+      )
+    : undefined,
 );

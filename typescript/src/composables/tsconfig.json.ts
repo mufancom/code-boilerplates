@@ -61,7 +61,8 @@ export default composable<ResolvedOptions>(({resolvedProjects: projects}) => {
                     experimentalDecorators: entrances.length > 0 || undefined,
                     rootDir: '.',
                     outDir: Path.posix.relative(inDir, outDir),
-                    noEmit: noEmit ? true : undefined,
+                    // noEmit is not supported in composite mode, outDir would
+                    // differ though.
                   },
                   references,
                 }
@@ -73,6 +74,7 @@ export default composable<ResolvedOptions>(({resolvedProjects: projects}) => {
                     moduleResolution: module === 'esm' ? 'nodenext' : undefined,
                     declaration: false,
                     outDir: Path.posix.relative(inDir, outDir),
+                    noEmit: noEmit ? true : undefined,
                   },
                 },
             JSON_OPTIONS,
