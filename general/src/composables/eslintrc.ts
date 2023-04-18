@@ -25,6 +25,7 @@ export default json(
   '.eslintrc',
   {
     root: true,
+    ignorePatterns: ['node_modules/'],
     extends: ['eslint:recommended'],
     env: {
       node: true,
