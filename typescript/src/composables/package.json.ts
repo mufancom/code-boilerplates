@@ -18,7 +18,7 @@ import type {
 const ROOT_DEV_DEPENDENCY_DICT = {
   '@mufan/code': '0.2',
   '@mufan/eslint-plugin': '0.1',
-  rimraf: '4',
+  rimraf: '5',
   typescript: '5',
   'run-in-every': '0.2',
 };
@@ -278,6 +278,10 @@ function buildProjectExport(
         )}`,
       ]),
     ),
+    default: `./${Path.posix.relative(
+      resolvedDir,
+      Path.posix.join(builds[0].outDir, `${exportsModule}.js`),
+    )}`,
   };
 }
 
