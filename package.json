@@ -8,11 +8,13 @@
   "exports": {
     "./general": {
       "types": "./general/bld/library/index.d.ts",
-      "require": "./general/bld/library/index.js"
+      "require": "./general/bld/library/index.js",
+      "default": "./general/bld/library/index.js"
     },
     "./typescript": {
       "types": "./typescript/bld/library/index.d.ts",
-      "require": "./typescript/bld/library/index.js"
+      "require": "./typescript/bld/library/index.js",
+      "default": "./typescript/bld/library/index.js"
     }
   },
   "scripts": {
@@ -26,10 +28,10 @@
   },
   "devDependencies": {
     "@mufan/code": "^0.2.16",
-    "@mufan/eslint-plugin": "^0.1.77",
-    "eslint": "^8.38.0",
-    "prettier": "^2.8.7",
-    "rimraf": "^4.4.1",
+    "@mufan/eslint-plugin": "^0.1.78",
+    "eslint": "^8.40.0",
+    "prettier": "^2.8.8",
+    "rimraf": "^5.0.0",
     "run-in-every": "^0.2.0",
     "typescript": "^5.0.4"
   }
