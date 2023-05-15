@@ -18,6 +18,7 @@
     }
   },
   "scripts": {
+    "3": "yarn && yarn-deduplicate && yarn",
     "build": "rimraf --glob */bld && tsc --build",
     "lint": "run-in-every eslint-project --parallel --echo -- eslint --config {configFileName} --no-error-on-unmatched-pattern .",
     "lint-prettier": "prettier --check .",
@@ -28,11 +29,12 @@
   },
   "devDependencies": {
     "@mufan/code": "^0.2.16",
-    "@mufan/eslint-plugin": "^0.1.78",
+    "@mufan/eslint-plugin": "^0.1.79",
     "eslint": "^8.40.0",
     "prettier": "^2.8.8",
     "rimraf": "^5.0.0",
     "run-in-every": "^0.2.0",
-    "typescript": "^5.0.4"
+    "typescript": "^5.0.4",
+    "yarn-deduplicate": "^6.0.2"
   }
 }
