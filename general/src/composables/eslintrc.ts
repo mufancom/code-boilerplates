@@ -26,11 +26,7 @@ export default json(
   {
     root: true,
     ignorePatterns: ['node_modules/'],
-    extends: ['eslint:recommended'],
-    env: {
-      node: true,
-      es2020: true,
-    },
+    extends: ['plugin:@mufan/js'],
   },
   JSON_OPTIONS,
 );
