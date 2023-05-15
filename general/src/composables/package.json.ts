@@ -101,7 +101,7 @@ export default composable<ResolvedOptions>(
           description,
           scripts: {
             '3': 'yarn && yarn-deduplicate && yarn',
-            lint: 'eslint .',
+            lint: 'eslint . --no-error-on-unmatched-pattern',
             'lint-prettier': 'prettier --check .',
             test: 'yarn lint-prettier && yarn lint',
           },
