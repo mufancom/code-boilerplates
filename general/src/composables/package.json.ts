@@ -69,6 +69,7 @@ const JSON_OPTIONS: JSONFileOptions = {
 };
 
 const DEV_DEPENDENCY_DICT = {
+  '@mufan/eslint-plugin': '0.1',
   eslint: '8',
   prettier: '2',
   'yarn-deduplicate': '6',
