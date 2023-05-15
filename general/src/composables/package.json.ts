@@ -71,6 +71,7 @@ const JSON_OPTIONS: JSONFileOptions = {
 const DEV_DEPENDENCY_DICT = {
   eslint: '8',
   prettier: '2',
+  'yarn-deduplicate': '6',
 };
 
 export default composable<ResolvedOptions>(
@@ -98,6 +99,7 @@ export default composable<ResolvedOptions>(
           name,
           description,
           scripts: {
+            '3': 'yarn && yarn-deduplicate && yarn',
             lint: 'eslint .',
             'lint-prettier': 'prettier --check .',
             test: 'yarn lint-prettier && yarn lint',
