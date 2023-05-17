@@ -71,15 +71,16 @@ export default composable<ResolvedOptions>(
           }
         }
 
-        scripts['lint'] =
-          'run-in-every eslint-project --parallel --echo -- eslint --config {configFileName} --no-error-on-unmatched-pattern .';
-
         scripts = extendObjectProperties(
           scripts,
           {
             build: extendPackageScript(
               scripts.build,
               _.compact([rimrafScript, 'tsc --build']),
+            ),
+            lint: extendPackageScript(
+              scripts.lint,
+              'run-in-every eslint-project --parallel --echo -- eslint --no-error-on-unmatched-pattern .',
             ),
           },
           {

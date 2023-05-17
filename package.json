@@ -20,7 +20,7 @@
   "scripts": {
     "3": "yarn && yarn-deduplicate && yarn",
     "build": "rimraf --glob */bld && tsc --build",
-    "lint": "run-in-every eslint-project --parallel --echo -- eslint --config {configFileName} --no-error-on-unmatched-pattern .",
+    "lint": "eslint --no-error-on-unmatched-pattern . && run-in-every eslint-project --parallel --echo -- eslint --no-error-on-unmatched-pattern .",
     "lint-prettier": "prettier --check .",
     "test": "yarn lint-prettier && yarn build && yarn lint"
   },
@@ -36,7 +36,7 @@
   },
   "devDependencies": {
     "@mufan/code": "^0.2.16",
-    "@mufan/eslint-plugin": "^0.1.79",
+    "@mufan/eslint-plugin": "^0.1.80",
     "@types/lodash": "^4.14.159",
     "@types/node": "^14.0.27",
     "eslint": "^8.40.0",

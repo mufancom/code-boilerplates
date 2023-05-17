@@ -22,11 +22,20 @@ const JSON_OPTIONS: JSONFileOptions = {
 };
 
 export default json(
-  '.eslintrc',
+  '.eslintrc.json',
   {
     root: true,
     ignorePatterns: ['node_modules/'],
     extends: ['plugin:@mufan/js'],
+    overrides: [
+      {files: '**/*.{js,jsx}'},
+      {
+        files: '**/*.cjs',
+        parserOptions: {
+          sourceType: 'script',
+        },
+      },
+    ],
   },
   JSON_OPTIONS,
 );

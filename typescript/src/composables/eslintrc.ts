@@ -7,7 +7,7 @@ import type {ResolvedOptions} from '../library';
 
 export default composable<ResolvedOptions>(({resolvedProjects: projects}) => {
   return [
-    json('.eslintrc', (data: any) => {
+    json('.eslintrc.json', (data: any) => {
       return {
         ...data,
         ignorePatterns: [
@@ -22,7 +22,7 @@ export default composable<ResolvedOptions>(({resolvedProjects: projects}) => {
       };
     }),
     ...projects.map(project =>
-      json(Path.join(project.inDir, '.eslintrc'), (data: any) => {
+      json(Path.join(project.inDir, '.eslintrc.json'), (data: any) => {
         return {
           ...data,
           root: true,

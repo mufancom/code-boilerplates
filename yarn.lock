@@ -102,10 +102,10 @@
   resolved "https://registry.yarnpkg.com/@mufan/code/-/code-0.2.16.tgz#aa83f0a1fb6574dcc5904adea76bc6fbb8ac63f5"
   integrity sha512-tkGIrXGiSgpBO5L30c+XQqwXHWTinTQXqAeynN4Qw8ZKkzYNcKBuDxmdnUdiSL69UrSsHdlpchKJqXfaN2EDww==
 
-"@mufan/eslint-plugin@^0.1.79":
-  version "0.1.79"
-  resolved "https://registry.yarnpkg.com/@mufan/eslint-plugin/-/eslint-plugin-0.1.79.tgz#8fb15a790c8ea763a90f8125704334fee92185cb"
-  integrity sha512-wsVp9NEzO0z5p+c/A63EeRh81Ia3o6ezxmSzjsL7uCPehsn0lfbL3VuWM6ZfJOat2WiwmIkxeJwDgjAJ9vGNvw==
+"@mufan/eslint-plugin@^0.1.80":
+  version "0.1.80"
+  resolved "https://registry.yarnpkg.com/@mufan/eslint-plugin/-/eslint-plugin-0.1.80.tgz#7d3c4f5602253648fb06ea32421a3457c0742dab"
+  integrity sha512-WneUCgKaOQ1rObO6EHI8YnP2JMhrL8bz1p+qZgx/8FVdsEfTkDo7bRxzT/bj5uQCXtOigjtAh4Ep0uoAWuB3sg==
   dependencies:
     "@typescript-eslint/eslint-plugin" "^5.59.5"
     "@typescript-eslint/parser" "^5.59.5"
@@ -122,6 +122,8 @@
     module-lens "^0.1.6"
     tslang "^0.1.27"
     tsutils "^3.21.0"
+  optionalDependencies:
+    typescript "^5"
 
 "@nodelib/fs.scandir@2.1.5":
   version "2.1.5"
@@ -2198,7 +2200,7 @@ typed-array-length@^1.0.4:
     for-each "^0.3.3"
     is-typed-array "^1.1.9"
 
-typescript@^5.0.4:
+typescript@^5, typescript@^5.0.4:
   version "5.0.4"
   resolved "https://registry.yarnpkg.com/typescript/-/typescript-5.0.4.tgz#b217fd20119bd61a94d4011274e0ab369058da3b"
   integrity sha512-cW9T5W9xY37cc+jfEnaUvX91foxtHkza3Nw3wkoF4sSlKn0MONdkdEndig/qPBWXNkmplh3NzayQzCiHM4/hqw==
