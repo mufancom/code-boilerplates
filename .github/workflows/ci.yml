@@ -7,20 +7,13 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        node-version: ['16', '18']
+    container: node:20
     steps:
       - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
-        with:
-          node-version: ${{matrix.node-version}}
-      - run: npm install --global yarn
       - run: yarn install
       - run: yarn test
       - run: npm --no-git-tag-version version 0.0.0-$GITHUB_SHA
       - name: Publish to NPM
-        if: ${{matrix.node-version == '18'}}
         uses: JS-DevTools/npm-publish@v1
         with:
           token: ${{secrets.NPM_TOKEN}}

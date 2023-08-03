@@ -113,14 +113,15 @@ export default composable<ResolvedOptions>(
         json(packageOptions.packageJSONPath, (data: any) => {
           const referencedPackageNames = _.compact(
             _.union(
-              ...(packageOptions.projects?.map(projectOptions =>
-                projectOptions.references?.map(reference =>
-                  typeof reference === 'string'
-                    ? undefined
-                    : reference.package !== packageOptions.name
-                    ? reference.package
-                    : undefined,
-                ),
+              ...(packageOptions.projects?.map(
+                projectOptions =>
+                  projectOptions.references?.map(reference =>
+                    typeof reference === 'string'
+                      ? undefined
+                      : reference.package !== packageOptions.name
+                      ? reference.package
+                      : undefined,
+                  ),
               ) ?? []),
             ),
           );
