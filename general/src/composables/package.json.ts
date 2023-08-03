@@ -93,18 +93,26 @@ export default composable<ResolvedOptions>(
 
     const devDependencies = await fetchPackageVersions(DEV_DEPENDENCY_DICT);
 
+    const scripts: Record<string, string> = {
+      '3': 'yarn && yarn-deduplicate && yarn',
+      lint: 'eslint --no-error-on-unmatched-pattern .',
+      'lint-prettier': 'prettier --check .',
+      test: 'yarn lint-prettier && yarn lint',
+    };
+
+    for (const {name, alias} of packages) {
+      if (alias !== undefined && !scripts.hasOwnProperty(alias)) {
+        scripts[alias] = `yarn workspace ${name}`;
+      }
+    }
+
     return [
       json(
         'package.json',
         {
           name,
           description,
-          scripts: {
-            '3': 'yarn && yarn-deduplicate && yarn',
-            lint: 'eslint --no-error-on-unmatched-pattern .',
-            'lint-prettier': 'prettier --check .',
-            test: 'yarn lint-prettier && yarn lint',
-          },
+          scripts,
           devDependencies,
           ...(packagesDir !== undefined
             ? {

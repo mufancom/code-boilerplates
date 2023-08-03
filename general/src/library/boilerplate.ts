@@ -84,6 +84,7 @@ export const Options = x.object({
 export type Options = x.TypeOf<typeof Options>;
 
 export interface ResolvedPackageOptions extends PackageOptions {
+  alias?: string;
   resolvedDir: string;
   packageJSONPath: string;
 }
@@ -113,13 +114,16 @@ export function resolveOptions({
     }
 
     resolvedPackages = (packages ?? []).map(packageOptions => {
+      const alias = packageOptions.name.replace(/^@[^/]+\//, '');
+
       const resolvedDir = Path.posix.join(
         packagesDir!,
-        packageOptions.dir || packageOptions.name.replace(/^@[^/]+/, ''),
+        packageOptions.dir || alias,
       );
 
       return {
         ...packageOptions,
+        alias,
         resolvedDir,
         packageJSONPath: Path.posix.join(resolvedDir, 'package.json'),
       };
