@@ -72,7 +72,27 @@ const DEV_DEPENDENCY_DICT = {
   '@mufan/eslint-plugin': '0.1',
   eslint: '8',
   prettier: '3',
-  'yarn-deduplicate': '6',
+};
+
+const PACKAGE_MANAGER_DEV_DEPENDENCY_DICT = {
+  pnpm: {},
+  yarn: {
+    'yarn-deduplicate': '6',
+  },
+};
+
+const SCRIPT_3_DICT = {
+  pnpm: 'pnpm install && pnpm dedupe && pnpm install',
+  yarn: 'yarn && yarn-deduplicate && yarn',
+};
+
+const WORKSPACE_ALIAS_DICT = {
+  pnpm(name: string): string {
+    return `pnpm --filter ${name}`;
+  },
+  yarn(name: string): string {
+    return `yarn workspace ${name}`;
+  },
 };
 
 export default composable<ResolvedOptions>(
@@ -82,6 +102,7 @@ export default composable<ResolvedOptions>(
     repository,
     author,
     license,
+    packageManager,
     packagesDir,
     packages,
   }) => {
@@ -91,18 +112,21 @@ export default composable<ResolvedOptions>(
       license,
     };
 
-    const devDependencies = await fetchPackageVersions(DEV_DEPENDENCY_DICT);
+    const devDependencies = await fetchPackageVersions({
+      ...DEV_DEPENDENCY_DICT,
+      ...PACKAGE_MANAGER_DEV_DEPENDENCY_DICT[packageManager],
+    });
 
     const scripts: Record<string, string> = {
-      '3': 'yarn && yarn-deduplicate && yarn',
+      '3': SCRIPT_3_DICT[packageManager],
       lint: 'eslint --no-error-on-unmatched-pattern .',
       'lint-prettier': 'prettier --check .',
-      test: 'yarn lint-prettier && yarn lint',
+      test: `${packageManager} lint-prettier && ${packageManager} lint`,
     };
 
     for (const {name, alias} of packages) {
       if (alias !== undefined && !scripts.hasOwnProperty(alias)) {
-        scripts[alias] = `yarn workspace ${name}`;
+        scripts[alias] = WORKSPACE_ALIAS_DICT[packageManager](name);
       }
     }
 

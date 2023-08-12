@@ -29,7 +29,7 @@
     "@magicspace/utils": "^0.3.0-alpha.1",
     "lodash": "^4.17.20",
     "npm-which": "^3.0.1",
-    "prettier": "^3.0.0",
+    "prettier": "^3.0.1",
     "tslang": "^0.1.22",
     "tslib": "^2.6.1",
     "typescript": "^5.1.6"
@@ -39,7 +39,7 @@
     "@mufan/eslint-plugin": "^0.1.81",
     "@types/lodash": "^4.14.159",
     "@types/node": "^14.0.27",
-    "eslint": "^8.46.0",
+    "eslint": "^8.47.0",
     "rimraf": "^5.0.1",
     "run-in-every": "^0.2.0",
     "yarn-deduplicate": "^6.0.2"

@@ -72,6 +72,8 @@ export const Options = x.object({
   repository: x.string.optional(),
   license: LicenseName.optional(),
   author: x.string.optional(),
+  defaultBranch: x.string.optional(),
+  packageManager: x.union([x.literal('pnpm'), x.literal('yarn')]).optional(),
   packagesDir: x.string
     .nominal({
       description: 'Name of the packages directory, defaults to "packages".',
@@ -90,18 +92,19 @@ export interface ResolvedPackageOptions extends PackageOptions {
 }
 
 export interface ResolvedOptions extends Options {
+  defaultBranch: string;
+  packageManager: 'pnpm' | 'yarn';
   packagesDir: string | undefined;
   packages: ResolvedPackageOptions[];
 }
 
-export function resolveOptions<TOptions extends Options>({
-  name,
-  packagesDir,
-  packages,
-  ...rest
-}: TOptions): TOptions & ResolvedOptions;
+export function resolveOptions<TOptions extends Options>(
+  options: TOptions,
+): TOptions & ResolvedOptions;
 export function resolveOptions({
   name,
+  defaultBranch = 'main',
+  packageManager = 'yarn',
   packagesDir,
   packages,
   ...rest
@@ -141,6 +144,8 @@ export function resolveOptions({
 
   return {
     name,
+    defaultBranch,
+    packageManager,
     packagesDir,
     packages: resolvedPackages,
     ...rest,

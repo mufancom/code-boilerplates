@@ -7,7 +7,5 @@ export default text(
 .DS_Store
 *.tgz
 node_modules/
-yarn-error.log
-npm-debug.log
 `,
 );

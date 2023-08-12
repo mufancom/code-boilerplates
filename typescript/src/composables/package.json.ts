@@ -31,7 +31,7 @@ const PROJECT_ENTRANCES_DEPENDENCY_DICT = {
 };
 
 export default composable<ResolvedOptions>(
-  async ({resolvedProjects: projects}) => {
+  async ({packageManager, resolvedProjects: projects}) => {
     const anyProjectWithEntrances = projects.some(
       project => project.entrances.length > 0,
     );
@@ -91,7 +91,7 @@ export default composable<ResolvedOptions>(
         scripts = extendObjectProperties(
           scripts,
           {
-            test: extendPackageScript(scripts.test, 'yarn build', {
+            test: extendPackageScript(scripts.test, `${packageManager} build`, {
               after: '*lint-prettier*',
             }),
           },
