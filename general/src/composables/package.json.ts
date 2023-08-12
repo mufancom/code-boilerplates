@@ -138,14 +138,14 @@ export default composable<ResolvedOptions>(
           description,
           scripts,
           devDependencies,
-          ...(packagesDir !== undefined
-            ? {
-                private: true,
-                workspaces: packages.map(
-                  packageOptions => packageOptions.resolvedDir,
-                ),
-              }
-            : {}),
+          ...(packagesDir !== undefined && {
+            private: true,
+            ...(packageManager === 'yarn' && {
+              workspaces: packages.map(
+                packageOptions => packageOptions.resolvedDir,
+              ),
+            }),
+          }),
           ...common,
         },
         JSON_OPTIONS,

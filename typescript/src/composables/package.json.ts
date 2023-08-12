@@ -30,6 +30,11 @@ const PROJECT_ENTRANCES_DEPENDENCY_DICT = {
   'entrance-decorator': '0.2',
 };
 
+const WORKSPACE_REFERENCE_DICT = {
+  pnpm: 'workspace:*',
+  yarn: '*',
+};
+
 export default composable<ResolvedOptions>(
   async ({packageManager, resolvedProjects: projects}) => {
     const anyProjectWithEntrances = projects.some(
@@ -157,6 +162,8 @@ export default composable<ResolvedOptions>(
             anyProjectWithEntrances &&
             packageProjects.some(project => project.entrances.length > 0);
 
+          const workspaceReference = WORKSPACE_REFERENCE_DICT[packageManager];
+
           return {
             ...data,
             ...(singleMainProjectAndExports
@@ -186,7 +193,9 @@ export default composable<ResolvedOptions>(
               ...data.dependencies,
               ...projectDependencies,
               ...(entrances ? projectEntrancesDependencies : undefined),
-              ..._.fromPairs(referencedPackageNames.map(name => [name, '*'])),
+              ..._.fromPairs(
+                referencedPackageNames.map(name => [name, workspaceReference]),
+              ),
             },
           };
         }),

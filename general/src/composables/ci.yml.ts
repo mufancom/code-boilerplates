@@ -4,7 +4,7 @@ import type {ResolvedOptions} from '../library';
 
 export default composable<ResolvedOptions>(
   ({defaultBranch, packageManager}) => {
-    return yaml('.github/workflows/ci.yml', {
+    return yaml('.github/workflows/ci.yaml', {
       name: 'CI',
       on: {
         push: {
