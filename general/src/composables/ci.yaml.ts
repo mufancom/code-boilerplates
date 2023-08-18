@@ -22,6 +22,13 @@ export default composable<ResolvedOptions>(
             {
               uses: 'actions/checkout@v3',
             },
+            ...(packageManager === 'pnpm'
+              ? [
+                  {
+                    run: 'npm install --global pnpm',
+                  },
+                ]
+              : []),
             {
               run: `${packageManager} install`,
             },
