@@ -1,6 +1,7 @@
 import * as Path from 'path';
 
 import {boilerplate, composables, x} from '@magicspace/core';
+import _ from 'lodash';
 
 export default boilerplate<Options>(async options => {
   return {
@@ -96,6 +97,8 @@ export interface ResolvedOptions extends Options {
   packageManager: 'pnpm' | 'yarn';
   packagesDir: string | undefined;
   packages: ResolvedPackageOptions[];
+  packagesSortedByName: ResolvedPackageOptions[];
+  packagesSortedByAlias: ResolvedPackageOptions[];
 }
 
 export function resolveOptions<TOptions extends Options>(
@@ -148,6 +151,14 @@ export function resolveOptions({
     packageManager,
     packagesDir,
     packages: resolvedPackages,
+    packagesSortedByName: _.sortBy(
+      resolvedPackages,
+      packageOptions => packageOptions.name,
+    ),
+    packagesSortedByAlias: _.sortBy(
+      resolvedPackages,
+      packageOptions => packageOptions.alias ?? '',
+    ),
     ...rest,
   };
 }

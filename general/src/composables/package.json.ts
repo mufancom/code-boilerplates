@@ -3,6 +3,7 @@ import * as Path from 'path';
 import type {JSONFileOptions} from '@magicspace/core';
 import {composable, json} from '@magicspace/core';
 import {fetchPackageVersions} from '@magicspace/utils';
+import _ from 'lodash';
 
 import type {ResolvedOptions} from '../library';
 
@@ -105,6 +106,7 @@ export default composable<ResolvedOptions>(
     packageManager,
     packagesDir,
     packages,
+    packagesSortedByName,
   }) => {
     const common = {
       repository,
@@ -124,7 +126,7 @@ export default composable<ResolvedOptions>(
       test: `${packageManager} lint-prettier && ${packageManager} lint`,
     };
 
-    for (const {name, alias} of packages) {
+    for (const {name, alias} of packagesSortedByName) {
       if (alias !== undefined && !scripts.hasOwnProperty(alias)) {
         scripts[alias] = WORKSPACE_ALIAS_DICT[packageManager](name);
       }
@@ -141,7 +143,7 @@ export default composable<ResolvedOptions>(
           ...(packagesDir !== undefined && {
             private: true,
             ...(packageManager === 'yarn' && {
-              workspaces: packages.map(
+              workspaces: packagesSortedByName.map(
                 packageOptions => packageOptions.resolvedDir,
               ),
             }),
