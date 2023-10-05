@@ -1,6 +1,6 @@
 # @mufan/code-boilerplates
 
-Just another awesome magic.
+Code boilerplates for Mufan
 
 ## License
 
