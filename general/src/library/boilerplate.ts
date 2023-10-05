@@ -31,6 +31,15 @@ export const LicenseName = x.union([
 
 export type LicenseName = x.TypeOf<typeof LicenseName>;
 
+const BadgesOptions = x.object({
+  npm: x.boolean.optional(),
+  repo: x.boolean.optional(),
+  coverage: x.boolean.optional(),
+  license: x.boolean.optional(),
+});
+
+export type BadgesOptions = x.TypeOf<typeof BadgesOptions>;
+
 export const PackageOptions = x.object({
   name: x.string,
   dir: x.string
@@ -39,6 +48,7 @@ export const PackageOptions = x.object({
         'Directory name of this package, defaults to package name ("@*/" removed if any).',
     })
     .optional(),
+  badges: BadgesOptions.optional(),
 });
 
 export type PackageOptions = x.TypeOf<typeof PackageOptions>;
@@ -73,6 +83,7 @@ export const Options = x.object({
   repository: x.string.optional(),
   license: LicenseName.optional(),
   author: x.string.optional(),
+  badges: BadgesOptions.optional(),
   defaultBranch: x.string.optional(),
   packageManager: x.union([x.literal('pnpm'), x.literal('yarn')]).optional(),
   packagesDir: x.string
