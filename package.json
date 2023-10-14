@@ -26,7 +26,6 @@
     "tslib": "^2.6.2"
   },
   "devDependencies": {
-    "@mufan/code": "^0.2.17",
     "@mufan/eslint-plugin": "^0.1.82",
     "eslint": "^8.51.0",
     "prettier": "^3.0.3",

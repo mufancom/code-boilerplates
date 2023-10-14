@@ -7,7 +7,7 @@
     "/typescript/src/",
     "/typescript/bld/"
   ],
-  "extends": ["plugin:@mufan/js"],
+  "extends": ["plugin:@mufan/javascript"],
   "overrides": [
     {
       "files": "**/*.{js,jsx}"
