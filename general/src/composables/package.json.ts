@@ -165,7 +165,7 @@ export default composable<ResolvedOptions>(
               ...common,
               name: packageOptions.name,
               version: '0.0.0',
-              type: packageOptions.type,
+              type: packageOptions.type ?? type,
             };
           },
           JSON_OPTIONS,
