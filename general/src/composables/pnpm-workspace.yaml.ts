@@ -1,6 +1,6 @@
 import {composable, yaml} from '@magicspace/core';
 
-import type {ResolvedOptions} from '../library';
+import type {ResolvedOptions} from '../library/index.js';
 
 export default composable<ResolvedOptions>(
   ({packageManager, packagesDir, packages}) => {

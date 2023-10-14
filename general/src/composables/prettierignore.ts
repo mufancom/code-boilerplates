@@ -1,6 +1,6 @@
 import {composable, text} from '@magicspace/core';
 
-import type {ResolvedOptions} from '../library';
+import type {ResolvedOptions} from '../library/index.js';
 
 const PACKAGE_MANAGER_IGNORE_ENTRIES_DICT = {
   pnpm: ['pnpm-lock.yaml'],

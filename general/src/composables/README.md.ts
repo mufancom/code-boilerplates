@@ -2,7 +2,11 @@ import * as Path from 'path';
 
 import {composable, handlebars} from '@magicspace/core';
 
-import type {BadgesOptions, LicenseName, ResolvedOptions} from '../library';
+import type {
+  BadgesOptions,
+  LicenseName,
+  ResolvedOptions,
+} from '../library/index.js';
 
 import {TEMPLATES_DIR} from './@constants';
 

@@ -1,12 +1,12 @@
 import * as Path from 'path';
 
 import {composable, json} from '@magicspace/core';
-import _ from 'lodash';
 
-import type {ResolvedOptions} from '../library';
+import type {ResolvedOptions} from '../library/index.js';
 
 export default composable<ResolvedOptions>(({resolvedProjects: projects}) => {
   return [
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     json('.eslintrc.json', (data: any) => {
       return {
         ...data,
@@ -22,6 +22,7 @@ export default composable<ResolvedOptions>(({resolvedProjects: projects}) => {
       };
     }),
     ...projects.map(project =>
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       json(Path.join(project.inDir, '.eslintrc.json'), (data: any) => {
         return {
           ...data,

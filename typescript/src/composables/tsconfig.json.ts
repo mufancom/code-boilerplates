@@ -4,7 +4,7 @@ import type {JSONFileOptions} from '@magicspace/core';
 import {composable, json} from '@magicspace/core';
 import _ from 'lodash';
 
-import type {ResolvedOptions} from '../library';
+import type {ResolvedOptions} from '../library/index.js';
 
 const JSON_OPTIONS: JSONFileOptions = {
   sortKeys: [

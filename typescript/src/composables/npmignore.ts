@@ -3,7 +3,7 @@ import * as Path from 'path';
 import {composable, text} from '@magicspace/core';
 import _ from 'lodash';
 
-import type {ResolvedOptions} from '../library';
+import type {ResolvedOptions} from '../library/index.js';
 
 export default composable<ResolvedOptions>(
   async ({resolvedProjects: projects}) => {

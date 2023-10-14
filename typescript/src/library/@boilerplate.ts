@@ -2,7 +2,7 @@ import * as Path from 'path';
 
 import {boilerplate, composables} from '@magicspace/core';
 
-import general from '../../../general/bld/library';
+import general from '../../../general/bld/library/index.js';
 
 import type {Options} from './options';
 import {resolveOptions} from './options';

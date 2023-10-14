@@ -3,9 +3,10 @@ import * as Path from 'path';
 import type {JSONFileOptions} from '@magicspace/core';
 import {composable, json} from '@magicspace/core';
 import {fetchPackageVersions} from '@magicspace/utils';
-import _ from 'lodash';
 
-import type {ResolvedOptions} from '../library';
+import type {ResolvedOptions} from '../library/index.js';
+
+const hasOwnProperty = Object.prototype.hasOwnProperty;
 
 const JSON_OPTIONS: JSONFileOptions = {
   /** @link https://docs.npmjs.com/files/package.json */
@@ -128,7 +129,7 @@ export default composable<ResolvedOptions>(
     };
 
     for (const {name, alias} of packagesSortedByName) {
-      if (alias !== undefined && !scripts.hasOwnProperty(alias)) {
+      if (alias !== undefined && !hasOwnProperty.call(scripts, alias)) {
         scripts[alias] = WORKSPACE_ALIAS_DICT[packageManager](name);
       }
     }
@@ -157,6 +158,7 @@ export default composable<ResolvedOptions>(
       ...packages.map(packageOptions =>
         json(
           Path.join(packageOptions.resolvedDir, 'package.json'),
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
           (data: any) => {
             return {
               ...data,

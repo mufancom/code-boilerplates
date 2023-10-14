@@ -1,5 +1,4 @@
-export {default} from './boilerplate';
+export {default} from './@boilerplate.js';
 
-export * from './options';
-export * from './boilerplate';
-export * from './examples';
+export * from './examples.js';
+export * from './options.js';

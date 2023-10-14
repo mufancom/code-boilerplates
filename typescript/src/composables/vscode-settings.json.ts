@@ -1,10 +1,11 @@
 import {composable, json} from '@magicspace/core';
 import {extendObjectProperties} from '@magicspace/utils';
 
-import type {ResolvedOptions} from '../library';
+import type {ResolvedOptions} from '../library/index.js';
 
 export default composable<ResolvedOptions>(
   async ({resolvedProjects: projects}) => {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     return json('.vscode/settings.json', (data: any) => {
       data = extendObjectProperties(
         data,

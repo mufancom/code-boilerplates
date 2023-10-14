@@ -1,6 +1,6 @@
 import {composable, json} from '@magicspace/core';
 
-import type {PrettierOptions, ResolvedOptions} from '../library';
+import type {PrettierOptions, ResolvedOptions} from '../library/index.js';
 
 const DEFAULT_PRETTIER_OPTIONS: PrettierOptions = {
   printWidth: 80,

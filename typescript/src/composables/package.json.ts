@@ -8,12 +8,12 @@ import {
 } from '@magicspace/utils';
 import _ from 'lodash';
 
-import type {ResolvedPackageOptions} from '../../../general/bld/library';
 import type {
+  ResolvedPackageOptions,
   PackageExports,
   ResolvedOptions,
   ResolvedTypeScriptProjectOptions,
-} from '../library';
+} from '../library/index.js';
 
 const ROOT_DEV_DEPENDENCY_DICT = {
   rimraf: '5',
@@ -58,6 +58,7 @@ export default composable<ResolvedOptions>(
     ]);
 
     return [
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       json('package.json', (data: any) => {
         let {scripts = {}} = data;
 
@@ -70,7 +71,7 @@ export default composable<ResolvedOptions>(
 
           if (rimrafPattern) {
             rimrafScript = `rimraf ${
-              /[\*{]/.test(rimrafPattern) ? '--glob ' : ''
+              /[*{]/.test(rimrafPattern) ? '--glob ' : ''
             }${rimrafPattern}`;
           }
         }
@@ -114,6 +115,7 @@ export default composable<ResolvedOptions>(
         };
       }),
       ...packagesWithTypeScriptProject.map(packageOptions =>
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         json(packageOptions.packageJSONPath, (data: any) => {
           const referencedPackageNames = _.compact(
             _.union(

@@ -7,12 +7,12 @@ import type {OmitValueOfKey} from 'tslang';
 import type {
   ResolvedOptions as ResolvedGeneralOptions,
   ResolvedPackageOptions as ResolvedGeneralPackageOptions,
-} from '../../../general/bld/library';
+} from '../../../general/bld/library/index.js';
 import {
   Options as GeneralOptions,
   PackageOptions as GeneralPackageOptions,
   resolveOptions as resolveGeneralOptions,
-} from '../../../general/bld/library';
+} from '../../../general/bld/library/index.js';
 
 export const TypeScriptProjectReferenceOptions = x.object({
   package: x.string,
