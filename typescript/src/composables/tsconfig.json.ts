@@ -41,7 +41,7 @@ export default composable<ResolvedOptions>(({resolvedProjects: projects}) => {
       json(
         Path.posix.join(inDir, 'tsconfig.json'),
         {
-          extends: '@mufan/code/tsconfig.json',
+          extends: Path.posix.relative(inDir, 'tsconfig.base.json'),
           compilerOptions: {
             composite: true,
             // fallback to undefined if no condition matched.

@@ -26,7 +26,7 @@ export default json(
   {
     root: true,
     ignorePatterns: ['node_modules/'],
-    extends: ['plugin:@mufan/js'],
+    extends: ['plugin:@mufan/javascript'],
     overrides: [
       {files: '**/*.{js,jsx}'},
       {

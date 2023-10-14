@@ -16,7 +16,6 @@ import type {
 } from '../library';
 
 const ROOT_DEV_DEPENDENCY_DICT = {
-  '@mufan/code': '0.2',
   rimraf: '5',
   typescript: '5',
   'run-in-every': '0.2',

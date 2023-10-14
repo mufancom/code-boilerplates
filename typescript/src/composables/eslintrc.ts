@@ -31,8 +31,8 @@ export default composable<ResolvedOptions>(({resolvedProjects: projects}) => {
             {
               files: ['**/*.{ts,tsx}'],
               extends: [
-                'plugin:@mufan/default',
-                ...(project.dev ? ['plugin:@mufan/override-dev'] : []),
+                'plugin:@mufan/typescript',
+                ...(project.dev ? ['plugin:@mufan/dev'] : []),
               ],
               parserOptions: {
                 project: 'tsconfig.json',

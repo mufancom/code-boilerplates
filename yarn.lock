@@ -102,11 +102,6 @@
     tslang "^0.1.27"
     tslib "^2.5.0"
 
-"@mufan/code@^0.2.17":
-  version "0.2.17"
-  resolved "https://registry.yarnpkg.com/@mufan/code/-/code-0.2.17.tgz#9739181402c5c0518756ff0c15ade9949398b436"
-  integrity sha512-d3IYXgT+pZLW/3COaC0JKvaztT/rYeF2vHFkRF37on0jnDvBN5ev2In2gZ1JEBKcR1aFNt7ds8gX8whJCQIb9g==
-
 "@mufan/eslint-plugin@^0.1.82":
   version "0.1.82"
   resolved "https://registry.yarnpkg.com/@mufan/eslint-plugin/-/eslint-plugin-0.1.82.tgz#562cd5d35fc107ee056146decc2813c71eef05ce"
