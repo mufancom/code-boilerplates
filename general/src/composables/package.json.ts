@@ -103,6 +103,7 @@ export default composable<ResolvedOptions>(
     repository,
     author,
     license,
+    type,
     packageManager,
     packagesDir,
     packages,
@@ -138,6 +139,7 @@ export default composable<ResolvedOptions>(
         {
           name,
           description,
+          type,
           scripts,
           devDependencies,
           ...(packagesDir !== undefined && {
