@@ -40,8 +40,16 @@ const BadgesOptions = x.object({
 
 export type BadgesOptions = x.TypeOf<typeof BadgesOptions>;
 
+export const PackageType = x.union([
+  x.literal('module'),
+  x.literal('commonjs'),
+]);
+
+export type PackageType = x.TypeOf<typeof PackageType>;
+
 export const PackageOptions = x.object({
   name: x.string,
+  type: PackageType.optional(),
   dir: x.string
     .nominal({
       description:
@@ -79,6 +87,7 @@ export type PrettierOptions = x.TypeOf<typeof PrettierOptions>;
 
 export const Options = x.object({
   name: x.string,
+  type: PackageType.optional(),
   description: x.string.optional(),
   repository: x.string.optional(),
   license: LicenseName.optional(),

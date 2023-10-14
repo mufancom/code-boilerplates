@@ -252,7 +252,7 @@ function guessReadableGlobPattern(pathGroups: string[][]): string | undefined {
 
 function buildProjectExport(
   {resolvedDir}: ResolvedPackageOptions,
-  {exportSourceAs, inDir, builds, noEmit}: ResolvedTypeScriptProjectOptions,
+  {exportSourceAs, inDir, outDir, noEmit}: ResolvedTypeScriptProjectOptions,
   {module: exportsModule}: PackageExports,
 ): Record<string, string | Record<string, string>> | undefined {
   const exportSourceAsPart = exportSourceAs
@@ -268,29 +268,15 @@ function buildProjectExport(
     return exportSourceAsPart;
   }
 
-  const primaryBuild =
-    builds.find(build => build.module === 'cjs') ?? builds[0];
-
-  builds = _.sortBy(builds, build => ['esm', 'cjs'].indexOf(build.module));
-
   return {
     types: `./${Path.posix.relative(
       resolvedDir,
-      Path.posix.join(primaryBuild.outDir, `${exportsModule}.d.ts`),
+      Path.posix.join(outDir, `${exportsModule}.d.ts`),
     )}`,
     ...exportSourceAsPart,
-    ...Object.fromEntries(
-      builds.map(({module, outDir}) => [
-        module === 'cjs' ? 'require' : 'import',
-        `./${Path.posix.relative(
-          resolvedDir,
-          Path.posix.join(outDir, `${exportsModule}.js`),
-        )}`,
-      ]),
-    ),
     default: `./${Path.posix.relative(
       resolvedDir,
-      Path.posix.join(builds[0].outDir, `${exportsModule}.js`),
+      Path.posix.join(outDir, `${exportsModule}.js`),
     )}`,
   };
 }

@@ -1,4 +1,5 @@
 {
+  "$schema": "boilerplate.schema.json",
   "boilerplate": "../typescript/bld/library/index.js",
   "options": {
     "name": "@mufan/code-boilerplates",

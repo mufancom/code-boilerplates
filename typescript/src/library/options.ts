@@ -66,10 +66,6 @@ export const TypeScriptProjectOptions = x.object({
         "Defaults to 'library' if project name is 'library', otherwise 'program'.",
     })
     .optional(),
-  module: x
-    .union([BuildModuleType, x.array(BuildModuleType)])
-    .nominal({description: "Module type to build, defaults to 'cjs'."})
-    .optional(),
   exports: x
     .union([PackageExports, x.string, x.boolean])
     .nominal({description: 'Whether generate `exports` field in package.json'})
@@ -156,9 +152,8 @@ export interface ResolvedTypeScriptProjectOptions {
   srcDir: string;
   bldDir: string;
   inDir: string;
-  upperOutDir: string;
+  outDir: string;
   type: 'library' | 'program' | 'script';
-  builds: ResolvedTypeScriptBuild[];
   exports: PackageExports | false;
   exportSourceAs: string | undefined;
   dev: boolean;
@@ -255,7 +250,6 @@ export function buildResolvedTypeScriptProjectOptions(
   {
     name = 'program',
     type = name.includes('library') ? 'library' : 'program',
-    module = 'cjs',
     exports = true,
     exportSourceAs,
     dev = name.includes('test') || type === 'script' ? true : false,
@@ -296,8 +290,6 @@ export function buildResolvedTypeScriptProjectOptions(
     dir = '';
   }
 
-  const modules = Array.isArray(module) ? module : [module];
-
   const packageDir = packageOptions.resolvedDir;
 
   const srcDir = Path.posix.join(packageDir, parentDir, src);
@@ -309,30 +301,12 @@ export function buildResolvedTypeScriptProjectOptions(
   );
 
   const outFolderName = dir || name;
-  const upperOutDir = Path.posix.join(bldDir, outFolderName);
-
-  const builds: ResolvedTypeScriptBuild[] = [];
-
-  if (modules.length > 1) {
-    builds.push(
-      ...modules.map(module => ({
-        module,
-        outDir: Path.posix.join(upperOutDir, module),
-      })),
-    );
-  } else if (modules.length > 0) {
-    builds.push({
-      module: modules[0],
-      outDir: upperOutDir,
-    });
-  } else {
-    throw new Error('At least one of `cjs` and `esm` must be true');
-  }
+  const outDir = Path.posix.join(bldDir, outFolderName);
 
   return {
     name,
     srcDir,
-    upperOutDir,
+    outDir,
     bldDir,
     inDir,
     type,
@@ -347,7 +321,6 @@ export function buildResolvedTypeScriptProjectOptions(
           : []
         : entrances,
     package: packageOptions,
-    builds,
     ...rest,
   };
 }

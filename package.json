@@ -8,12 +8,10 @@
   "exports": {
     "./general": {
       "types": "./general/bld/library/index.d.ts",
-      "require": "./general/bld/library/index.js",
       "default": "./general/bld/library/index.js"
     },
     "./typescript": {
       "types": "./typescript/bld/library/index.d.ts",
-      "require": "./typescript/bld/library/index.js",
       "default": "./typescript/bld/library/index.js"
     }
   },
@@ -39,7 +37,7 @@
     "@mufan/eslint-plugin": "^0.1.82",
     "@types/lodash": "^4.14.159",
     "@types/node": "^14.0.27",
-    "eslint": "^8.50.0",
+    "eslint": "^8.51.0",
     "rimraf": "^5.0.5",
     "run-in-every": "^0.2.0",
     "yarn-deduplicate": "^6.0.2"

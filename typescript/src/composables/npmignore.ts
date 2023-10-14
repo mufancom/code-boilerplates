@@ -21,7 +21,7 @@ export default composable<ResolvedOptions>(
 ${projects
   .flatMap(project => [
     `!/${Path.posix.relative(packageDir, project.inDir)}/**/*.{ts,tsx}`,
-    `!/${Path.posix.relative(packageDir, project.upperOutDir)}/**`,
+    `!/${Path.posix.relative(packageDir, project.outDir)}/**`,
   ])
   .join('\n')}
 *.tsbuildinfo
