@@ -25,9 +25,13 @@ const PROJECT_DEPENDENCY_DICT = {
   tslib: '2',
 };
 
-const PROJECT_ENTRANCES_DEPENDENCY_DICT = {
-  'entrance-decorator': '0.2',
-};
+function PROJECT_ENTRANCES_DEPENDENCY_DICT(
+  esm: boolean,
+): Record<string, string> {
+  return {
+    'entrance-decorator': esm ? '0.3' : '0.2',
+  };
+}
 
 const WORKSPACE_REFERENCE_DICT = {
   pnpm: 'workspace:*',
@@ -36,8 +40,16 @@ const WORKSPACE_REFERENCE_DICT = {
 
 export default composable<ResolvedOptions>(
   async ({packageManager, resolvedProjects: projects}) => {
-    const anyProjectWithEntrances = projects.some(
+    const projectWithEntrances = projects.filter(
       project => project.entrances.length > 0,
+    );
+
+    const anyESMProjectWithEntrances = projectWithEntrances.some(
+      project => project.package.type === 'module',
+    );
+
+    const anyCJSProjectWithEntrances = projectWithEntrances.some(
+      project => project.package.type !== 'module',
     );
 
     const packagesWithTypeScriptProject = _.uniqBy(
@@ -48,12 +60,16 @@ export default composable<ResolvedOptions>(
     const [
       rootDevDependencies,
       projectDependencies,
-      projectEntrancesDependencies,
+      esmProjectEntrancesDependencies,
+      cjsProjectEntrancesDependencies,
     ] = await Promise.all([
       fetchPackageVersions(ROOT_DEV_DEPENDENCY_DICT),
       fetchPackageVersions(PROJECT_DEPENDENCY_DICT),
-      anyProjectWithEntrances
-        ? fetchPackageVersions(PROJECT_ENTRANCES_DEPENDENCY_DICT)
+      anyESMProjectWithEntrances
+        ? fetchPackageVersions(PROJECT_ENTRANCES_DEPENDENCY_DICT(true))
+        : undefined,
+      anyCJSProjectWithEntrances
+        ? fetchPackageVersions(PROJECT_ENTRANCES_DEPENDENCY_DICT(false))
         : undefined,
     ]);
 
@@ -159,9 +175,9 @@ export default composable<ResolvedOptions>(
               ? singleProjectAndExports
               : undefined;
 
-          const entrances =
-            anyProjectWithEntrances &&
-            packageProjects.some(project => project.entrances.length > 0);
+          const entrances = packageProjects.some(
+            project => project.entrances.length > 0,
+          );
 
           const workspaceReference = WORKSPACE_REFERENCE_DICT[packageManager];
 
@@ -193,7 +209,11 @@ export default composable<ResolvedOptions>(
             dependencies: {
               ...data.dependencies,
               ...projectDependencies,
-              ...(entrances ? projectEntrancesDependencies : undefined),
+              ...(entrances
+                ? packageOptions.type === 'module'
+                  ? esmProjectEntrancesDependencies
+                  : cjsProjectEntrancesDependencies
+                : undefined),
               ..._.fromPairs(
                 referencedPackageNames.map(name => [name, workspaceReference]),
               ),
