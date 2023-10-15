@@ -10,6 +10,8 @@ export default composable<ResolvedOptions>(
       data = extendObjectProperties(
         data,
         {
+          'typescript.preferences.importModuleSpecifier': 'project-relative',
+          'typescript.preferences.importModuleSpecifierEnding': 'js',
           'typescript.tsdk': 'node_modules/typescript/lib',
         },
         {

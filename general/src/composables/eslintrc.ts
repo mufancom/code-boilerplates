@@ -1,5 +1,7 @@
 import type {JSONFileOptions} from '@magicspace/core';
-import {json} from '@magicspace/core';
+import {json, composable} from '@magicspace/core';
+
+import type {ResolvedOptions} from '../library/index.js';
 
 const JSON_OPTIONS: JSONFileOptions = {
   /** @link https://eslint.org/docs/user-guide/configuring */
@@ -21,21 +23,44 @@ const JSON_OPTIONS: JSONFileOptions = {
   ],
 };
 
-export default json(
-  '.eslintrc.json',
-  {
-    root: true,
-    ignorePatterns: ['node_modules/'],
-    extends: ['plugin:@mufan/javascript'],
-    overrides: [
-      {files: '**/*.{js,jsx}'},
-      {
-        files: '**/*.cjs',
-        parserOptions: {
-          sourceType: 'script',
-        },
-      },
-    ],
-  },
-  JSON_OPTIONS,
-);
+export default composable<ResolvedOptions>(({type}) => {
+  const esm = type === 'module';
+
+  return json(
+    '.eslintrc.json',
+    {
+      root: true,
+      ignorePatterns: ['node_modules/'],
+      extends: ['plugin:@mufan/javascript'],
+      overrides: [
+        esm
+          ? {
+              files: '**/*.{js,mjs}',
+              parserOptions: {
+                sourceType: 'module',
+              },
+            }
+          : {
+              files: '**/*.{js,cjs}',
+              parserOptions: {
+                sourceType: 'script',
+              },
+            },
+        esm
+          ? {
+              files: '**/*.cjs',
+              parserOptions: {
+                sourceType: 'script',
+              },
+            }
+          : {
+              files: '**/*.mjs',
+              parserOptions: {
+                sourceType: 'module',
+              },
+            },
+      ],
+    },
+    JSON_OPTIONS,
+  );
+});
