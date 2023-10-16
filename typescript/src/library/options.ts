@@ -1,5 +1,6 @@
 import * as Path from 'path';
 
+import type {BoilerplateBuilderContext} from '@magicspace/core';
 import {x} from '@magicspace/core';
 import _ from 'lodash';
 import type {OmitValueOfKey} from 'tslang';
@@ -176,8 +177,11 @@ export type ResolvedOptions = Options &
     bldDirNames: string[];
   };
 
-export function resolveOptions(options: Options): ResolvedOptions {
-  const resolvedOptions = resolveGeneralOptions(options);
+export function resolveOptions(
+  options: Options,
+  context: BoilerplateBuilderContext,
+): ResolvedOptions {
+  const resolvedOptions = resolveGeneralOptions(options, context);
 
   const projectOptionsArray = resolvedOptions.packages.flatMap(
     (packageOptions: ResolvedPackageOptions) =>

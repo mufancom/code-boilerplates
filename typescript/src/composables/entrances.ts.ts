@@ -4,7 +4,7 @@ import {composable, handlebars} from '@magicspace/core';
 
 import type {ResolvedOptions} from '../library/index.js';
 
-import {TEMPLATES_DIR} from './@constants';
+import {TEMPLATES_DIR} from './@constants.js';
 
 const TEMPLATE_PATH = Path.join(TEMPLATES_DIR, '@entrances.ts.hbs');
 

@@ -4,15 +4,15 @@ import {boilerplate, composables} from '@magicspace/core';
 
 import general from '../../../general/bld/library/index.js';
 
-import type {Options} from './options';
-import {resolveOptions} from './options';
+import type {Options} from './options.js';
+import {resolveOptions} from './options.js';
 
-export default boilerplate<Options>(async options => {
+export default boilerplate<Options>(async (options, context) => {
   return {
-    extends: await general(options),
+    extends: await general(options, context),
     composables: await composables(
       Path.join(__dirname, '../composables'),
-      resolveOptions(options),
+      resolveOptions(options, context),
     ),
   };
 });

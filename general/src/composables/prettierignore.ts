@@ -14,19 +14,19 @@ const BOILERPLATE_SCHEMA_FILE_NAME = 'boilerplate.schema.json';
 
 export default composable<ResolvedOptions>(
   async ({packageManager, magicspaceDir}) => {
-    const packageManagerIgnoreEntries =
-      PACKAGE_MANAGER_IGNORE_ENTRIES_DICT[packageManager];
-
-    if (!packageManagerIgnoreEntries) {
-      return undefined;
-    }
-
     const boilerplateSchemaExists = await FS.stat(
       Path.join(magicspaceDir, BOILERPLATE_SCHEMA_FILE_NAME),
     ).then(
       stats => stats.isFile(),
       () => false,
     );
+
+    const packageManagerIgnoreEntries =
+      PACKAGE_MANAGER_IGNORE_ENTRIES_DICT[packageManager];
+
+    if (!boilerplateSchemaExists && !packageManagerIgnoreEntries) {
+      return;
+    }
 
     return text('.prettierignore', content => {
       if (boilerplateSchemaExists) {
@@ -36,10 +36,12 @@ ${BOILERPLATE_SCHEMA_FILE_NAME}
 `;
       }
 
-      content += `\
+      if (packageManagerIgnoreEntries) {
+        content += `\
 # Package Manager
 ${packageManagerIgnoreEntries.join('\n')}
 `;
+      }
 
       return content;
     });

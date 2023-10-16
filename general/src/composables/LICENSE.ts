@@ -5,7 +5,7 @@ import {composable, handlebars} from '@magicspace/core';
 
 import type {ResolvedOptions} from '../library/index.js';
 
-import {LICENSE_TEMPLATES_DIR} from './@constants';
+import {LICENSE_TEMPLATES_DIR} from './@constants.js';
 
 export default composable<ResolvedOptions>(({license, author}) => {
   if (!license) {
