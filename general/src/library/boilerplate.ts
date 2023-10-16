@@ -1,16 +1,17 @@
 import * as Path from 'path';
 
+import type {BoilerplateBuilderContext} from '@magicspace/core';
 import {boilerplate, composables, x} from '@magicspace/core';
 import _ from 'lodash';
 
-export default boilerplate<Options>(async options => {
+export default boilerplate<Options>(async (options, context) => {
   return {
     composables: await composables(
       {
         root: Path.join(__dirname, '../composables'),
         pattern: '(?!@)*.js',
       },
-      resolveOptions(options),
+      resolveOptions(options, context),
     ),
     scripts: {
       postgenerate: 'prettier --write .',
@@ -112,7 +113,7 @@ export interface ResolvedPackageOptions extends PackageOptions {
   packageJSONPath: string;
 }
 
-export interface ResolvedOptions extends Options {
+export interface ResolvedOptions extends Options, BoilerplateBuilderContext {
   defaultBranch: string;
   packageManager: 'pnpm' | 'yarn';
   packagesDir: string | undefined;
@@ -123,15 +124,19 @@ export interface ResolvedOptions extends Options {
 
 export function resolveOptions<TOptions extends Options>(
   options: TOptions,
+  context: BoilerplateBuilderContext,
 ): TOptions & ResolvedOptions;
-export function resolveOptions({
-  name,
-  defaultBranch = 'main',
-  packageManager = 'yarn',
-  packagesDir,
-  packages,
-  ...rest
-}: Options): ResolvedOptions {
+export function resolveOptions(
+  {
+    name,
+    defaultBranch = 'main',
+    packageManager = 'yarn',
+    packagesDir,
+    packages,
+    ...rest
+  }: Options,
+  context: BoilerplateBuilderContext,
+): ResolvedOptions {
   let resolvedPackages: ResolvedPackageOptions[];
 
   if (packages || packagesDir !== undefined) {
@@ -179,6 +184,7 @@ export function resolveOptions({
       resolvedPackages,
       packageOptions => packageOptions.alias ?? '',
     ),
+    ...context,
     ...rest,
   };
 }

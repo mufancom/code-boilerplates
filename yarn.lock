@@ -82,12 +82,12 @@
     wrap-ansi "^8.1.0"
     wrap-ansi-cjs "npm:wrap-ansi@^7.0.0"
 
-"@magicspace/core@^0.3.0-alpha.5":
-  version "0.3.0-alpha.5"
-  resolved "https://registry.yarnpkg.com/@magicspace/core/-/core-0.3.0-alpha.5.tgz#f845f9aaef4622ea457ccc674cd8349e7b5cc67e"
-  integrity sha512-oL0+OyxvzjWLNVyZJuIgej+6mbY8ubdv2zYEBxs43cSmo5oKKgtRPLV0TppVsBe7U4P2+JTM4gD5W/rIw3GbFw==
+"@magicspace/core@^0.3.3":
+  version "0.3.3"
+  resolved "https://registry.yarnpkg.com/@magicspace/core/-/core-0.3.3.tgz#4f2a7393567e7092159ad63a15e57761109336bd"
+  integrity sha512-HKL+AY7A9fP2JIke7h+s9Po8qrZ92X7cBI/zxtHANXv13nFktrgK+Wp+J7F/QBwBW1VjJn1jeRNBvd25DBETzg==
   dependencies:
-    "@magicspace/utils" "^0.3.0-alpha.1"
+    "@magicspace/utils" "^0.3.0"
     enhanced-resolve "^5.12.0"
     fast-glob "^3.2.12"
     fs-extra "^11.1.0"
@@ -98,21 +98,21 @@
     npm-path "^2.0.4"
     tmp "^0.2.1"
     tslang "^0.1.27"
-    tslib "^2.5.0"
+    tslib "^2.6.2"
     x-value "^0.1.8"
     yaml "^2.2.1"
 
-"@magicspace/utils@^0.3.0-alpha.1":
-  version "0.3.0-alpha.1"
-  resolved "https://registry.yarnpkg.com/@magicspace/utils/-/utils-0.3.0-alpha.1.tgz#a7b35fcef7d2f341d0f78ff4c9ec4b068723942e"
-  integrity sha512-G/ZJ6fRyi7vMSGmXDDi6WPLSOR4NEtRU992Y/PC8c/zn3pTRvFA7R4UTWK9Bz8l7cXYVUkyMg047PVFnTUCKyA==
+"@magicspace/utils@^0.3.0":
+  version "0.3.0"
+  resolved "https://registry.yarnpkg.com/@magicspace/utils/-/utils-0.3.0.tgz#2b68f4fb2598cad645660597974af670ec44d702"
+  integrity sha512-w353jez9X2p3dKXQOjhxOIwzV+VgDhRk0NaKoXjSfCI0mSYF/LRSWILcr35A1r3DNf7cosYAZYNvVfmyJtgWKg==
   dependencies:
     chalk "4"
     latest-version "5"
     lodash "^4.17.21"
     micromatch "^4.0.5"
     tslang "^0.1.27"
-    tslib "^2.5.0"
+    tslib "^2.6.2"
 
 "@mufan/eslint-plugin@^0.2.1":
   version "0.2.1"
