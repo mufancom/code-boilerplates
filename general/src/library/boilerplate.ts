@@ -37,6 +37,7 @@ const BadgesOptions = x.object({
   repo: x.boolean.optional(),
   coverage: x.boolean.optional(),
   license: x.boolean.optional(),
+  discord: x.string.optional(),
 });
 
 export type BadgesOptions = x.TypeOf<typeof BadgesOptions>;

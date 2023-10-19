@@ -72,6 +72,7 @@ function buildBadges(
     repo: repoBadge = false,
     coverage: coverageBadge = false,
     license: licenseBadge = false,
+    discord: discordBadgeHref,
   } = options ?? {};
 
   const badges: Badge[] = [];
@@ -115,6 +116,15 @@ function buildBadges(
         license,
       )}-999999?style=flat-square`,
       url: `./LICENSE`,
+    });
+  }
+
+  if (typeof discordBadgeHref === 'string') {
+    badges.push({
+      title: 'Discord',
+      image:
+        'https://img.shields.io/badge/chat-discord-5662f6?style=flat-square',
+      url: discordBadgeHref,
     });
   }
 
