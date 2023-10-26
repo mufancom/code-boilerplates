@@ -3,57 +3,56 @@ import * as Path from 'path';
 import {composable, handlebars} from '@magicspace/core';
 
 import type {
-  BadgesOptions,
-  LicenseName,
   ResolvedOptions,
+  ResolvedPackageOptions,
 } from '../library/index.js';
 
 import {TEMPLATES_DIR} from './@constants.js';
 
 const TEMPLATE_PATH = Path.join(TEMPLATES_DIR, 'README.md.hbs');
 
-export default composable<ResolvedOptions>(
-  ({
+export default composable<ResolvedOptions>(options => {
+  const {
     name,
     description = 'Just another awesome magic.',
-    repository,
     license,
-    badges: badgeOptions,
     packages,
-  }) => {
-    const data = {
-      license,
-      description,
-    };
+  } = options;
 
-    return [
-      handlebars(
-        'README.md',
+  const data = {
+    license,
+    description,
+  };
+
+  return [
+    handlebars(
+      'README.md',
+      {
+        name,
+        badges: buildBadges(options, undefined),
+        ...data,
+      },
+      {
+        template: TEMPLATE_PATH,
+      },
+    ),
+    ...packages.map(packageOptions => {
+      const {name, resolvedDir} = packageOptions;
+
+      return handlebars(
+        Path.join(resolvedDir, 'README.md'),
         {
           name,
-          badges: buildBadges(name, repository, license, badgeOptions),
+          badges: buildBadges(options, packageOptions),
           ...data,
         },
         {
           template: TEMPLATE_PATH,
         },
-      ),
-      ...packages.map(({name, resolvedDir}) => {
-        return handlebars(
-          Path.join(resolvedDir, 'README.md'),
-          {
-            name,
-            badges: buildBadges(name, repository, license, badgeOptions),
-            ...data,
-          },
-          {
-            template: TEMPLATE_PATH,
-          },
-        );
-      }),
-    ];
-  },
-);
+      );
+    }),
+  ];
+});
 
 interface Badge {
   title: string;
@@ -62,30 +61,39 @@ interface Badge {
 }
 
 function buildBadges(
-  name: string,
-  repository: string | undefined,
-  license: LicenseName | undefined,
-  options: BadgesOptions | undefined,
+  {
+    name,
+    license,
+    repository,
+    packagesDir,
+    badges: {
+      npm: npmBadge = false,
+      repo: repoBadge = false,
+      coverage: coverageBadge = false,
+      license: licenseBadge = false,
+      discord: discordBadgeHref,
+    } = {},
+  }: ResolvedOptions,
+  packageOptions: ResolvedPackageOptions | undefined,
 ): Badge[] {
-  const {
-    npm: npmBadge = false,
-    repo: repoBadge = false,
-    coverage: coverageBadge = false,
-    license: licenseBadge = false,
-    discord: discordBadgeHref,
-  } = options ?? {};
-
   const badges: Badge[] = [];
 
-  if (npmBadge) {
+  const npmPackageName =
+    packagesDir === undefined ? name : packageOptions?.name;
+
+  if (npmBadge && npmPackageName !== undefined) {
     badges.push({
       title: 'NPM version',
-      image: `https://img.shields.io/npm/v/${name}?color=%23cb3837&style=flat-square`,
-      url: `https://www.npmjs.com/package/${name}`,
+      image: `https://img.shields.io/npm/v/${npmPackageName}?color=%23cb3837&style=flat-square`,
+      url: `https://www.npmjs.com/package/${npmPackageName}`,
     });
   }
 
   if (repoBadge) {
+    if (packagesDir !== undefined) {
+      throw new Error('Badge `repo` is not supported in monorepo.');
+    }
+
     const specifier = requireRepositorySpecifier();
 
     badges.push({
