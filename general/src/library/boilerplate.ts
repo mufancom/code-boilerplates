@@ -89,7 +89,7 @@ export type PrettierOptions = x.TypeOf<typeof PrettierOptions>;
 
 export const Options = x.object({
   name: x.string,
-  type: PackageType.optional(),
+  type: PackageType,
   description: x.string.optional(),
   repository: x.string.optional(),
   license: LicenseName.optional(),
