@@ -9,6 +9,9 @@ export default json('.vscode/settings.json', {
   },
   'editor.defaultFormatter': 'esbenp.prettier-vscode',
   'editor.rulers': [80],
+  'files.associations': {
+    'boilerplate.json': 'jsonc',
+  },
   'files.eol': '\n',
   'files.insertFinalNewline': true,
   'files.trimTrailingWhitespace': true,
