@@ -95,8 +95,8 @@ export const Options = x.object({
   license: LicenseName.optional(),
   author: x.string.optional(),
   badges: BadgesOptions.optional(),
-  defaultBranch: x.string.optional(),
-  packageManager: x.union([x.literal('pnpm'), x.literal('yarn')]).optional(),
+  defaultBranch: x.string,
+  packageManager: x.union([x.literal('pnpm'), x.literal('yarn')]),
   packagesDir: x.string
     .nominal({
       description: 'Name of the packages directory, defaults to "packages".',
