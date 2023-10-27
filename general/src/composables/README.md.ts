@@ -54,11 +54,11 @@ export default composable<ResolvedOptions>(options => {
   ];
 });
 
-interface Badge {
+type Badge = {
   title: string;
   image: string;
   url: string;
-}
+};
 
 function buildBadges(
   {

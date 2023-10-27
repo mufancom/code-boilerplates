@@ -1,5 +1,5 @@
 import type {JSONFileOptions} from '@magicspace/core';
-import {json, composable} from '@magicspace/core';
+import {composable, json} from '@magicspace/core';
 
 import type {ResolvedOptions} from '../library/index.js';
 

@@ -5,6 +5,7 @@
   "repository": "https://github.com/makeflow/mufan-code-boilerplates.git",
   "author": "Chengdu Mufan Technology Co., Ltd.",
   "license": "MIT",
+  "type": "module",
   "exports": {
     "./general": {
       "types": "./general/bld/library/index.d.ts",
@@ -33,10 +34,10 @@
     "typescript": "^5.2.2"
   },
   "devDependencies": {
-    "@mufan/eslint-plugin": "^0.2.5",
+    "@mufan/eslint-plugin": "^0.2.13",
     "@types/lodash": "^4.14.159",
     "@types/node": "^14.0.27",
-    "eslint": "^8.51.0",
+    "eslint": "^8.52.0",
     "rimraf": "^5.0.5",
     "run-in-every": "^0.2.0",
     "yarn-deduplicate": "^6.0.2"

@@ -108,20 +108,21 @@ export const Options = x.object({
 
 export type Options = x.TypeOf<typeof Options>;
 
-export interface ResolvedPackageOptions extends PackageOptions {
+export type ResolvedPackageOptions = {
   alias?: string;
   resolvedDir: string;
   packageJSONPath: string;
-}
+} & PackageOptions;
 
-export interface ResolvedOptions extends Options, BoilerplateBuilderContext {
+export type ResolvedOptions = {
   defaultBranch: string;
   packageManager: 'pnpm' | 'yarn';
   packagesDir: string | undefined;
   packages: ResolvedPackageOptions[];
   packagesSortedByName: ResolvedPackageOptions[];
   packagesSortedByAlias: ResolvedPackageOptions[];
-}
+} & Options &
+  BoilerplateBuilderContext;
 
 export function resolveOptions<TOptions extends Options>(
   options: TOptions,

@@ -11,15 +11,15 @@
   "extends": ["plugin:@mufan/javascript"],
   "overrides": [
     {
-      "files": "**/*.{js,cjs}",
+      "files": "**/*.{js,mjs}",
       "parserOptions": {
-        "sourceType": "script"
+        "sourceType": "module"
       }
     },
     {
-      "files": "**/*.mjs",
+      "files": "**/*.cjs",
       "parserOptions": {
-        "sourceType": "module"
+        "sourceType": "script"
       }
     }
   ]

@@ -143,12 +143,12 @@ export const Options = GeneralOptions.extend({
 
 export type Options = x.TypeOf<typeof Options>;
 
-export interface ResolvedTypeScriptBuild {
+export type ResolvedTypeScriptBuild = {
   outDir: string;
   module: BuildModuleType;
-}
+};
 
-export interface ResolvedTypeScriptProjectOptions {
+export type ResolvedTypeScriptProjectOptions = {
   name: string;
   srcDir: string;
   bldDir: string;
@@ -162,14 +162,14 @@ export interface ResolvedTypeScriptProjectOptions {
   entrances: string[];
   package: ResolvedPackageOptions;
   references: ResolvedTypeScriptProjectReference[] | undefined;
-}
+};
 
 export type ResolvedPackageOptions = ResolvedGeneralPackageOptions &
   PackageOptions;
 
-export interface ResolvedTypeScriptProjectReference {
+export type ResolvedTypeScriptProjectReference = {
   path: string;
-}
+};
 
 export type ResolvedOptions = Options &
   ResolvedGeneralOptions & {
@@ -245,10 +245,9 @@ export function resolveOptions(
   };
 }
 
-interface ResolvedTypeScriptProjectOptionsWithRawReferences
-  extends OmitValueOfKey<ResolvedTypeScriptProjectOptions, 'references'> {
+type ResolvedTypeScriptProjectOptionsWithRawReferences = {
   references?: GeneralTypeScriptProjectReferenceOptions[];
-}
+} & OmitValueOfKey<ResolvedTypeScriptProjectOptions, 'references'>;
 
 export function buildResolvedTypeScriptProjectOptions(
   {

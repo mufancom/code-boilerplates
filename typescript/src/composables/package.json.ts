@@ -9,9 +9,9 @@ import {
 import _ from 'lodash';
 
 import type {
-  ResolvedPackageOptions,
   PackageExports,
   ResolvedOptions,
+  ResolvedPackageOptions,
   ResolvedTypeScriptProjectOptions,
 } from '../library/index.js';
 
