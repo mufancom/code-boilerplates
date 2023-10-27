@@ -1,4 +1,5 @@
 import * as Path from 'path';
+import {fileURLToPath} from 'url';
 
 import type {BoilerplateBuilderContext} from '@magicspace/core';
 import {boilerplate, composables, x} from '@magicspace/core';
@@ -8,7 +9,7 @@ export default boilerplate<Options>(async (options, context) => {
   return {
     composables: await composables(
       {
-        root: Path.join(__dirname, '../composables'),
+        root: Path.join(fileURLToPath(import.meta.url), '../../composables'),
         pattern: '(?!@)*.js',
       },
       resolveOptions(options, context),
