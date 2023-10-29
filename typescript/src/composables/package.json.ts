@@ -101,7 +101,7 @@ export default composable<ResolvedOptions>(
             ),
             lint: extendPackageScript(
               scripts.lint,
-              'run-in-every eslint-project --parallel --echo -- eslint --no-error-on-unmatched-pattern .',
+              'run-in-every eslint-project --parallel --echo -- eslint --no-error-on-unmatched-pattern --report-unused-disable-directives .',
             ),
           },
           {

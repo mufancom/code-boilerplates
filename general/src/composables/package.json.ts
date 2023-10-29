@@ -123,7 +123,7 @@ export default composable<ResolvedOptions>(
 
     const scripts: Record<string, string> = {
       '3': SCRIPT_3_DICT[packageManager],
-      lint: 'eslint --no-error-on-unmatched-pattern .',
+      lint: 'eslint --no-error-on-unmatched-pattern --report-unused-disable-directives .',
       'lint-prettier': 'prettier --check .',
       test: `${packageManager} lint-prettier && ${packageManager} lint`,
     };
