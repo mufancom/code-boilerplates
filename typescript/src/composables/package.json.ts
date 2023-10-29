@@ -74,7 +74,6 @@ export default composable<ResolvedOptions>(
     ]);
 
     return [
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       json('package.json', (data: any) => {
         let {scripts = {}} = data;
 
@@ -131,7 +130,6 @@ export default composable<ResolvedOptions>(
         };
       }),
       ...packagesWithTypeScriptProject.map(packageOptions =>
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         json(packageOptions.packageJSONPath, (data: any) => {
           const referencedPackageNames = _.compact(
             _.union(
