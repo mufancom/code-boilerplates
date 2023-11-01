@@ -29,7 +29,7 @@ function PROJECT_ENTRANCES_DEPENDENCY_DICT(
   esm: boolean,
 ): Record<string, string> {
   return {
-    'entrance-decorator': esm ? '0.3' : '0.2',
+    'entrance-decorator': esm ? '0.4' : '0.2',
   };
 }
 

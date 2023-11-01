@@ -36,24 +36,27 @@ export default composable<ResolvedOptions>(({resolvedProjects: projects}) => {
       },
       JSON_OPTIONS,
     ),
-    ...projects.map(({inDir, entrances, outDir, references}) =>
-      json(
-        Path.posix.join(inDir, 'tsconfig.json'),
-        {
-          extends: Path.posix.relative(inDir, 'tsconfig.base.json'),
-          compilerOptions: {
-            composite: true,
-            // fallback to undefined if no condition matched.
-            experimentalDecorators: entrances.length > 0 || undefined,
-            rootDir: '.',
-            outDir: Path.posix.relative(inDir, outDir),
-            // noEmit is not supported in composite mode, outDir would
-            // differ though.
+    ...projects.map(
+      ({inDir, entrances, outDir, references, package: packageOptions}) =>
+        json(
+          Path.posix.join(inDir, 'tsconfig.json'),
+          {
+            extends: Path.posix.relative(inDir, 'tsconfig.base.json'),
+            compilerOptions: {
+              composite: true,
+              // fallback to undefined if no condition matched.
+              experimentalDecorators:
+                (packageOptions.type !== 'module' && entrances.length > 0) ||
+                undefined,
+              rootDir: '.',
+              outDir: Path.posix.relative(inDir, outDir),
+              // noEmit is not supported in composite mode, outDir would
+              // differ though.
+            },
+            references,
           },
-          references,
-        },
-        JSON_OPTIONS,
-      ),
+          JSON_OPTIONS,
+        ),
     ),
   ];
 });
