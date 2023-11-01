@@ -52,7 +52,7 @@ export type PackageType = x.TypeOf<typeof PackageType>;
 
 export const PackageOptions = x.object({
   name: x.string,
-  type: PackageType.optional(),
+  type: PackageType,
   dir: x.string
     .nominal({
       description:
