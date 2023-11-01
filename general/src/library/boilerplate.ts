@@ -110,6 +110,7 @@ export const Options = x.object({
 export type Options = x.TypeOf<typeof Options>;
 
 export type ResolvedPackageOptions = {
+  type: PackageType;
   alias?: string;
   resolvedDir: string;
   packageJSONPath: string;
@@ -132,6 +133,7 @@ export function resolveOptions<TOptions extends Options>(
 export function resolveOptions(
   {
     name,
+    type,
     defaultBranch = 'main',
     packageManager = 'yarn',
     packagesDir,
@@ -156,6 +158,7 @@ export function resolveOptions(
       );
 
       return {
+        type,
         ...packageOptions,
         alias,
         resolvedDir,
@@ -166,6 +169,7 @@ export function resolveOptions(
     resolvedPackages = [
       {
         name,
+        type,
         resolvedDir: '',
         packageJSONPath: 'package.json',
         ...rest,
@@ -175,6 +179,7 @@ export function resolveOptions(
 
   return {
     name,
+    type,
     defaultBranch,
     packageManager,
     packagesDir,
