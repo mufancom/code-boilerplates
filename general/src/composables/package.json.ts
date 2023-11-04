@@ -106,7 +106,7 @@ export default composable<ResolvedOptions>(
     license,
     type,
     packageManager,
-    packagesDir,
+    mono,
     packages,
     packagesSortedByName,
   }) => {
@@ -143,7 +143,7 @@ export default composable<ResolvedOptions>(
           type,
           scripts,
           devDependencies,
-          ...(packagesDir !== undefined && {
+          ...(mono && {
             private: true,
             ...(packageManager === 'yarn' && {
               workspaces: packagesSortedByName.map(

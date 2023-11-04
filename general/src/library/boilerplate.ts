@@ -119,6 +119,7 @@ export type ResolvedPackageOptions = {
 export type ResolvedOptions = {
   defaultBranch: string;
   packageManager: 'pnpm' | 'yarn';
+  mono: boolean;
   packagesDir: string | undefined;
   packages: ResolvedPackageOptions[];
   packagesSortedByName: ResolvedPackageOptions[];
@@ -142,9 +143,12 @@ export function resolveOptions(
   }: Options,
   context: BoilerplateBuilderContext,
 ): ResolvedOptions {
+  let mono: boolean;
   let resolvedPackages: ResolvedPackageOptions[];
 
   if (packages || packagesDir !== undefined) {
+    mono = true;
+
     if (packagesDir === undefined) {
       packagesDir = 'packages';
     }
@@ -166,6 +170,8 @@ export function resolveOptions(
       };
     });
   } else {
+    mono = false;
+
     resolvedPackages = [
       {
         name,
@@ -182,6 +188,7 @@ export function resolveOptions(
     type,
     defaultBranch,
     packageManager,
+    mono,
     packagesDir,
     packages: resolvedPackages,
     packagesSortedByName: _.sortBy(

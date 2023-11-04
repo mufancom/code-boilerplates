@@ -3,12 +3,12 @@ import {composable, yaml} from '@magicspace/core';
 import type {ResolvedOptions} from '../library/index.js';
 
 export default composable<ResolvedOptions>(
-  ({packageManager, packagesDir, packages}) => {
+  ({packageManager, mono, packages}) => {
     if (packageManager !== 'pnpm') {
       return undefined;
     }
 
-    if (packagesDir === undefined) {
+    if (!mono) {
       return;
     }
 

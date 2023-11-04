@@ -65,7 +65,6 @@ function buildBadges(
     name,
     license,
     repository,
-    packagesDir,
     badges: {
       npm: npmBadge = false,
       repo: repoBadge = false,
@@ -73,13 +72,13 @@ function buildBadges(
       license: licenseBadge = false,
       discord: discordBadgeHref,
     } = {},
+    mono,
   }: ResolvedOptions,
   packageOptions: ResolvedPackageOptions | undefined,
 ): Badge[] {
   const badges: Badge[] = [];
 
-  const npmPackageName =
-    packagesDir === undefined ? name : packageOptions?.name;
+  const npmPackageName = mono ? packageOptions?.name : name;
 
   if (npmBadge && npmPackageName !== undefined) {
     badges.push({
@@ -90,7 +89,7 @@ function buildBadges(
   }
 
   if (repoBadge) {
-    if (packagesDir !== undefined) {
+    if (mono) {
       throw new Error('Badge `repo` is not supported in monorepo.');
     }
 
