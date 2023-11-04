@@ -24,7 +24,7 @@
     "test": "yarn lint-prettier && yarn build && yarn lint"
   },
   "dependencies": {
-    "@magicspace/core": "^0.3.5",
+    "@magicspace/core": "^0.3.6",
     "@magicspace/utils": "^0.3.4",
     "lodash": "^4.17.20",
     "npm-which": "^3.0.1",

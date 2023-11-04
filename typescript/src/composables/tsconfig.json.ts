@@ -37,13 +37,14 @@ export default composable<ResolvedOptions>(({resolvedProjects: projects}) => {
       JSON_OPTIONS,
     ),
     ...projects.map(
-      ({inDir, entrances, outDir, references, package: packageOptions}) =>
+      ({inDir, entrances, outDir, references, test, package: packageOptions}) =>
         json(
           Path.posix.join(inDir, 'tsconfig.json'),
           {
             extends: Path.posix.relative(inDir, 'tsconfig.base.json'),
             compilerOptions: {
               composite: true,
+              types: test ? ['jest'] : undefined,
               // fallback to undefined if no condition matched.
               experimentalDecorators:
                 (packageOptions.type !== 'module' && entrances.length > 0) ||

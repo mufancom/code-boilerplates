@@ -70,10 +70,10 @@
     wrap-ansi "^8.1.0"
     wrap-ansi-cjs "npm:wrap-ansi@^7.0.0"
 
-"@magicspace/core@^0.3.5":
-  version "0.3.5"
-  resolved "https://registry.yarnpkg.com/@magicspace/core/-/core-0.3.5.tgz#d3632f6f4ef912e538994fb350f0d78c464e6c76"
-  integrity sha512-40X5tHREEHtX7PyHolSILtxG8mjC6BNJvchJ+WC9PO8hl1WePrDgihanoeI/VCW/Q0OmtESHfadkbLVufqaQgQ==
+"@magicspace/core@^0.3.6":
+  version "0.3.6"
+  resolved "https://registry.yarnpkg.com/@magicspace/core/-/core-0.3.6.tgz#179835f8c5d9fb5a21883b5da0407650d03b48d3"
+  integrity sha512-QNoBU8tmvlS+xwr6RDTqkIOd835g9xurcWGbtV9rTxVN4iIgTb5ntnnLXMlr1szM6Eb/BHvo0ZP25XA5LsXkwg==
   dependencies:
     "@magicspace/utils" "^0.3.4"
     enhanced-resolve "^5.12.0"

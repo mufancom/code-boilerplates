@@ -15,11 +15,18 @@ import type {
   ResolvedTypeScriptProjectOptions,
 } from '../library/index.js';
 
-const ROOT_DEV_DEPENDENCY_DICT = {
-  rimraf: '5',
-  typescript: '5',
-  'run-in-every': '0.2',
-};
+function ROOT_DEV_DEPENDENCY_DICT(test: boolean): Record<string, string> {
+  return {
+    ...(test && {
+      '@types/jest': '29',
+      'cross-env': '7',
+      jest: '29',
+    }),
+    rimraf: '5',
+    'run-in-every': '0.2',
+    typescript: '5',
+  };
+}
 
 const PROJECT_DEPENDENCY_DICT = {
   tslib: '2',
@@ -57,13 +64,15 @@ export default composable<ResolvedOptions>(
       packageOptions => packageOptions.packageJSONPath,
     );
 
+    const anyTestProject = projects.some(project => project.test);
+
     const [
       rootDevDependencies,
       projectDependencies,
       esmProjectEntrancesDependencies,
       cjsProjectEntrancesDependencies,
     ] = await Promise.all([
-      fetchPackageVersions(ROOT_DEV_DEPENDENCY_DICT),
+      fetchPackageVersions(ROOT_DEV_DEPENDENCY_DICT(anyTestProject)),
       fetchPackageVersions(PROJECT_DEPENDENCY_DICT),
       anyESMProjectWithEntrances
         ? fetchPackageVersions(PROJECT_ENTRANCES_DEPENDENCY_DICT(true))
@@ -111,9 +120,15 @@ export default composable<ResolvedOptions>(
         scripts = extendObjectProperties(
           scripts,
           {
-            test: extendPackageScript(scripts.test, `${packageManager} build`, {
-              after: '*lint-prettier*',
-            }),
+            'bare-test': anyTestProject
+              ? 'cross-env NODE_OPTIONS=--experimental-vm-modules jest'
+              : undefined,
+            test: extendPackageScript(
+              extendPackageScript(scripts.test, `${packageManager} build`, {
+                after: '*lint-prettier*',
+              }),
+              `${packageManager} bare-test`,
+            ),
           },
           {
             after: '*lint*',

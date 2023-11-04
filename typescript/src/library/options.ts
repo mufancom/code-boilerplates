@@ -64,7 +64,7 @@ export const TypeScriptProjectOptions = x.object({
     .union([x.literal('library'), x.literal('program'), x.literal('script')])
     .nominal({
       description:
-        "Defaults to 'library' if project name is 'library', otherwise 'program'.",
+        "Defaults to 'library' if project name includes 'library', otherwise 'program'.",
     })
     .optional(),
   exports: x
@@ -80,7 +80,7 @@ export const TypeScriptProjectOptions = x.object({
     .nominal({
       description: `\
 Whether this TypeScript project is a development-time project, \
-defaults to true if the project name is 'test' or project type is 'script', \
+defaults to true if the project name includes 'test' or project type is 'script', \
 otherwise false.`,
     })
     .optional(),
@@ -107,6 +107,12 @@ otherwise false.`,
       description: `\
 Whether this project does not emit build artifact, \
 defaults to true if \`src\` is false, otherwise false.`,
+    })
+    .optional(),
+  test: x.boolean
+    .nominal({
+      description:
+        "Whether this project is a test project, defaults to true if `name` includes 'test', otherwise false.",
     })
     .optional(),
   entrances: x
@@ -159,6 +165,7 @@ export type ResolvedTypeScriptProjectOptions = {
   exportSourceAs: string | undefined;
   dev: boolean;
   noEmit: boolean;
+  test: boolean;
   entrances: string[];
   package: ResolvedPackageOptions;
   references: ResolvedTypeScriptProjectReference[] | undefined;
@@ -260,6 +267,7 @@ export function buildResolvedTypeScriptProjectOptions(
     src = type === 'script' ? false : 'src',
     dir = name,
     noEmit = src === false ? true : false,
+    test = name.includes('test') ? true : false,
     entrances = false,
     ...rest
   }: TypeScriptProjectOptions,
@@ -317,6 +325,7 @@ export function buildResolvedTypeScriptProjectOptions(
     exportSourceAs,
     dev,
     noEmit,
+    test,
     entrances:
       typeof entrances === 'boolean'
         ? entrances
