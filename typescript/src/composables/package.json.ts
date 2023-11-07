@@ -120,20 +120,31 @@ export default composable<ResolvedOptions>(
         scripts = extendObjectProperties(
           scripts,
           {
-            'bare-test': anyTestProject
-              ? 'cross-env NODE_OPTIONS=--experimental-vm-modules jest'
-              : undefined,
-            test: extendPackageScript(
-              extendPackageScript(scripts.test, `${packageManager} build`, {
-                after: '*lint-prettier*',
-              }),
-              `${packageManager} bare-test`,
-            ),
+            test: extendPackageScript(scripts.test, `${packageManager} build`, {
+              after: '*lint-prettier*',
+            }),
           },
           {
             after: '*lint*',
           },
         );
+
+        if (anyTestProject) {
+          scripts = extendObjectProperties(
+            scripts,
+            {
+              'bare-test':
+                'cross-env NODE_OPTIONS=--experimental-vm-modules jest',
+              test: extendPackageScript(
+                scripts.test,
+                `${packageManager} bare-test`,
+              ),
+            },
+            {
+              before: 'test',
+            },
+          );
+        }
 
         return {
           ...data,
