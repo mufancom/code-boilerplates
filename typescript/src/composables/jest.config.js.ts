@@ -11,6 +11,7 @@ export default composable<ResolvedOptions>(({type, mono, resolvedProjects}) => {
 
   return [
     mono &&
+      testProjects.length > 0 &&
       objectModule(
         'jest.config.js',
         {
