@@ -125,7 +125,7 @@ export default composable<ResolvedOptions>(
       '3': SCRIPT_3_DICT[packageManager],
       lint: 'eslint --no-error-on-unmatched-pattern --report-unused-disable-directives .',
       'lint-prettier': 'prettier --check .',
-      test: `${packageManager} lint-prettier && ${packageManager} lint`,
+      test: 'npm run lint-prettier && npm run lint',
     };
 
     for (const {name, alias} of packagesSortedByName) {

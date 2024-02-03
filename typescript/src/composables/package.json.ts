@@ -120,7 +120,7 @@ export default composable<ResolvedOptions>(
         scripts = extendObjectProperties(
           scripts,
           {
-            test: extendPackageScript(scripts.test, `${packageManager} build`, {
+            test: extendPackageScript(scripts.test, 'npm run build', {
               after: '*lint-prettier*',
             }),
           },
@@ -135,10 +135,7 @@ export default composable<ResolvedOptions>(
             {
               'bare-test':
                 'cross-env NODE_OPTIONS=--experimental-vm-modules jest',
-              test: extendPackageScript(
-                scripts.test,
-                `${packageManager} bare-test`,
-              ),
+              test: extendPackageScript(scripts.test, 'npm run bare-test'),
             },
             {
               before: 'test',
