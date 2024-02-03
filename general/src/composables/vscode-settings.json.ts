@@ -5,7 +5,7 @@ export default json('.vscode/settings.json', {
   'editor.insertSpaces': true,
   'editor.formatOnSave': true,
   'editor.codeActionsOnSave': {
-    'source.fixAll.eslint': true,
+    'source.fixAll.eslint': 'explicit',
   },
   'editor.defaultFormatter': 'esbenp.prettier-vscode',
   'editor.rulers': [80],
