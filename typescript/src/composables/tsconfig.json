@@ -3,14 +3,14 @@
   "compilerOptions": {
     "composite": true,
     "rootDir": ".",
-    "outDir": "../../bld/composables"
+    "outDir": "../../bld/composables",
   },
   "references": [
     {
-      "path": "../library"
+      "path": "../library",
     },
     {
-      "path": "../../../general/src/library"
-    }
-  ]
+      "path": "../../../general/src/library",
+    },
+  ],
 }

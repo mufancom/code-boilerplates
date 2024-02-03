@@ -3,11 +3,11 @@
   "compilerOptions": {
     "composite": true,
     "rootDir": ".",
-    "outDir": "../../bld/library"
+    "outDir": "../../bld/library",
   },
   "references": [
     {
-      "path": "../../../general/src/library"
-    }
-  ]
+      "path": "../../../general/src/library",
+    },
+  ],
 }
