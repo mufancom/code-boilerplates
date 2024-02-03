@@ -7,11 +7,11 @@
     "sourceMap": false,
 
     "rootDir": ".",
-    "outDir": "../../bld/composables"
+    "outDir": "../../bld/composables",
   },
   "references": [
     {
-      "path": "../library"
-    }
-  ]
+      "path": "../library",
+    },
+  ],
 }

@@ -98,7 +98,7 @@ function buildBadges(
     badges.push({
       title: 'Repository package.json version',
       image: `https://img.shields.io/github/package-json/v/${specifier}?color=%230969da&label=repo&style=flat-square`,
-      url: `./package.json`,
+      url: './package.json',
     });
   }
 
@@ -122,7 +122,7 @@ function buildBadges(
       image: `https://img.shields.io/badge/license-${encodeURIComponent(
         license,
       )}-999999?style=flat-square`,
-      url: `./LICENSE`,
+      url: './LICENSE',
     });
   }
 

@@ -4,7 +4,7 @@ import {composable, objectModule} from '@magicspace/core';
 
 import type {ResolvedOptions} from '../library/index.js';
 
-const COMMENT = `/** @type {import('jest').Config} */`;
+const COMMENT = "/** @type {import('jest').Config} */";
 
 export default composable<ResolvedOptions>(({type, mono, resolvedProjects}) => {
   const testProjects = resolvedProjects.filter(project => project.test);

@@ -78,10 +78,11 @@ export const TypeScriptProjectOptions = x.object({
     .optional(),
   dev: x.boolean
     .nominal({
-      description: `\
+      description:
+        "\
 Whether this TypeScript project is a development-time project, \
 defaults to true if the project name includes 'test' or project type is 'script', \
-otherwise false.`,
+otherwise false.",
     })
     .optional(),
   parentDir: x
@@ -104,9 +105,10 @@ otherwise false.`,
     .optional(),
   noEmit: x.boolean
     .nominal({
-      description: `\
+      description:
+        '\
 Whether this project does not emit build artifact, \
-defaults to true if \`src\` is false, otherwise false.`,
+defaults to true if `src` is false, otherwise false.',
     })
     .optional(),
   test: x.boolean
@@ -118,9 +120,10 @@ defaults to true if \`src\` is false, otherwise false.`,
   entrances: x
     .union([x.array(x.string), x.boolean])
     .nominal({
-      description: `\
+      description:
+        "\
 Whether to add entrances file(s) and related package/configuration.\
-If true, defaults to ['@entrances.ts'].`,
+If true, defaults to ['@entrances.ts'].",
     })
     .optional(),
   references: x

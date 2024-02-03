@@ -159,15 +159,14 @@ export default composable<ResolvedOptions>(
         json(packageOptions.packageJSONPath, (data: any) => {
           const referencedPackageNames = _.compact(
             _.union(
-              ...(packageOptions.projects?.map(
-                projectOptions =>
-                  projectOptions.references?.map(reference =>
-                    typeof reference === 'string'
-                      ? undefined
-                      : reference.package !== packageOptions.name
+              ...(packageOptions.projects?.map(projectOptions =>
+                projectOptions.references?.map(reference =>
+                  typeof reference === 'string'
+                    ? undefined
+                    : reference.package !== packageOptions.name
                       ? reference.package
                       : undefined,
-                  ),
+                ),
               ) ?? []),
             ),
           );
@@ -216,20 +215,24 @@ export default composable<ResolvedOptions>(
                   ),
                 }
               : projectAndExportsArray.length > 0
-              ? {
-                  exports: emptyObjectAsUndefined({
-                    ...data.exports,
-                    ...Object.fromEntries(
-                      projectAndExportsArray
-                        .map(([project, exports]) => [
-                          exports.subpath,
-                          buildProjectExport(packageOptions, project, exports),
-                        ])
-                        .filter(([, value]) => !!value),
-                    ),
-                  }),
-                }
-              : undefined),
+                ? {
+                    exports: emptyObjectAsUndefined({
+                      ...data.exports,
+                      ...Object.fromEntries(
+                        projectAndExportsArray
+                          .map(([project, exports]) => [
+                            exports.subpath,
+                            buildProjectExport(
+                              packageOptions,
+                              project,
+                              exports,
+                            ),
+                          ])
+                          .filter(([, value]) => !!value),
+                      ),
+                    }),
+                  }
+                : undefined),
             dependencies: {
               ...data.dependencies,
               ...projectDependencies,
