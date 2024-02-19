@@ -1,17 +1,17 @@
 {
   "references": [
     {
-      "path": "general/src/composables",
+      "path": "general/src/composables"
     },
     {
-      "path": "general/src/library",
+      "path": "general/src/library"
     },
     {
-      "path": "typescript/src/composables",
+      "path": "typescript/src/composables"
     },
     {
-      "path": "typescript/src/library",
-    },
+      "path": "typescript/src/library"
+    }
   ],
-  "files": [],
+  "files": []
 }
