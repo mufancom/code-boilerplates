@@ -12,7 +12,10 @@ export default boilerplate<Options>(async (options, context) => {
   return {
     extends: await general(options, context),
     composables: await composables(
-      Path.join(fileURLToPath(import.meta.url), '../../composables'),
+      {
+        root: Path.join(fileURLToPath(import.meta.url), '../../composables'),
+        pattern: '(?!@)*.js',
+      },
       resolveOptions(options, context),
     ),
   };
