@@ -29,17 +29,17 @@
     "@magicspace/utils": "^0.3.4",
     "lodash": "^4.17.20",
     "npm-which": "^3.0.1",
-    "prettier": "^3.2.5",
+    "prettier": "^3.5.3",
     "tslang": "^0.1.22",
-    "tslib": "^2.6.2",
-    "typescript": "^5.3.3"
+    "tslib": "^2.8.1",
+    "typescript": "^5.8.2"
   },
   "devDependencies": {
-    "@mufan/eslint-plugin": "^0.2.18",
+    "@mufan/eslint-plugin": "^0.2.19",
     "@types/lodash": "^4.14.159",
     "@types/node": "^14.0.27",
-    "eslint": "^8.56.0",
-    "rimraf": "^5.0.5",
+    "eslint": "^8.57.1",
+    "rimraf": "^5.0.10",
     "run-in-every": "^0.2.0",
     "yarn-deduplicate": "^6.0.2"
   }
