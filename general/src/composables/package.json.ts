@@ -81,11 +81,13 @@ const PACKAGE_MANAGER_DEV_DEPENDENCY_DICT = {
   yarn: {
     'yarn-deduplicate': '6',
   },
+  npm: {},
 };
 
 const SCRIPT_3_DICT = {
   pnpm: 'pnpm install && pnpm dedupe && pnpm install',
   yarn: 'yarn && yarn-deduplicate && yarn',
+  npm: 'npm install && npm dedupe && npm install',
 };
 
 const WORKSPACE_ALIAS_DICT = {
@@ -94,6 +96,9 @@ const WORKSPACE_ALIAS_DICT = {
   },
   yarn(name: string): string {
     return `yarn workspace ${name}`;
+  },
+  npm(name: string): string {
+    return `npm run --workspace ${name}`;
   },
 };
 

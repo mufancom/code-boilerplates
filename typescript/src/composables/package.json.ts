@@ -43,6 +43,7 @@ function PROJECT_ENTRANCES_DEPENDENCY_DICT(
 const WORKSPACE_REFERENCE_DICT = {
   pnpm: 'workspace:*',
   yarn: '*',
+  npm: 'workspace:*',
 };
 
 export default composable<ResolvedOptions>(

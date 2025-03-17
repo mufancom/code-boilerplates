@@ -6,6 +6,7 @@ import type {ResolvedOptions} from '../library/index.js';
 const PACKAGE_MANAGER_IGNORE_ENTRIES_DICT = {
   pnpm: undefined,
   yarn: ['yarn-error.log'],
+  npm: ['npm-debug.log'],
 };
 
 export default composable<ResolvedOptions>(({packageManager}) => {

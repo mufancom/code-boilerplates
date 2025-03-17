@@ -88,6 +88,14 @@ export const PrettierOptions = x.object({
 
 export type PrettierOptions = x.TypeOf<typeof PrettierOptions>;
 
+export const PackageManagerName = x.union([
+  x.literal('pnpm'),
+  x.literal('yarn'),
+  x.literal('npm'),
+]);
+
+export type PackageManagerName = x.TypeOf<typeof PackageManagerName>;
+
 export const Options = x.object({
   name: x.string,
   type: PackageType,
@@ -97,7 +105,7 @@ export const Options = x.object({
   author: x.string.optional(),
   badges: BadgesOptions.optional(),
   defaultBranch: x.string,
-  packageManager: x.union([x.literal('pnpm'), x.literal('yarn')]),
+  packageManager: PackageManagerName,
   packagesDir: x.string
     .nominal({
       description: 'Name of the packages directory, defaults to "packages".',
@@ -118,7 +126,7 @@ export type ResolvedPackageOptions = {
 
 export type ResolvedOptions = {
   defaultBranch: string;
-  packageManager: 'pnpm' | 'yarn';
+  packageManager: PackageManagerName;
   mono: boolean;
   packagesDir: string | undefined;
   packages: ResolvedPackageOptions[];
@@ -136,7 +144,7 @@ export function resolveOptions(
     name,
     type,
     defaultBranch = 'main',
-    packageManager = 'yarn',
+    packageManager,
     packagesDir,
     packages,
     ...rest

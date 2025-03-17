@@ -8,6 +8,7 @@ import type {ResolvedOptions} from '../library/index.js';
 const PACKAGE_MANAGER_IGNORE_ENTRIES_DICT = {
   pnpm: ['pnpm-lock.yaml'],
   yarn: undefined,
+  npm: undefined,
 };
 
 const BOILERPLATE_SCHEMA_FILE_NAME = 'boilerplate.schema.json';
