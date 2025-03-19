@@ -1,7 +1,7 @@
 import type {Composable, TextFile} from '@magicspace/core';
 import {composable, text} from '@magicspace/core';
 
-import type {ResolvedOptions} from '../library/index.js';
+import {type ResolvedOptions, textSegment} from '../library/index.js';
 
 const PACKAGE_MANAGER_IGNORE_ENTRIES_DICT = {
   pnpm: undefined,
@@ -13,12 +13,11 @@ export default composable<ResolvedOptions>(({packageManager}) => {
   const composables: Composable<TextFile>[] = [
     text(
       '.gitignore',
-      `\
+      textSegment(`\
 # General
 .DS_Store
 *.tgz
-node_modules/
-`,
+node_modules/`),
     ),
   ];
 
@@ -29,10 +28,9 @@ node_modules/
     composables.push(
       text(
         '.gitignore',
-        content => `${content}\
+        textSegment(`\
 # Package Manager
-${packageManagerIgnoreEntries.join('\n')}
-`,
+${packageManagerIgnoreEntries.join('\n')}`),
       ),
     );
   }

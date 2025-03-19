@@ -3,7 +3,7 @@ import * as Path from 'path';
 
 import {composable, text} from '@magicspace/core';
 
-import type {ResolvedOptions} from '../library/index.js';
+import {type ResolvedOptions, textSegment} from '../library/index.js';
 
 const PACKAGE_MANAGER_IGNORE_ENTRIES_DICT = {
   pnpm: ['pnpm-lock.yaml'],
@@ -25,26 +25,18 @@ export default composable<ResolvedOptions>(
     const packageManagerIgnoreEntries =
       PACKAGE_MANAGER_IGNORE_ENTRIES_DICT[packageManager];
 
-    if (!boilerplateSchemaExists && !packageManagerIgnoreEntries) {
-      return;
-    }
-
-    return text('.prettierignore', content => {
-      if (boilerplateSchemaExists) {
-        content += `\
+    return text(
+      '.prettierignore',
+      textSegment(
+        boilerplateSchemaExists &&
+          `\
 # Magicspace
-${BOILERPLATE_SCHEMA_FILE_NAME}
-`;
-      }
-
-      if (packageManagerIgnoreEntries) {
-        content += `\
+${BOILERPLATE_SCHEMA_FILE_NAME}`,
+        packageManagerIgnoreEntries &&
+          `\
 # Package Manager
-${packageManagerIgnoreEntries.join('\n')}
-`;
-      }
-
-      return content;
-    });
+${packageManagerIgnoreEntries.join('\n')}`,
+      ),
+    );
   },
 );

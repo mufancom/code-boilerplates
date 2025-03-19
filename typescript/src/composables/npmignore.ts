@@ -3,6 +3,7 @@ import * as Path from 'path';
 import {composable, text} from '@magicspace/core';
 import _ from 'lodash';
 
+import {textSegment} from '../../../general/bld/library/index.js';
 import type {ResolvedOptions} from '../library/index.js';
 
 export default composable<ResolvedOptions>(
@@ -15,8 +16,10 @@ export default composable<ResolvedOptions>(
     return Object.values(packingTypeScriptProjectsDict).map(projects => {
       const packageDir = projects[0].package.resolvedDir;
 
-      return text(Path.join(packageDir, '.npmignore'), content => {
-        return `${content}\
+      return text(
+        Path.join(packageDir, '.npmignore'),
+        textSegment(
+          `\
 *
 ${projects
   .flatMap(project => [
@@ -24,9 +27,9 @@ ${projects
     `!/${Path.posix.relative(packageDir, project.outDir)}/**`,
   ])
   .join('\n')}
-*.tsbuildinfo
-`;
-      });
+*.tsbuildinfo`,
+        ),
+      );
     });
   },
 );
