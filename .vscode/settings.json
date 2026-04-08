@@ -13,16 +13,9 @@
   "files.eol": "\n",
   "files.insertFinalNewline": true,
   "files.trimTrailingWhitespace": true,
-  "typescript.preferences.importModuleSpecifier": "project-relative",
-  "typescript.preferences.importModuleSpecifierEnding": "js",
-  "typescript.tsdk": "node_modules/typescript/lib",
-  "eslint.workingDirectories": [
-    ".",
-    "general/src/composables",
-    "general/src/library",
-    "typescript/src/composables",
-    "typescript/src/library"
-  ],
+  "js/ts.preferences.importModuleSpecifier": "project-relative",
+  "js/ts.preferences.importModuleSpecifierEnding": "js",
+  "js/ts.tsdk.path": "node_modules/typescript/lib",
   "eslint.validate": [
     "javascript",
     "javascriptreact",

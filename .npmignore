@@ -1,10 +1,14 @@
 *
 !/general/src/composables/**/*.{ts,tsx}
 !/general/bld/composables/**
+/general/bld/composables/**/*.test.js
 !/general/src/library/**/*.{ts,tsx}
 !/general/bld/library/**
+/general/bld/library/**/*.test.js
 !/typescript/src/composables/**/*.{ts,tsx}
 !/typescript/bld/composables/**
+/typescript/bld/composables/**/*.test.js
 !/typescript/src/library/**/*.{ts,tsx}
 !/typescript/bld/library/**
+/typescript/bld/library/**/*.test.js
 *.tsbuildinfo
