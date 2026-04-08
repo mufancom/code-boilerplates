@@ -31,7 +31,7 @@ export default composable<ResolvedOptions>(({type, mono, resolvedProjects}) => {
             transform: {},
             testMatch: [
               ...(config?.testMatch ?? []),
-              `<rootDir>/${posix.relative(resolvedDir, bldDir)}/test/*.test.js`,
+              `<rootDir>/${posix.relative(resolvedDir, bldDir)}/**/*.test.js`,
             ],
           };
         },

@@ -114,7 +114,7 @@ defaults to true if `src` is false, otherwise false.',
   test: x.boolean
     .nominal({
       description:
-        "Whether this project is a test project, defaults to true if `name` includes 'test', otherwise false.",
+        "Whether this project is a test project or includes tests, defaults to true if `name` includes 'test', otherwise false.",
     })
     .optional(),
   entrances: x
