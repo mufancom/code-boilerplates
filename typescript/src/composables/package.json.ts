@@ -18,13 +18,13 @@ import type {
 function ROOT_DEV_DEPENDENCY_DICT(test: boolean): Record<string, string> {
   return {
     ...(test && {
-      '@types/jest': '29',
-      'cross-env': '7',
-      jest: '29',
+      '@types/jest': '30',
+      'cross-env': '10',
+      jest: '30',
     }),
-    rimraf: '5',
+    rimraf: '6',
     'run-in-every': '0.2',
-    typescript: '5',
+    typescript: '6',
   };
 }
 
