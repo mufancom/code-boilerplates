@@ -4,7 +4,7 @@
   "description": "Code boilerplates for Mufan",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/makeflow/mufan-code-boilerplates.git"
+    "url": "git+https://github.com/mufancom/code-boilerplates.git"
   },
   "author": "Chengdu Mufan Technology Co., Ltd.",
   "license": "MIT",
