@@ -71,8 +71,8 @@ const JSON_OPTIONS: JSONFileOptions = {
 };
 
 const DEV_DEPENDENCY_DICT = {
-  '@mufan/eslint-plugin': '0.2',
-  eslint: '8',
+  '@mufan/eslint-plugin': '0.3',
+  eslint: '10',
   prettier: '3',
 };
 
@@ -109,13 +109,13 @@ export default composable<ResolvedOptions>(
     repository,
     author,
     license,
-    type,
     packageManager,
     mono,
     packages,
     packagesSortedByName,
   }) => {
     const common = {
+      type: 'module',
       repository,
       author,
       license,
@@ -145,7 +145,6 @@ export default composable<ResolvedOptions>(
         {
           name,
           description,
-          type,
           scripts,
           devDependencies,
           ...(mono && {
@@ -169,7 +168,6 @@ export default composable<ResolvedOptions>(
               ...common,
               name: packageOptions.name,
               version: '0.0.0',
-              type: packageOptions.type ?? type,
             };
           },
           JSON_OPTIONS,

@@ -25,6 +25,7 @@ ${projects
   .flatMap(project => [
     `!/${Path.posix.relative(packageDir, project.inDir)}/**/*.{ts,tsx}`,
     `!/${Path.posix.relative(packageDir, project.outDir)}/**`,
+    `/${Path.posix.relative(packageDir, project.outDir)}/**/*.test.js`,
   ])
   .join('\n')}
 *.tsbuildinfo`,

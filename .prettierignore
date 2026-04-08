@@ -5,6 +5,7 @@ boilerplate.schema.json
 bld/
 
 # Some Handlebars Templates
+*.js.hbs
 *.ts.hbs
 *.tsx.hbs
 *.md.hbs

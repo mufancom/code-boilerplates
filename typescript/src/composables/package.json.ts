@@ -23,7 +23,6 @@ function ROOT_DEV_DEPENDENCY_DICT(test: boolean): Record<string, string> {
       jest: '30',
     }),
     rimraf: '6',
-    'run-in-every': '0.2',
     typescript: '6',
   };
 }
@@ -32,13 +31,9 @@ const PROJECT_DEPENDENCY_DICT = {
   tslib: '2',
 };
 
-function PROJECT_ENTRANCES_DEPENDENCY_DICT(
-  esm: boolean,
-): Record<string, string> {
-  return {
-    'entrance-decorator': esm ? '0.4' : '0.2',
-  };
-}
+const PROJECT_ENTRANCES_DEPENDENCY_DICT = {
+  'entrance-decorator': '0.4',
+};
 
 const WORKSPACE_REFERENCE_DICT = {
   pnpm: 'workspace:*',
@@ -48,16 +43,8 @@ const WORKSPACE_REFERENCE_DICT = {
 
 export default composable<ResolvedOptions>(
   async ({packageManager, resolvedProjects: projects}) => {
-    const projectWithEntrances = projects.filter(
+    const anyProjectWithEntrances = projects.some(
       project => project.entrances.length > 0,
-    );
-
-    const anyESMProjectWithEntrances = projectWithEntrances.some(
-      project => project.package.type === 'module',
-    );
-
-    const anyCJSProjectWithEntrances = projectWithEntrances.some(
-      project => project.package.type !== 'module',
     );
 
     const packagesWithTypeScriptProject = _.uniqBy(
@@ -70,16 +57,12 @@ export default composable<ResolvedOptions>(
     const [
       rootDevDependencies,
       projectDependencies,
-      esmProjectEntrancesDependencies,
-      cjsProjectEntrancesDependencies,
+      projectEntrancesDependencies,
     ] = await Promise.all([
       fetchPackageVersions(ROOT_DEV_DEPENDENCY_DICT(anyTestProject)),
       fetchPackageVersions(PROJECT_DEPENDENCY_DICT),
-      anyESMProjectWithEntrances
-        ? fetchPackageVersions(PROJECT_ENTRANCES_DEPENDENCY_DICT(true))
-        : undefined,
-      anyCJSProjectWithEntrances
-        ? fetchPackageVersions(PROJECT_ENTRANCES_DEPENDENCY_DICT(false))
+      anyProjectWithEntrances
+        ? fetchPackageVersions(PROJECT_ENTRANCES_DEPENDENCY_DICT)
         : undefined,
     ]);
 
@@ -107,10 +90,6 @@ export default composable<ResolvedOptions>(
             build: extendPackageScript(
               scripts.build,
               _.compact([rimrafScript, 'tsc --build']),
-            ),
-            lint: extendPackageScript(
-              scripts.lint,
-              'run-in-every eslint-project --parallel --echo -- eslint --no-error-on-unmatched-pattern --report-unused-disable-directives .',
             ),
           },
           {
@@ -234,11 +213,7 @@ export default composable<ResolvedOptions>(
             dependencies: {
               ...data.dependencies,
               ...projectDependencies,
-              ...(entrances
-                ? packageOptions.type === 'module'
-                  ? esmProjectEntrancesDependencies
-                  : cjsProjectEntrancesDependencies
-                : undefined),
+              ...(entrances && projectEntrancesDependencies),
               ..._.fromPairs(
                 referencedPackageNames.map(name => [name, workspaceReference]),
               ),

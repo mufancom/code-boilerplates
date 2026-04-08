@@ -1,0 +1,15 @@
+import mufan, {configs} from '@mufan/eslint-plugin';
+{{#if globalIgnoresJSON}}
+import {defineConfig, globalIgnores} from 'eslint/config';
+{{else}}
+import {defineConfig} from 'eslint/config';
+{{/if}}
+
+export default defineConfig([
+  {{#if globalIgnoresJSON}}
+  globalIgnores({{globalIgnoresJSON}}),
+  {{/if}}
+  {{#each configs}}
+  {{this}}
+  {{/each}}
+]);

@@ -15,5 +15,8 @@ export default json('.vscode/settings.json', {
   'files.eol': '\n',
   'files.insertFinalNewline': true,
   'files.trimTrailingWhitespace': true,
+  'js/ts.preferences.importModuleSpecifier': 'project-relative',
+  'js/ts.preferences.importModuleSpecifierEnding': 'js',
+  'js/ts.tsdk.path': 'node_modules/typescript/lib',
   'eslint.validate': ['javascript', 'javascriptreact'],
 });

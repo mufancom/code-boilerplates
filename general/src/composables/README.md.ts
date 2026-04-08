@@ -32,9 +32,7 @@ export default composable<ResolvedOptions>(options => {
         badges: buildBadges(options, undefined),
         ...data,
       },
-      {
-        template: TEMPLATE_PATH,
-      },
+      {template: TEMPLATE_PATH},
     ),
     ...packages.map(packageOptions => {
       const {name, resolvedDir} = packageOptions;
@@ -46,9 +44,7 @@ export default composable<ResolvedOptions>(options => {
           badges: buildBadges(options, packageOptions),
           ...data,
         },
-        {
-          template: TEMPLATE_PATH,
-        },
+        {template: TEMPLATE_PATH},
       );
     }),
   ];

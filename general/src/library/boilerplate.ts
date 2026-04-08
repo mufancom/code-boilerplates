@@ -43,16 +43,8 @@ const BadgesOptions = x.object({
 
 export type BadgesOptions = x.TypeOf<typeof BadgesOptions>;
 
-export const PackageType = x.union([
-  x.literal('module'),
-  x.literal('commonjs'),
-]);
-
-export type PackageType = x.TypeOf<typeof PackageType>;
-
 export const PackageOptions = x.object({
   name: x.string,
-  type: PackageType.optional(),
   dir: x.string
     .nominal({
       description:
@@ -98,7 +90,6 @@ export type PackageManagerName = x.TypeOf<typeof PackageManagerName>;
 
 export const Options = x.object({
   name: x.string,
-  type: PackageType,
   description: x.string.optional(),
   repository: x.string.optional(),
   license: LicenseName.optional(),
@@ -118,7 +109,6 @@ export const Options = x.object({
 export type Options = x.TypeOf<typeof Options>;
 
 export type ResolvedPackageOptions = {
-  type: PackageType;
   alias?: string;
   resolvedDir: string;
   packageJSONPath: string;
@@ -142,7 +132,6 @@ export function resolveOptions<TOptions extends Options>(
 export function resolveOptions(
   {
     name,
-    type,
     defaultBranch = 'main',
     packageManager,
     packagesDir,
@@ -170,7 +159,6 @@ export function resolveOptions(
       );
 
       return {
-        type,
         ...packageOptions,
         alias,
         resolvedDir,
@@ -183,7 +171,6 @@ export function resolveOptions(
     resolvedPackages = [
       {
         name,
-        type,
         resolvedDir: '',
         packageJSONPath: 'package.json',
         ...rest,
@@ -193,7 +180,6 @@ export function resolveOptions(
 
   return {
     name,
-    type,
     defaultBranch,
     packageManager,
     mono,

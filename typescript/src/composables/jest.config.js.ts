@@ -6,7 +6,7 @@ import type {ResolvedOptions} from '../library/index.js';
 
 const COMMENT = "/** @type {import('jest').Config} */";
 
-export default composable<ResolvedOptions>(({type, mono, resolvedProjects}) => {
+export default composable<ResolvedOptions>(({mono, resolvedProjects}) => {
   const testProjects = resolvedProjects.filter(project => project.test);
 
   return [
@@ -18,11 +18,11 @@ export default composable<ResolvedOptions>(({type, mono, resolvedProjects}) => {
           projects: testProjects.map(project => project.package.resolvedDir),
         },
         {
-          type,
+          type: 'module',
           comment: COMMENT,
         },
       ),
-    ...testProjects.map(({bldDir, package: {type, resolvedDir}}) => {
+    ...testProjects.map(({bldDir, package: {resolvedDir}}) => {
       return objectModule(
         join(resolvedDir, 'jest.config.js'),
         (config: {testMatch?: string[]}) => {
@@ -36,7 +36,7 @@ export default composable<ResolvedOptions>(({type, mono, resolvedProjects}) => {
           };
         },
         {
-          type,
+          type: 'module',
           comment: COMMENT,
         },
       );
