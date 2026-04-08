@@ -13,9 +13,9 @@ export default defineConfig([
     plugins: {'@mufan': mufan},
     extends: [configs.dev],
   },
-  // general/
+  // general/src/composables
   {
-    files: ['general/**/*.{ts,tsx}'],
+    files: ['general/src/composables/**/*.{ts,tsx}'],
     plugins: {'@mufan': mufan},
     extends: [configs.typescript],
     languageOptions: {
@@ -25,9 +25,33 @@ export default defineConfig([
       },
     },
   },
-  // typescript/
+  // general/src/library
   {
-    files: ['typescript/**/*.{ts,tsx}'],
+    files: ['general/src/library/**/*.{ts,tsx}'],
+    plugins: {'@mufan': mufan},
+    extends: [configs.typescript],
+    languageOptions: {
+      parserOptions: {
+        projectService: true,
+        tsconfigRootDir: import.meta.dirname,
+      },
+    },
+  },
+  // typescript/src/composables
+  {
+    files: ['typescript/src/composables/**/*.{ts,tsx}'],
+    plugins: {'@mufan': mufan},
+    extends: [configs.typescript],
+    languageOptions: {
+      parserOptions: {
+        projectService: true,
+        tsconfigRootDir: import.meta.dirname,
+      },
+    },
+  },
+  // typescript/src/library
+  {
+    files: ['typescript/src/library/**/*.{ts,tsx}'],
     plugins: {'@mufan': mufan},
     extends: [configs.typescript],
     languageOptions: {

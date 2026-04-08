@@ -35,7 +35,7 @@
     "typescript": "^6.0.2"
   },
   "devDependencies": {
-    "@mufan/eslint-plugin": "^0.2.19",
+    "@mufan/eslint-plugin": "^0.3.0",
     "@types/lodash": "^4.17.24",
     "@types/node": "^25.5.2",
     "eslint": "^10.2.0",
