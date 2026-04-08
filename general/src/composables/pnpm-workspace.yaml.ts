@@ -8,12 +8,11 @@ export default composable<ResolvedOptions>(
       return undefined;
     }
 
-    if (!mono) {
-      return;
-    }
-
     return yaml({
-      packages: packages.map(packageOptions => packageOptions.resolvedDir),
+      ...(mono && {
+        packages: packages.map(packageOptions => packageOptions.resolvedDir),
+      }),
+      publicHoistPattern: ['*eslint-plugin*'],
     });
   },
 );
