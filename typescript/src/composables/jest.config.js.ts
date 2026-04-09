@@ -15,7 +15,9 @@ export default composable<ResolvedOptions>(({mono, resolvedProjects}) => {
       objectModule(
         'jest.config.js',
         {
-          projects: testProjects.map(project => project.package.resolvedDir),
+          projects: Array.from(
+            new Set(testProjects.map(project => project.package.resolvedDir)),
+          ),
         },
         {
           type: 'module',
@@ -29,10 +31,12 @@ export default composable<ResolvedOptions>(({mono, resolvedProjects}) => {
           return {
             ...config,
             transform: {},
-            testMatch: [
-              ...(config?.testMatch ?? []),
-              `<rootDir>/${posix.relative(resolvedDir, bldDir)}/**/*.test.js`,
-            ],
+            testMatch: Array.from(
+              new Set([
+                ...(config?.testMatch ?? []),
+                `<rootDir>/${posix.relative(resolvedDir, bldDir)}/**/*.test.js`,
+              ]),
+            ),
           };
         },
         {
