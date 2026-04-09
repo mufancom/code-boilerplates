@@ -28,8 +28,8 @@
     "test": "npm run lint-prettier && npm run build && npm run lint"
   },
   "dependencies": {
-    "@magicspace/core": "^0.3.7",
-    "@magicspace/utils": "^0.3.4",
+    "@magicspace/core": "^0.4.0",
+    "@magicspace/utils": "^0.4.0",
     "lodash": "^4.18.1",
     "npm-which": "^3.0.1",
     "prettier": "^3.8.1",
