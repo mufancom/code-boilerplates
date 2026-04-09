@@ -8,8 +8,7 @@
     "license": "MIT",
     "author": "Chengdu Mufan Technology Co., Ltd.",
     "defaultBranch": "master",
-    "packageManager": "yarn",
-    "type": "module",
+    "packageManager": "npm",
     "projects": [
       {
         "name": "general-composables",
