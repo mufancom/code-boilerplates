@@ -149,7 +149,7 @@ export default composable<ResolvedOptions>(
           devDependencies,
           ...(mono && {
             private: true,
-            ...(packageManager === 'yarn' && {
+            ...((packageManager === 'yarn' || packageManager === 'npm') && {
               workspaces: packagesSortedByName.map(
                 packageOptions => packageOptions.resolvedDir,
               ),
