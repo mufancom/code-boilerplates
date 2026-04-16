@@ -1,1 +1,0 @@
-# General JavaScript Project Boilerplate

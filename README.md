@@ -22,18 +22,10 @@ Select an example and review/edit the configuration options.
 
 ### Initialize magicspace
 
-Initialize the repository and **make initial commit** if you have not:
+Initialize the repository if you have not, and then initialize magicspace:
 
 ```bash
 git init
-
-touch README.md
-git add README.md
-
-git commit --message "Initial commit"
-```
-
-```bash
 magicspace init
 ```
 
@@ -46,7 +38,7 @@ Review changes, resolve conflicts (if any) and commit the merge.
 Update installed boilerplates:
 
 ```bash
-npm install --global makeflow/mufan-code-boilerplates
+npm install --global @mufan/code-boilerplates
 ```
 
 Update magicspace:
