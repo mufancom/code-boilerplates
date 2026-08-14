@@ -14,13 +14,22 @@ export default composable<ResolvedOptions>(
           branches: [defaultBranch],
         },
       },
+      permissions: {
+        contents: 'read',
+      },
       jobs: {
         test: {
           'runs-on': 'ubuntu-latest',
-          container: 'node:20',
           steps: [
             {
-              uses: 'actions/checkout@v3',
+              uses: 'actions/checkout@v6',
+            },
+            {
+              name: 'Set up Node.js',
+              uses: 'actions/setup-node@v7',
+              with: {
+                'node-version': '24',
+              },
             },
             ...(packageManager === 'pnpm'
               ? [
@@ -30,7 +39,10 @@ export default composable<ResolvedOptions>(
                 ]
               : []),
             {
-              run: `${packageManager} install`,
+              run:
+                packageManager === 'npm'
+                  ? 'npm ci'
+                  : `${packageManager} install --frozen-lockfile`,
             },
             {
               run: `${packageManager} test`,
