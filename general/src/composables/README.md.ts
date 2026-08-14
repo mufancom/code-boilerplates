@@ -57,22 +57,17 @@ type Badge = {
 };
 
 function buildBadges(
-  {
-    name,
-    license,
-    repository,
-    badges: {
-      npm: npmBadge = false,
-      repo: repoBadge = false,
-      coverage: coverageBadge = false,
-      license: licenseBadge = false,
-      discord: discordBadgeHref,
-    } = {},
-    mono,
-  }: ResolvedOptions,
+  {name, license, repository, badges: rootBadges, mono}: ResolvedOptions,
   packageOptions: ResolvedPackageOptions | undefined,
 ): Badge[] {
   const badges: Badge[] = [];
+  const {
+    npm: npmBadge = false,
+    repo: repoBadge = false,
+    coverage: coverageBadge = false,
+    license: licenseBadge = false,
+    discord: discordBadgeHref,
+  } = {...rootBadges, ...packageOptions?.badges};
 
   const npmPackageName = mono ? packageOptions?.name : name;
 
@@ -118,7 +113,10 @@ function buildBadges(
       image: `https://img.shields.io/badge/license-${encodeURIComponent(
         license,
       )}-999999?style=flat-square`,
-      url: './LICENSE',
+      url:
+        packageOptions === undefined
+          ? './LICENSE'
+          : Path.posix.relative(packageOptions.resolvedDir, 'LICENSE'),
     });
   }
 
